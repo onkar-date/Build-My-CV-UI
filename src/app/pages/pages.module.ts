@@ -1,0 +1,37 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedComponentsModule } from './../library/shared-components/shared-components.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { PagesRoutingModule } from './pages-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { PersonalDetailsComponent } from './personal-details/personal-details.component';
+import { SkillsComponent } from './skills/skills.component';
+import { ExperienceComponent } from './experience/experience.component';
+import { EducationComponent } from './education/education.component';
+import { PersonalProjectsComponent } from './personal-projects/personal-projects.component';
+import { CertificatesComponent } from './certificates/certificates.component';
+
+@NgModule({
+  declarations: [
+    HomeComponent,
+    PersonalDetailsComponent,
+    SkillsComponent,
+    ExperienceComponent,
+    EducationComponent,
+    PersonalProjectsComponent,
+    CertificatesComponent
+  ],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    SharedComponentsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
+  ],
+})
+export class PagesModule {}

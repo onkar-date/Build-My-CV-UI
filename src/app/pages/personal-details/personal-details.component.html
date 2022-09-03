@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Personal Details</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="personalDetailsForm">
+                <div class="form-row">
+                    <!-- first name -->
+                    <div class="form-group col-md-3">
+                        <mat-form-field appearance="fill">
+                            <mat-label>First name</mat-label>
+                            <input matInput formControlName="firstName">
+                        </mat-form-field>
+                    </div>
+                    <!-- last name -->
+                    <div class="form-group col-md-3">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Last name</mat-label>
+                            <input matInput formControlName="lastName">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!-- Address -->
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput placeholder="Ex. 100 Main St" formControlName="address"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!-- Area of expertise -->
+                    <div class="form-group col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Area of expertise</mat-label>
+                            <input matInput placeholder="Ex. Front End Developer" formControlName="areaOfExpertise">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button mat-raised-button color="primary" (click)="goToNextSection()">
+                            Next
+                            <mat-icon>arrow_right_alt</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+// $side-menu-mobile-size: 64px;
+// .wrapper{
+//     position: relative;
+//     width: 100%;
+//     transition: 0.5s;
+//     .sidebar{
+//         color: $white;
+//         position: fixed;
+//         width: 260px;
+//         height: 100%;
+//         left: 0;
+//         overflow: hidden;
+//         background-color: $custom-primary;
+//         transition: 0.5s;
+//         .header{
+//             padding: 1rem;
+//             .mobile-header{
+//                 display: none;
+//             }
+//         }
+//         .nav{
+//             display: block;
+//             .nav-link{
+//                 color: #FFFFFF;
+//                 margin: 5px 15px;
+//                 opacity: .86;
+//                 border-radius: 4px;
+//                 display: block;
+//                 padding: 10px 15px;
+//                 i{
+//                     margin-right: 8px;
+//                 }
+//             }
+//             .nav-link.active{
+//                 color: #FFFFFF;
+//                 opacity: 1;
+//                 background: rgba(255, 255, 255, 0.23);
+//             }
+//         }
+//     }
+//     .sidebar.active{
+//         left: -260px;
+//         transition: 0.5s;
+//     }
+//     .main-content{
+//         position: absolute;
+//         width: calc(100% - 260px);
+//         left: 260px;
+//         background-color: #f7f7f8;
+//         height: 100%;
+//         transition: 0.5s;
+//     }
+//     .main-content.active{
+//         width: 100%;
+//         left: 0px;
+//         transition: 0.5s;
+//     }
+// }
+
+// @media (max-width: 992px) {
+//     .wrapper{
+//         .sidebar{
+//             left: -260px;
+//             transition: 0.5s;
+//         }
+//         .sidebar.active{
+//             left: 0px;
+//             width: 260px;
+//             transition: 0.5s;
+//         }
+//         .main-content{
+//             left: 0px;
+//             width: 100%;
+//             transition: 0.5s;
+//         }
+//         .main-content.active{
+//             left: 260px;
+//             width: calc(100% - 260px);
+//             transition: 0.5s;
+//         }
+//     }
+// }
+
+// /* Extra small devices (phones, 600px and down) */
+// @media only screen and (max-width: 600px) {
+//     .wrapper{
+//         .sidebar{
+//             width: 64px;
+//             left: -64px;
+//             transition: 0.5s;
+//             .header{
+//                 padding: 0.95rem;
+//                 .mobile-header{
+//                     display: block;
+//                 }
+//                 .laptop-header{
+//                     display: none;
+//                 }
+//             }
+//             .nav{
+//                 display: block;
+//                 .nav-link{
+//                     color: #FFFFFF;
+//                     margin: 0;
+//                     opacity: .86;
+//                     border-radius: 4px;
+//                     display: block;
+//                     display: flex;
+//                     flex-direction: column;
+//                     align-items: center;
+//                     padding: 12px;
+//                     i{
+//                         margin: 0;
+//                         font-size: 1.5em;
+//                     }
+//                     span{
+//                         font-size: 14px;
+//                     }
+//                 }
+//                 .nav-link.active{
+//                     color: #FFFFFF;
+//                     opacity: 1;
+//                     background: none
+//                 }
+//             }
+//         }
+//         .sidebar.active{
+//             left: 0px;
+//             width: 64px;
+//             transition: 0.5s;
+//         }
+//         .main-content{
+//             left: 0px;
+//             width: 100%;
+//             transition: 0.5s;
+//         }
+//         .main-content.active{
+//             left: 64px;
+//             width: calc(100% - 64px);
+//             transition: 0.5s;
+//         }
+//     }
+// }
+

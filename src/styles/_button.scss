@@ -1,0 +1,39 @@
+// // Custom Primary Button
+// .btn-primary {
+//     background-color: $custom-primary;
+//     border: $custom-primary;
+//     &:not(:disabled):not(.disabled):active,
+//     :not(:disabled):not(.disabled).active {
+//         border: $custom-primary;
+//         background-color: $custom-primary;
+//         box-shadow: 0 0 0 0.2rem rgb(147 108 213 / 50%);
+//     }
+//     &:hover {
+//         border: $custom-primary;
+//         background-color: $custom-primary;
+//         box-shadow: 0 0 0 0.2rem rgb(147 108 213 / 50%);
+//     }
+//     &:focus {
+//         border: $custom-primary;
+//         background-color: $custom-primary;
+//         box-shadow: 0 0 0 0.2rem rgb(147 108 213 / 50%);
+//     }
+//     &:not(:disabled):not(.disabled):active:focus {
+//         box-shadow: 0 0 0 0.2rem rgb(147 108 213 / 50%);
+//     }
+// }
+
+// // Custom Primary Button Link
+// .btn-link{
+//     @extend .btn-link;
+//     cursor: pointer;
+//     color: $custom-primary;
+//     &:hover{
+//         color: $custom-primary;
+//     }
+// }
+
+.no-style {
+    all: unset !important;
+    cursor: pointer !important;
+}

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Skills</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button mat-raised-button color="primary" (click)="addSkill()">
+                Add Skill
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <div class="col-12 mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let skill of skills$ | async; let i = index">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{skill.name}}</td>
+                        <td>
+                            <ngb-rating [(rate)]="skill.rating" [readonly]="true"></ngb-rating>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
