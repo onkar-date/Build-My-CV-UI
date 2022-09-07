@@ -3,7 +3,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './../library/shared-components/shared-components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PagesRoutingModule } from './pages-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -15,8 +14,8 @@ import { PersonalProjectsComponent } from './personal-projects/personal-projects
 import { CertificatesComponent } from './certificates/certificates.component';
 import { SummaryComponent } from './summary/summary.component';
 import { TemplatesComponent } from './templates/templates.component';
-import { Template1Component } from './template1/template1.component';
-
+import { T102Component } from './t102/t102.component';
+import { T101Component } from './t101/t101.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -28,7 +27,8 @@ import { Template1Component } from './template1/template1.component';
     CertificatesComponent,
     SummaryComponent,
     TemplatesComponent,
-    Template1Component
+    T102Component,
+    T101Component,
   ],
   imports: [
     CommonModule,
@@ -37,7 +37,7 @@ import { Template1Component } from './template1/template1.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
   ],
 })
 export class PagesModule {}

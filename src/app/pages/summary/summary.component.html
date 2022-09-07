@@ -9,8 +9,15 @@
     <div class="row mt-3" *ngIf="selectedTemplate.id">
         <div class="col-12">
             <ng-container [ngSwitch]="selectedTemplate.id">
+
+                <!-- Template T101 -->
                 <ng-container *ngSwitchCase="'T101'">
-                    <app-template1></app-template1>
+                    <app-t101 [cvData]="cvData"></app-t101>
+                </ng-container>
+
+                <!-- Template T102 -->
+                <ng-container *ngSwitchCase="'T102'">
+                    <app-t102 [cvData]="cvData"></app-t102>
                 </ng-container>
                 <ng-container *ngSwitchDefault>output2</ng-container>
             </ng-container>

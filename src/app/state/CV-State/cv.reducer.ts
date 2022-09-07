@@ -1,4 +1,6 @@
-import { mockContactDetails, mockTemplate } from './../../shared/stub/mockData';
+import {
+  mockInitialState,
+} from './../../shared/stub/mockData';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
 import { IExperience } from './../../shared/interface/experience.interface';
@@ -21,14 +23,6 @@ import {
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
-import {
-  mockCertificates,
-  mockEducation,
-  mockExperience,
-  mockPersonalDetails,
-  mockProjects,
-  mockSKills,
-} from 'src/app/shared/stub/mockData';
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
 export interface CVState {
   personalDetails: IPersonalDetails;
@@ -49,27 +43,27 @@ export interface CVState {
 
 const initialState: CVState = {
   personalDetails: {
-    firstName: mockPersonalDetails.firstName,
-    lastName: mockPersonalDetails.lastName,
-    address: mockPersonalDetails.address,
-    areaOfExpertise: mockPersonalDetails.areaOfExpertise,
-    aboutMe: mockPersonalDetails.aboutMe,
+    firstName: '',
+    lastName: '',
+    address: '',
+    areaOfExpertise: '',
+    aboutMe: '',
   },
   contactDetails: {
-    mobile: mockContactDetails.mobile,
-    email: mockContactDetails.email,
-    linkedIn: mockContactDetails.linkedIn,
-    address: mockContactDetails.address,
+    mobile: '',
+    email: '',
+    linkedIn: '',
+    address: '',
   },
-  skills: [...mockSKills],
-  experience: [...mockExperience],
-  education: [...mockEducation],
-  projects: [...mockProjects],
-  certificates: [...mockCertificates],
-  interest: ['Playing Games', 'Surfing Internet', 'Playing Guitar'],
+  skills: [],
+  experience: [],
+  education: [],
+  projects: [],
+  certificates: [],
+  interest: [],
   template: {
-    name: mockTemplate.name,
-    id: mockTemplate.id,
+    name: '',
+    id: '',
   },
 };
 

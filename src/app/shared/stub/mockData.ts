@@ -1,3 +1,4 @@
+import { CVState } from './../../state/CV-State/cv.reducer';
 import { ICOntactDetails } from './../interface/contactDetails.interface';
 import { ITemplate } from './../interface/template.interface';
 import { ICertificate } from './../interface/certificate.interface';
@@ -117,7 +118,7 @@ export const mockCertificates: ICertificate[] = [
 ];
 
 export const mockTemplate: ITemplate = {
-  id: 'T101',
+  id: 'T102',
   name: 'Template 1',
 };
 
@@ -126,4 +127,30 @@ export const mockContactDetails: ICOntactDetails = {
   email: 'onkar101197@gmail.com',
   linkedIn: 'adadadadada./adadad',
   address: 'Hadapsar, Pune 411028',
+};
+
+export const mockInitialState: CVState = {
+  personalDetails: {
+    firstName: mockPersonalDetails.firstName,
+    lastName: mockPersonalDetails.lastName,
+    address: mockPersonalDetails.address,
+    areaOfExpertise: mockPersonalDetails.areaOfExpertise,
+    aboutMe: mockPersonalDetails.aboutMe,
+  },
+  contactDetails: {
+    mobile: mockContactDetails.mobile,
+    email: mockContactDetails.email,
+    linkedIn: mockContactDetails.linkedIn,
+    address: mockContactDetails.address,
+  },
+  skills: [...mockSKills],
+  experience: [...mockExperience],
+  education: [...mockEducation],
+  projects: [...mockProjects],
+  certificates: [...mockCertificates],
+  interest: ['Playing Games', 'Surfing Internet', 'Playing Guitar'],
+  template: {
+    name: mockTemplate.name,
+    id: mockTemplate.id,
+  },
 };

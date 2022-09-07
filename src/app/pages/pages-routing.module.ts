@@ -1,7 +1,5 @@
-import { Template1Component } from './template1/template1.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { SummaryComponent } from './summary/summary.component';
-import { AuthGuard } from './../shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CertificatesComponent } from './certificates/certificates.component';
