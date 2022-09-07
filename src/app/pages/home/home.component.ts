@@ -31,6 +31,10 @@ export class HomeComponent implements OnInit {
     {
       title: 'Certificates',
       routerLink: 'certificates'
+    },
+    {
+      title: 'Templates',
+      routerLink: 'templates'
     }
   ]
   constructor() { }

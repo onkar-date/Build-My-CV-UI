@@ -1,0 +1,30 @@
+$primary-color: #333e50;
+.resume-body {
+    width: 24cm;
+    margin: auto;
+}
+
+.header {
+    background-color: $primary-color;
+    color: white;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    border-bottom: 3px solid $primary-color;
+    margin-bottom: 0.5rem;
+}
+
+ul.ul-col-2 {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.section-title h3 {
+    font-weight: bold;
+    color: $primary-color;
+}

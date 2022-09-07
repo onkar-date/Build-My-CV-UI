@@ -16,6 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class PersonalDetailsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
   personalDetailsForm!: FormGroup;
+  demo = '';
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -40,8 +41,8 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
     this.personalDetailsForm = this.fb.group({
       firstName: [personalDetails.firstName, Validators.required],
       lastName: [personalDetails.lastName, Validators.required],
-      address: [personalDetails.address, Validators.required],
       areaOfExpertise: [personalDetails.areaOfExpertise, Validators.required],
+      aboutMe: [personalDetails.aboutMe, Validators.required]
     });
   }
 

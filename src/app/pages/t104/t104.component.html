@@ -1,0 +1,134 @@
+<div class="resume-body shadow-lg" *ngIf="cvData">
+    <div class="header p-5">
+      <span class="mb-3 display-5 font-weight-bold d-flex justify-content-center">
+        {{cvData.personalDetails.firstName}} {{cvData.personalDetails.lastName}}
+      </span>
+      <div class="d-flex justify-content-center">
+        <div>
+            <u>{{cvData.contactDetails.mobile}}</u>
+          </div>
+          <div class="vert-divider"></div>
+          <div>
+            <u>{{cvData.contactDetails.email}}</u>
+          </div>
+          <div class="vert-divider"></div>
+          <div>
+            <u>{{cvData.contactDetails.linkedIn}}</u>
+          </div>
+      </div>
+
+    </div>
+    <div class="content p-5">
+      <!-- Summary -->
+      <section>
+        <div class="section-title">
+          <h1>Summary</h1>
+        </div>
+        <div class="section-info">
+          <p>
+            {{cvData.personalDetails.aboutMe}}
+          </p>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section>
+        <div class="section-title">
+          <h1>Skills</h1>
+        </div>
+        <div class="section-info">
+          <ul class="ul-col-2">
+            <li *ngFor="let skill of cvData.skills">
+                {{skill.name}}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section>
+        <div class="section-title">
+          <h1>Experience</h1>
+        </div>
+        <div class="section-info">
+          <ng-container *ngFor="let experience of cvData.experience">
+            <div>
+                <strong>{{experience.designation}} - </strong>
+                <span>{{experience.workedFrom}} to {{experience.workedTill}}</span>
+              </div>
+    
+              <div>
+                <span>{{experience.companyName}}</span>
+              </div>
+    
+              <div>
+                <ul>
+                  <li *ngFor="let item of experience.description">
+                    {{item}}
+                  </li>
+                </ul>
+              </div>
+          </ng-container>
+        </div>
+        
+      </section>
+
+      <!-- Education -->
+      <section>
+        <div class="section-title">
+          <h1>Education</h1>
+        </div>
+        <div class="section-info">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>University/College</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cvData.education">
+                <td>{{item.degree}}</td>
+                <td>{{item.batch}}</td>
+                <td>{{item.university}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section>
+        <div class="section-title">
+          <h1>Certifications</h1>
+        </div>
+        <div class="section-info">
+          <ul>
+            <li *ngFor="let item of cvData.certificates">
+                {{item.title}}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Personal Projects -->
+      <section>
+        <div class="section-title">
+          <h1>Personal Projects</h1>
+        </div>
+        <div class="section-info">
+          <ul>
+            <li class="mt-2" *ngFor="let project of cvData.projects">
+              <span>{{project.title}}</span>
+              <br>
+              <a href="{{project.link}}">{{project.link}}</a>
+              <br>
+              <span>{{project.description}}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>

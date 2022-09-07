@@ -1,0 +1,29 @@
+$primary-color: #084b81;
+
+.header {
+    background-color: $primary-color;
+    color: white;
+}
+
+.vert-divider {
+    width: 2px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background: white;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    width: 25%;
+    border-bottom: 3px solid lightgray;
+    margin-bottom: 0.5rem;
+}
+
+.section-title h1 {
+    color: $primary-color;
+    margin-bottom: 0%;
+    font-weight: bold;
+}

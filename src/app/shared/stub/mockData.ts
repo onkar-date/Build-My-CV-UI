@@ -11,7 +11,6 @@ import { IEducation } from '../interface/education.interface';
 export const mockPersonalDetails: IPersonalDetails = {
   firstName: 'Onkar',
   lastName: 'Date',
-  address: 'Onkar Date, B-7, Pratibha Residency, Sasane Nagar',
   areaOfExpertise: 'Front End Developer',
   aboutMe:
     'UI developer with 2.5 years of experience in web development.Skilled in designing, developing, and testing web-based applications, incorporating range of techniques like HTML, CSS, JavaScript.',
@@ -61,12 +60,13 @@ export const mockEducation: IEducation[] = [
     university: 'Sane Guruji Madhyamik Vidyalay',
   },
 ];
+
 export const mockExperience: IExperience[] = [
   {
     companyName: 'Infosys Ltd.',
     designation: 'Systems Engineer',
-    workedFrom: '09-06-2022',
-    workedTill: new Date().toLocaleDateString(),
+    workedFrom: 'January 01, 2020',
+    workedTill: 'December 06, 2021',
     description: [
       'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
       'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
@@ -76,9 +76,9 @@ export const mockExperience: IExperience[] = [
   },
   {
     companyName: 'Infosys Ltd.',
-    designation: 'Systems Engineer',
-    workedFrom: new Date().toLocaleDateString(),
-    workedTill: new Date().toLocaleDateString(),
+    designation: 'Systems Engineer Trainee',
+    workedFrom: 'August 11, 2019',
+    workedTill: 'January 01, 2020',
     description: [
       'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
       'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
@@ -118,8 +118,8 @@ export const mockCertificates: ICertificate[] = [
 ];
 
 export const mockTemplate: ITemplate = {
-  id: 'T102',
-  name: 'Template 1',
+  id: 'T104',
+  name: 'Template 3',
 };
 
 export const mockContactDetails: ICOntactDetails = {
@@ -133,7 +133,6 @@ export const mockInitialState: CVState = {
   personalDetails: {
     firstName: mockPersonalDetails.firstName,
     lastName: mockPersonalDetails.lastName,
-    address: mockPersonalDetails.address,
     areaOfExpertise: mockPersonalDetails.areaOfExpertise,
     aboutMe: mockPersonalDetails.aboutMe,
   },

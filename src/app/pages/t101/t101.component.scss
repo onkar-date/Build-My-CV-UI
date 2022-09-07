@@ -1,18 +1,13 @@
 $primary-color: #715d8d;
 $left-section-width: 70%;
-.resume-body {
-    width: 24cm;
-    margin: auto;
-    .left-section{
-        width: $left-section-width;
-    }
-    .right-section{
-        width: calc(100% - $left-section-width);
-    }
+.left-section {
+    width: $left-section-width;
+}
+.right-section {
+    width: calc(100% - $left-section-width);
 }
 .section-title {
     margin: 0;
-
 }
 .header {
     display: flex;
@@ -22,7 +17,7 @@ $left-section-width: 70%;
     background-color: $primary-color;
     height: 10rem;
     color: white;
-    .name{
+    .name {
         border-bottom: 2px solid white;
     }
 }

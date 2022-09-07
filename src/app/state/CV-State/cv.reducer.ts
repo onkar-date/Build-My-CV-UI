@@ -41,11 +41,10 @@ export interface CVState {
   template: ITemplate;
 }
 
-const initialState: CVState = {
+const initialState: CVState = mockInitialState || {
   personalDetails: {
     firstName: '',
     lastName: '',
-    address: '',
     areaOfExpertise: '',
     aboutMe: '',
   },

@@ -19,7 +19,18 @@
                 <ng-container *ngSwitchCase="'T102'">
                     <app-t102 [cvData]="cvData"></app-t102>
                 </ng-container>
-                <ng-container *ngSwitchDefault>output2</ng-container>
+
+                <!-- Template T103 -->
+                <ng-container *ngSwitchCase="'T103'">
+                    <app-t103 [cvData]="cvData"></app-t103>
+                </ng-container>
+
+                <!-- Template T104 -->
+                <ng-container *ngSwitchCase="'T104'">
+                    <app-t104 [cvData]="cvData"></app-t104>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>Preview Not Available !!</ng-container>
             </ng-container>
         </div>
     </div>

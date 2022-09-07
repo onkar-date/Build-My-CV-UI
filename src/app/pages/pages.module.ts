@@ -16,6 +16,8 @@ import { SummaryComponent } from './summary/summary.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { T102Component } from './t102/t102.component';
 import { T101Component } from './t101/t101.component';
+import { T103Component } from './t103/t103.component';
+import { T104Component } from './t104/t104.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,6 +31,8 @@ import { T101Component } from './t101/t101.component';
     TemplatesComponent,
     T102Component,
     T101Component,
+    T103Component,
+    T104Component,
   ],
   imports: [
     CommonModule,
