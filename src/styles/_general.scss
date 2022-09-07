@@ -1,3 +1,7 @@
-// .text-primary {
-//     color: $custom-primary !important;
-// }
+.visually-hidden {
+    display: none !important;
+}
+
+.glyphicon.glyphicon-star, .glyphicon.glyphicon-star-empty {
+    font-size: 50px;
+}

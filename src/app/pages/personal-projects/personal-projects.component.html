@@ -1,1 +1,52 @@
-<p>personal-projects works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Personal Projects</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button (click)="addProject()" color="primary" mat-raised-button>Add Project</button>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="(projects$ | async)?.length">
+        <div class="col-md-6 mb-3" *ngFor="let project of projects$ | async">
+            <div class="card shadow">
+
+                <div class="card-body exp-card">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="mb-1">{{project.title}}</h2>
+                        <button mat-icon-button color="warn" class="remove-exp-btn"
+                            (click)="deleteProject(project)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a role="button" class="mb-0">
+                            <u>{{project.link}}</u>
+                        </a>
+                    </div>
+                    <div class="mt-2">
+                        {{project.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-3 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Education
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Certificates
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -13,3 +13,28 @@ export const selectSkills = createSelector(
   selectCVState,
   (state: CVState) => state.skills
 )
+
+export const selectExperiences = createSelector(
+  selectCVState,
+  (state: CVState) => state.experience
+)
+
+export const selectEducation = createSelector(
+  selectCVState,
+  (state: CVState) => state.education
+)
+
+export const selectProjects = createSelector(
+  selectCVState,
+  (state: CVState) => state.projects
+)
+
+export const selectCertificates = createSelector(
+  selectCVState,
+  (state: CVState) => state.certificates
+)
+
+export const selectTemplate = createSelector(
+  selectCVState,
+  (state: CVState) => state.template
+)

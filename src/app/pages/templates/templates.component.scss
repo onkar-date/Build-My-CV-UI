@@ -1,0 +1,10 @@
+.template-img{
+    height: 32rem;
+    width: 25rem;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.template-img:hover{
+    scale: 1.05;
+}

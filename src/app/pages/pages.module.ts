@@ -13,6 +13,9 @@ import { ExperienceComponent } from './experience/experience.component';
 import { EducationComponent } from './education/education.component';
 import { PersonalProjectsComponent } from './personal-projects/personal-projects.component';
 import { CertificatesComponent } from './certificates/certificates.component';
+import { SummaryComponent } from './summary/summary.component';
+import { TemplatesComponent } from './templates/templates.component';
+import { Template1Component } from './template1/template1.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { CertificatesComponent } from './certificates/certificates.component';
     ExperienceComponent,
     EducationComponent,
     PersonalProjectsComponent,
-    CertificatesComponent
+    CertificatesComponent,
+    SummaryComponent,
+    TemplatesComponent,
+    Template1Component
   ],
   imports: [
     CommonModule,

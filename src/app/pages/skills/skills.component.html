@@ -13,13 +13,14 @@
             </button>
         </div>
 
-        <div class="col-12 mt-3">
+        <div class="col-12 mt-3" *ngIf="(skills$ | async)?.length || showNewSkillRow">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Rating</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,11 +28,56 @@
                         <th scope="row">{{i + 1}}</th>
                         <td>{{skill.name}}</td>
                         <td>
-                            <ngb-rating [(rate)]="skill.rating" [readonly]="true"></ngb-rating>
+                            <ngb-rating [(rate)]="skill.rating" [max]="5" [readonly]="true"></ngb-rating>
+                        </td>
+                        <td>
+                            <button mat-icon-button color="warn" (click)="removeSkill(skill.name)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="showNewSkillRow">
+                        <td></td>
+                        <td>
+                            <form [formGroup]="newSkillForm">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="name" placeholder="Enter skill name">
+                                </div>
+                            </form>
+                        </td>
+                        <td class="d-flex align-items-center justify-content-between">
+                            <form [formGroup]="newSkillForm">
+                                <div class="form-group">
+                                    <ngb-rating [(rate)]="initialRating" [max]="5" formControlName="rating">
+                                    </ngb-rating>
+                                </div>
+                            </form>
+                            
+                        </td>
+                        <td>
+                            <div>
+                                <button mat-icon-button color="primary" (click)="saveSkill()">
+                                    <mat-icon>check_circle</mat-icon>
+                                </button>
+                                <button mat-icon-button color="warn" (click)="cancelSkill()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="col-12 mt-3 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Personal Details
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Experience
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
         </div>
     </div>
 </div>

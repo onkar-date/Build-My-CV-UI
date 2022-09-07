@@ -1,1 +1,56 @@
-<p>experience works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Experience</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button (click)="addExperience()" color="primary" mat-raised-button>Add Experience</button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 mb-3" *ngFor="let experience of experiences$ | async">
+            <div class="card shadow">
+
+                <div class="card-body exp-card">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="mb-1">{{experience.designation}}</h2>
+                        <button mat-icon-button color="warn" class="remove-exp-btn"
+                            (click)="deleteExperience(experience)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <h3 class="mb-0">{{experience.companyName}}</h3>
+                        <span>,</span>
+                        <span class="ml-3">
+                            ({{experience.workedFrom | date: 'mediumDate'}}
+                            &nbsp;&nbsp;-&nbsp;&nbsp;
+                            {{experience.workedTill | date: 'mediumDate'}})
+                        </span>
+                    </div>
+                    <div class="mt-2">
+                        {{experience.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Skills
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Education
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>

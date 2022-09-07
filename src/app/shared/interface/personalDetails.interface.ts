@@ -3,4 +3,5 @@ export interface IPersonalDetails {
   lastName: string;
   address: string;
   areaOfExpertise: string;
+  aboutMe: string;
 }

@@ -1,1 +1,77 @@
-<p>certificates works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Certificates</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button (click)="addCertificate()" color="primary" mat-raised-button>Add Certificate</button>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="(certificates$ | async)?.length || showNewCertificateRow">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Certificate Name</th>
+                        <th>Year of Completion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let certificate of certificates$ | async">
+                        <td>{{certificate.title}}</td>
+                        <td>{{certificate.yearOfCompletion}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="showNewCertificateRow">
+                        <td>
+                            <form [formGroup]="certificateForm">
+                                <div class="form-group mb-0">
+                                    <input type="text" class="form-control" formControlName="title">
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            <form [formGroup]="certificateForm">
+                                <div class="form-group mb-0">
+                                    <input type="text" class="form-control" formControlName="yearOfCompletion"
+                                        placeholder="eg. 2017 - 2021">
+                                </div>
+                            </form>
+                        </td>
+                        <td class="d-flex justify-content-center align-items-center">
+                            <button mat-icon-button color="primary" (click)="saveCertificate()">
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="cancelCertificate()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Projects
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Templates
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>

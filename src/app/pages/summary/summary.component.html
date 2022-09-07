@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+            <h2>Summary</h2>
+            <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="selectedTemplate.id">
+        <div class="col-12">
+            <ng-container [ngSwitch]="selectedTemplate.id">
+                <ng-container *ngSwitchCase="'T101'">
+                    <app-template1></app-template1>
+                </ng-container>
+                <ng-container *ngSwitchDefault>output2</ng-container>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Templates
+            </button>
+        </div>
+    </div>
+
+</div>

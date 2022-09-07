@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Select A Template</h2>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6 mb-3 d-flex justify-content-center" *ngFor="let template of templates">
+            <img src='{{ "assets/images/" + template.id + ".png" }}' alt="" class="template-img shadow-lg" (click)="selectTemplate(template)">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Certificates
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Summary
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>
