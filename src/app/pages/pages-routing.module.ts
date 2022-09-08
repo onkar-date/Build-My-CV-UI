@@ -1,3 +1,4 @@
+import { InterestComponent } from './interest/interest.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { SummaryComponent } from './summary/summary.component';
 import { NgModule } from '@angular/core';
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'certificates',
         component: CertificatesComponent,
+      },
+      {
+        path: 'interests',
+        component: InterestComponent,
       },
       {
         path: 'templates',

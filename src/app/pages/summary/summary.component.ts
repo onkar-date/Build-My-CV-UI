@@ -36,14 +36,12 @@ export class SummaryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((template: ITemplate) => {
         this.selectedTemplate = template;
-        console.log(this.selectedTemplate);
       });
     this.store
       .select(selectCVState)
       .pipe(takeUntil(this.destroy$))
       .subscribe((cvData: CVState) => {
         this.cvData = cvData;
-        console.log(this.cvData);
       });
   }
 

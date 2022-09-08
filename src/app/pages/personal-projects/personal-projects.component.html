@@ -25,7 +25,9 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <a role="button" class="mb-0">
-                            <u>{{project.link}}</u>
+                            <a (click)="openProject(project)">
+                                <u>{{project.link}}</u>
+                            </a>
                         </a>
                     </div>
                     <div class="mt-2">

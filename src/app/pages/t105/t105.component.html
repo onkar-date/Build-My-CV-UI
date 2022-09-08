@@ -1,0 +1,153 @@
+<div class="resume-body shadow-lg" *ngIf="cvData">
+    <!-- Left Section -->
+    <div class="left-section">
+        <section>
+            <div class="section-content">
+                <h1 class="mb-0">{{cvData.personalDetails.firstName}} {{cvData.personalDetails.lastName}}</h1>
+                <h4 class="mb-1">{{cvData.personalDetails.areaOfExpertise}}</h4>
+            </div>
+        </section>
+
+        <!-- Personal Info -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Personal Info</h2>
+            </div>
+            <div class="section-content">
+                <!-- Address -->
+                <div>Address</div>
+                <p class="text-white-50">
+                    {{cvData.contactDetails.address}}
+                </p>
+
+                <!-- Phone -->
+                <div>Phone</div>
+                <p class="text-white-50">
+                    {{cvData.contactDetails.mobile}}
+                </p>
+
+                <!-- Email -->
+                <div>Email</div>
+                <p class="text-white-50">
+                    {{cvData.contactDetails.email}}
+                </p>
+
+                <!-- LinkedIn -->
+                <div>LinkedIn</div>
+                <p class="text-white-50">
+                    {{cvData.contactDetails.linkedIn}}
+                </p>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="section-content">
+                <!-- Address -->
+                <ng-container *ngFor="let education of cvData.education">
+                    <div>
+                        {{education.degree}}
+                    </div>
+                    <p class="text-white-50">
+                        {{education.university}}
+                    </p>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li class="text-white-70" *ngFor="let skill of cvData.skills">
+                        {{skill.name}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Interests -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Interests</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li class="text-white-70" *ngFor="let interest of cvData.interest">
+                        {{interest}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+
+        <!-- About Me -->
+        <section>
+            {{cvData.personalDetails.aboutMe}}
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <div class="section-header">
+                Experience
+            </div>
+
+            <ng-container *ngFor="let experience of cvData.experience">
+                <div class="section-content marker-section">
+                    <!-- Company -->
+                    <div class="company-name font-weight-bold">
+                        <span class="marker"></span>
+                        {{experience.companyName}}
+                    </div>
+
+                    <!-- Duration -->
+                    <div>
+                        <span>{{experience.workedFrom}}&nbsp;-&nbsp;</span>
+                        <span>{{experience.workedTill}}</span>
+                    </div>
+
+                    <!-- Designation -->
+                    <h4 class="mb-0">
+                        <strong>{{experience.designation}}</strong>
+                    </h4>
+
+                    <!-- Description -->
+                    <div>
+                        <ul>
+                            <ng-container *ngFor="let description of experience.description">
+                                <li>
+                                    {{description}}
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+            </ng-container>
+        </section>
+
+        <!-- Certifications -->
+        <section>
+            <div class="section-header">
+                Certifications
+            </div>
+
+            <div class="section-content pt-0">
+                <ul>
+                    <li *ngFor="let certificate of cvData.certificates">
+                        {{certificate.title}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+</div>

@@ -34,7 +34,6 @@ export class TemplatesComponent implements OnInit {
   }
 
   selectTemplate(template: ITemplate) {
-    console.log(template);
     this.store.dispatch(finalizeTemplate({ template }));
     this.goToNextSection();
   }

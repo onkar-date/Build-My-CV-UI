@@ -13,7 +13,7 @@ export const mockPersonalDetails: IPersonalDetails = {
   lastName: 'Date',
   areaOfExpertise: 'Front End Developer',
   aboutMe:
-    'UI developer with 2.5 years of experience in web development.Skilled in designing, developing, and testing web-based applications, incorporating range of techniques like HTML, CSS, JavaScript.',
+    'UI developer with 3 years of experience in web development.Skilled in designing, developing, and testing web-based applications, incorporating range of techniques like HTML, CSS, JavaScript.',
 };
 
 export const mockSKills: ISkill[] = [
@@ -63,10 +63,21 @@ export const mockEducation: IEducation[] = [
 
 export const mockExperience: IExperience[] = [
   {
+    companyName: 'Cognizant Technology Solutions',
+    designation: 'Associate Projects',
+    workedFrom: 'Dec, 2021',
+    workedTill: 'Present',
+    description: [
+      'Working on developing a angular application For Legato Health Technologies',
+      'Using library based approach for bringing modularity to application.',
+      'Using NgRx store for state management.',
+    ],
+  },
+  {
     companyName: 'Infosys Ltd.',
     designation: 'Systems Engineer',
-    workedFrom: 'January 01, 2020',
-    workedTill: 'December 06, 2021',
+    workedFrom: 'Jan, 2020',
+    workedTill: 'Dec, 2021',
     description: [
       'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
       'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
@@ -77,8 +88,8 @@ export const mockExperience: IExperience[] = [
   {
     companyName: 'Infosys Ltd.',
     designation: 'Systems Engineer Trainee',
-    workedFrom: 'August 11, 2019',
-    workedTill: 'January 01, 2020',
+    workedFrom: 'Aug, 2019',
+    workedTill: 'Jan, 2020',
     description: [
       'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
       'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
@@ -95,10 +106,20 @@ export const mockProjects: IProject[] = [
     link: 'https://onkar-date.github.io/portfolio/home',
   },
   {
+    title: 'COVID-19 India',
+    description: 'Corona Tracker website made with Angular and bootstrap',
+    link: 'https://onkar-date.github.io/covid_India/dashboard/home',
+  },
+  {
+    title: 'Wanderlust',
+    description: 'MEAN stack project for planning trips',
+    link: 'https://onkar-date.github.io/wanderlust-UI/home',
+  },
+  {
     title: 'My Laptop Replica',
     description:
       'Replica of my laptop created with Angular and bootstrap and little bit of JS',
-    link: 'https://onkar-date.github.io/my-laptop/laptop',
+    link: 'https://onkar-date.github.io/My-laptop/laptop',
   },
 ];
 
@@ -118,8 +139,8 @@ export const mockCertificates: ICertificate[] = [
 ];
 
 export const mockTemplate: ITemplate = {
-  id: 'T104',
-  name: 'Template 3',
+  id: 'T105',
+  name: 'Template 5',
 };
 
 export const mockContactDetails: ICOntactDetails = {

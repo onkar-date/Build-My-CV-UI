@@ -29,7 +29,7 @@ export class AppErrorHandlerService implements ErrorHandler {
         } else if(httpError.status === 500) {
           this.showToastr('Something went wrong');
         } else {
-          this.showToastr('check here 1234');
+          this.showToastr('Something went wrong!!');
         }
       }
     }

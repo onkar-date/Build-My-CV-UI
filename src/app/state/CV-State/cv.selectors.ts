@@ -38,3 +38,8 @@ export const selectTemplate = createSelector(
   selectCVState,
   (state: CVState) => state.template
 )
+
+export const selectInterests = createSelector(
+  selectCVState,
+  (state: CVState) => state.interest
+)

@@ -71,3 +71,13 @@ export const finalizeTemplate = createAction(
   '[Templates] Select Template',
   props<{ template: ITemplate }>()
 )
+
+export const addInterest = createAction(
+  '[Interests] Add Interest',
+  props<{ interest: string }>()
+)
+
+export const removeInterest = createAction(
+  '[Interests] Remove Interest',
+  props<{ interest: string }>()
+)

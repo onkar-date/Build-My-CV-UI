@@ -52,4 +52,8 @@ export class PersonalProjectsComponent implements OnInit {
       relativeTo: this.activatedRoute,
     });
   }
+
+  openProject(project: IProject): void {
+    window.open(project.link, '_blank');
+  }
 }

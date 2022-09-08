@@ -33,6 +33,10 @@ export class HomeComponent implements OnInit {
       routerLink: 'certificates'
     },
     {
+      title: 'Interests',
+      routerLink: 'interests'
+    },
+    {
       title: 'Templates',
       routerLink: 'templates'
     }

@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Hobbies And Interests</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <button (click)="addInterest()" color="primary" mat-raised-button>Add Hobby/Interest</button>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="(interests$ | async)?.length || showNewInterestRow">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let interest of interests$ | async; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{interest}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button mat-icon-button color="warn" (click)="deleteInterest(interest)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="showNewInterestRow">
+                        <td></td>
+                        <td>
+                            <div class="form-group mb-0">
+                                <input type="text" class="form-control" [(ngModel)]="newInterest">
+                            </div>
+                        </td>
+                        <td class="d-flex justify-content-center align-items-center">
+                            <button mat-icon-button color="primary" (click)="saveInterest()">
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="cancelInterest()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3 d-flex justify-content-between">
+            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+                <mat-icon>arrow_back</mat-icon>
+                Certificates
+            </button>
+            <button mat-raised-button color="primary" (click)="goToNextSection()">
+                Templates
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>

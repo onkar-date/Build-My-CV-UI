@@ -103,22 +103,6 @@
             </div>
         </section>
 
-        <!-- Certifications -->
-        <section>
-            <div class="section-title">
-                <h1 class="mb-0">
-                    <strong>Certifications</strong>
-                </h1>
-            </div>
-            <div class="section-info">
-                <ul>
-                    <li *ngFor="let certificate of cvData.certificates">
-                        {{certificate.title}}
-                    </li>
-                </ul>
-            </div>
-        </section>
-
         <!-- Personal Projects -->
         <section>
             <div class="section-title">
@@ -136,6 +120,38 @@
                         </a>
                         <br>
                         <span>{{project.description}}</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section>
+            <div class="section-title">
+                <h1 class="mb-0">
+                    <strong>Certifications</strong>
+                </h1>
+            </div>
+            <div class="section-info">
+                <ul>
+                    <li *ngFor="let certificate of cvData.certificates">
+                        {{certificate.title}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Hobbies & Interests -->
+        <section>
+            <div class="section-title">
+                <h1 class="mb-0">
+                    <strong>Interests</strong>
+                </h1>
+            </div>
+            <div class="section-info">
+                <ul>
+                    <li *ngFor="let interest of cvData.interest">
+                        {{interest}}
                     </li>
                 </ul>
             </div>

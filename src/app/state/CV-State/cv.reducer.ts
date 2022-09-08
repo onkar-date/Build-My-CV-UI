@@ -1,6 +1,4 @@
-import {
-  mockInitialState,
-} from './../../shared/stub/mockData';
+import { mockInitialState } from './../../shared/stub/mockData';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
 import { IExperience } from './../../shared/interface/experience.interface';
@@ -20,6 +18,8 @@ import {
   addCertificate,
   removeCertificate,
   finalizeTemplate,
+  addInterest,
+  removeInterest,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -132,5 +132,15 @@ export const cvReducer = createReducer(
   on(finalizeTemplate, (state, { template }) => ({
     ...state,
     template,
+  })),
+
+  on(addInterest, (state, { interest }) => ({
+    ...state,
+    interest: [...state.interest, interest],
+  })),
+
+  on(removeInterest, (state, { interest }) => ({
+    ...state,
+    interest: state.interest.filter((_) => _ !== interest),
   }))
 );
