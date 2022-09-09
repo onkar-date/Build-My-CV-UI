@@ -33,10 +33,12 @@
         </p>
 
         <!-- LinkedIn -->
-        <div>LinkedIn</div>
-        <p class="info">
-          {{cvData.contactDetails.linkedIn}}
-        </p>
+        <ng-container *ngIf="cvData.contactDetails.linkedIn">
+          <div>LinkedIn</div>
+          <p class="info">
+            {{cvData.contactDetails.linkedIn}}
+          </p>
+        </ng-container>
       </div>
     </div>
 
@@ -55,7 +57,7 @@
     </div>
 
     <!-- Interests -->
-    <div class="section">
+    <div class="section" *ngIf="cvData.interest.length">
       <div class="section-header">
         <h3 class="section-title">Interests</h3>
       </div>
@@ -142,7 +144,7 @@
     </div>
 
     <!-- Certifications -->
-    <div class="section">
+    <div class="section" *ngIf="cvData.certificates.length">
       <h3 class="section-header">
         Certifications
       </h3>

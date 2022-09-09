@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="row mt-3" *ngIf="(certificates$ | async)?.length || showNewCertificateRow">
+    <div class="row mt-3" *ngIf="(certificates$ | async)?.length || showNewCertificateRow; else noData">
         <div class="col-12">
             <table class="table table-bordered">
                 <thead>
@@ -68,10 +68,17 @@
                 Projects
             </button>
             <button mat-raised-button color="primary" (click)="goToNextSection()">
-                Templates
+                Interests
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>
     </div>
-
 </div>
+
+<ng-template #noData>
+    <div class="row mt-3">
+        <div class="col-12">
+            <span class="d-flex justify-content-center text-muted display-5">No Certificates Added</span>
+        </div>
+    </div>
+</ng-template>

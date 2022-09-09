@@ -1,10 +1,18 @@
-import { selectInterests } from './../../state/CV-State/cv.selectors';
+import {
+  selectInterests,
+  selectSections,
+} from './../../state/CV-State/cv.selectors';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { addInterest, removeInterest } from 'src/app/state/CV-State/cv.actions';
+import {
+  addInterest,
+  removeInterest,
+  selectSection,
+} from 'src/app/state/CV-State/cv.actions';
+import { Subject, takeUntil } from 'rxjs';
+import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
   selector: 'app-interest',
@@ -15,14 +23,23 @@ export class InterestComponent implements OnInit {
   interests$ = this.store.select(selectInterests);
   showNewInterestRow = false;
   newInterest: string = '';
+  sections: ISection[] = [];
+  destroy$ = new Subject();
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-  ) {}
+    private router: Router
+  ) {
+    store
+      .select(selectSections)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sections: ISection[]) => {
+        this.sections = sections;
+      });
+  }
 
-  ngOnInit(): void { }
-  
+  ngOnInit(): void {}
+
   addInterest() {
     this.newInterest = '';
     this.showNewInterestRow = true;
@@ -38,22 +55,32 @@ export class InterestComponent implements OnInit {
 
   saveInterest(): void {
     if (this.newInterest.length) {
-      this.store.dispatch(
-        addInterest({ interest: this.newInterest })
-      );
+      this.store.dispatch(addInterest({ interest: this.newInterest }));
       this.addInterest();
     }
   }
 
   goToNextSection(): void {
-    this.router.navigate(['../templates'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 
   goToPreviousSection(): void {
-    this.router.navigate(['../certificates'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
+        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 }

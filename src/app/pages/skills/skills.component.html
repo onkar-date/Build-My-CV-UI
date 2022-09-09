@@ -13,8 +13,8 @@
             </button>
         </div>
 
-        <div class="col-12 mt-3" *ngIf="(skills$ | async)?.length || showNewSkillRow">
-            <table class="table">
+        <div class="col-12 mt-3">
+            <table class="table" *ngIf="skills.length || showNewSkillRow; else noData">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let skill of skills$ | async; let i = index">
+                    <tr *ngFor="let skill of skills; let i = index">
                         <th scope="row">{{i + 1}}</th>
                         <td>{{skill.name}}</td>
                         <td>
@@ -72,7 +72,7 @@
         <div class="col-12 mt-3 d-flex justify-content-between">
             <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
                 <mat-icon>arrow_back</mat-icon>
-                Personal Details
+                Contact Details
             </button>
             <button mat-raised-button color="primary" (click)="goToNextSection()">
                 Experience
@@ -81,3 +81,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #noData>
+    <span class="d-flex justify-content-center text-muted display-5">No Skills Added</span>
+</ng-template>

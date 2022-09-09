@@ -1,3 +1,4 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { CVState } from './../../state/CV-State/cv.reducer';
 import { ICOntactDetails } from './../interface/contactDetails.interface';
 import { ITemplate } from './../interface/template.interface';
@@ -173,4 +174,5 @@ export const mockInitialState: CVState = {
     name: mockTemplate.name,
     id: mockTemplate.id,
   },
+  sections: SECTIONS
 };

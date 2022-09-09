@@ -1,6 +1,10 @@
-import { savePersonalDetails } from './../../state/CV-State/cv.actions';
+import { ISection } from './../../shared/interface/section.interface';
+import { savePersonalDetails, selectSection } from './../../state/CV-State/cv.actions';
 import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
-import { selectPersonalDetails } from './../../state/CV-State/cv.selectors';
+import {
+  selectPersonalDetails,
+  selectSections,
+} from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,16 +19,23 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class PersonalDetailsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
+  sections: ISection[] = [];
   personalDetailsForm!: FormGroup;
-  demo = '';
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>
-  ) {}
+  ) {
+    store
+      .select(selectSections)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sections: ISection[]) => {
+        this.sections = sections;
+      });
+  }
+
   ngOnDestroy(): void {
-    this.destroy$.next(null);
     this.destroy$.complete();
   }
 
@@ -42,7 +53,7 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
       firstName: [personalDetails.firstName, Validators.required],
       lastName: [personalDetails.lastName, Validators.required],
       areaOfExpertise: [personalDetails.areaOfExpertise, Validators.required],
-      aboutMe: [personalDetails.aboutMe, Validators.required]
+      aboutMe: [personalDetails.aboutMe, Validators.required],
     });
   }
 
@@ -51,7 +62,15 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         savePersonalDetails({ personalDetails: this.personalDetailsForm.value })
       );
-      this.router.navigate(['../skills'], { relativeTo: this.activatedRoute });
+      for (let i = 0; i < this.sections.length; i++) {
+        if (this.sections[i].active) {
+          this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+          this.router.navigate([`../${this.sections[i+1].routerLink}`], {
+            relativeTo: this.activatedRoute,
+          });
+          break;
+        }
+      }
     }
   }
 }

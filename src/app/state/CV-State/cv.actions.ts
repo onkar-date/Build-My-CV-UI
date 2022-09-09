@@ -1,3 +1,5 @@
+import { ISection } from './../../shared/interface/section.interface';
+import { ICOntactDetails } from './../../shared/interface/contactDetails.interface';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -7,9 +9,19 @@ import { IPersonalDetails } from '../../shared/interface/personalDetails.interfa
 import { createAction, props } from '@ngrx/store';
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
 
+export const selectSection = createAction(
+  '[Sections] Select section',
+  props<{ section: ISection }>()
+);
+
 export const savePersonalDetails = createAction(
   '[Personsl Details] Save Personal Details',
   props<{ personalDetails: IPersonalDetails }>()
+);
+
+export const saveContactDetails = createAction(
+  '[Contact Details] Save Contact Details',
+  props<{ contactDetails: ICOntactDetails }>()
 );
 
 export const addSkill = createAction(
@@ -35,49 +47,49 @@ export const addExperience = createAction(
 export const removeExperience = createAction(
   '[Experience] Remove Experience',
   props<{ experience: IExperience }>()
-)
+);
 
 export const addEducation = createAction(
   '[Education] Add Education',
   props<{ education: IEducation }>()
-)
+);
 
 export const removeEducation = createAction(
   '[Education] Remove Education',
   props<{ education: IEducation }>()
-)
+);
 
 export const addProject = createAction(
   '[Project] Add Project',
   props<{ project: IProject }>()
-)
+);
 
 export const removeProject = createAction(
   '[Project] Remove Project',
   props<{ project: IProject }>()
-)
+);
 
 export const addCertificate = createAction(
   '[Certificate] Add Certificate',
   props<{ certificate: ICertificate }>()
-)
+);
 
 export const removeCertificate = createAction(
   '[Certificate] Remove Certificate',
   props<{ certificate: ICertificate }>()
-)
+);
 
 export const finalizeTemplate = createAction(
   '[Templates] Select Template',
   props<{ template: ITemplate }>()
-)
+);
 
 export const addInterest = createAction(
   '[Interests] Add Interest',
   props<{ interest: string }>()
-)
+);
 
 export const removeInterest = createAction(
   '[Interests] Remove Interest',
   props<{ interest: string }>()
-)
+);

@@ -1,17 +1,17 @@
 import { ICertificate } from './../../shared/interface/certificate.interface';
-import { selectCertificates } from './../../state/CV-State/cv.selectors';
+import { selectCertificates, selectSections } from './../../state/CV-State/cv.selectors';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { IEducation } from 'src/app/shared/interface/education.interface';
 import { AppState } from 'src/app/state/app.state';
 import {
-  removeEducation,
-  addEducation,
   removeCertificate,
   addCertificate,
+  selectSection,
 } from 'src/app/state/CV-State/cv.actions';
+import { takeUntil, Subject } from 'rxjs';
+import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
   selector: 'app-certificates',
@@ -22,12 +22,21 @@ export class CertificatesComponent implements OnInit {
   certificates$ = this.store.select(selectCertificates);
   certificateForm!: FormGroup;
   showNewCertificateRow = false;
+  sections: ISection[] = [];
+  destroy$ = new Subject();
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    store
+      .select(selectSections)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sections: ISection[]) => {
+        this.sections = sections;
+      });
+  }
 
   ngOnInit(): void {}
 
@@ -57,14 +66,26 @@ export class CertificatesComponent implements OnInit {
   }
 
   goToNextSection(): void {
-    this.router.navigate(['../templates'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 
   goToPreviousSection(): void {
-    this.router.navigate(['../personal-projects'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
+        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 }

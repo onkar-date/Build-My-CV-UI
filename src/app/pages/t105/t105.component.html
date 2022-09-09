@@ -8,10 +8,10 @@
             </div>
         </section>
 
-        <!-- Personal Info -->
+        <!-- Contact -->
         <section>
             <div class="section-header">
-                <h2 class="section-title">Personal Info</h2>
+                <h2 class="section-title">Contact</h2>
             </div>
             <div class="section-content">
                 <!-- Address -->
@@ -33,10 +33,12 @@
                 </p>
 
                 <!-- LinkedIn -->
-                <div>LinkedIn</div>
-                <p class="text-white-50">
-                    {{cvData.contactDetails.linkedIn}}
-                </p>
+                <ng-container *ngIf="cvData.contactDetails.linkedIn">
+                    <div>LinkedIn</div>
+                    <p class="text-white-50">
+                        {{cvData.contactDetails.linkedIn}}
+                    </p>
+                </ng-container>
             </div>
         </section>
 
@@ -73,7 +75,7 @@
         </section>
 
         <!-- Interests -->
-        <section>
+        <section *ngIf="cvData.interest.length">
             <div class="section-header">
                 <h2 class="section-title">Interests</h2>
             </div>
@@ -134,8 +136,33 @@
             </ng-container>
         </section>
 
+        <!-- Personal Projects -->
+        <section *ngIf="cvData.projects.length">
+            <div class="section-header">
+                Personal Projects 
+            </div>
+
+            <div class="section-content pt-0">
+                <ul>
+                    <li *ngFor="let project of cvData.projects" class="mb-3">
+                        <div>
+                            <strong>{{project.title}}</strong>
+                        </div>
+                        <div>
+                            <a href="{{project.link}}">
+                                {{project.link}}
+                            </a>
+                        </div>
+                        <div class="text-muted">
+                            {{project.description}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
         <!-- Certifications -->
-        <section>
+        <section *ngIf="cvData.certificates.length">
             <div class="section-header">
                 Certifications
             </div>

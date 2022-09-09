@@ -21,7 +21,7 @@ import { StoreModule } from '@ngrx/store';
     PagesModule,
     SharedComponentsModule,
     ToastrModule.forRoot({
-      timeOut: 4000,
+      timeOut: 2500,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       closeButton: true,

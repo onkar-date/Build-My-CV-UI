@@ -1,4 +1,7 @@
-import { selectCVState } from './../../state/CV-State/cv.selectors';
+import {
+  selectCVState,
+  selectSections,
+} from './../../state/CV-State/cv.selectors';
 import { CVState } from './../../state/CV-State/cv.reducer';
 import { ResumeService } from './../../shared/services/resume.service';
 import { ITemplate } from './../../shared/interface/template.interface';
@@ -8,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { selectTemplate } from 'src/app/state/CV-State/cv.selectors';
+import { selectSection } from 'src/app/state/CV-State/cv.actions';
+import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
   selector: 'app-summary',
@@ -18,15 +23,22 @@ export class SummaryComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   selectedTemplate!: ITemplate;
   cvData!: CVState;
+  sections: ISection[] = [];
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private resumeService: ResumeService
-  ) {}
+  ) {
+    store
+      .select(selectSections)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sections: ISection[]) => {
+        this.sections = sections;
+      });
+  }
 
   ngOnDestroy(): void {
-    this.destroy$.next(null);
     this.destroy$.complete();
   }
 
@@ -46,9 +58,15 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   goToPreviousSection(): void {
-    this.router.navigate(['../templates'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
+        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 
   async downloadResume() {

@@ -6,7 +6,7 @@
         <div>
             <u>{{cvData.contactDetails.email}}</u>
         </div>
-        <div>
+        <div *ngIf="cvData.contactDetails.linkedIn">
             <u>{{cvData.contactDetails.linkedIn}}</u>
         </div>
 
@@ -104,7 +104,7 @@
         </section>
 
         <!-- Personal Projects -->
-        <section>
+        <section *ngIf="cvData.projects.length">
             <div class="section-title">
                 <h1 class="mb-0">
                     <strong>Personal Projects</strong>
@@ -126,7 +126,7 @@
         </section>
 
         <!-- Certifications -->
-        <section>
+        <section *ngIf="cvData.certificates.length">
             <div class="section-title">
                 <h1 class="mb-0">
                     <strong>Certifications</strong>
@@ -142,7 +142,7 @@
         </section>
 
         <!-- Hobbies & Interests -->
-        <section>
+        <section *ngIf="cvData.interest.length">
             <div class="section-title">
                 <h1 class="mb-0">
                     <strong>Interests</strong>

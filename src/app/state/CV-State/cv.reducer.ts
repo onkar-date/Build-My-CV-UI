@@ -1,3 +1,5 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
+import { ISection } from './../../shared/interface/section.interface';
 import { mockInitialState } from './../../shared/stub/mockData';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
@@ -20,6 +22,8 @@ import {
   finalizeTemplate,
   addInterest,
   removeInterest,
+  saveContactDetails,
+  selectSection,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -39,6 +43,7 @@ export interface CVState {
   certificates: ICertificate[];
   interest: string[];
   template: ITemplate;
+  sections: ISection[];
 }
 
 const initialState: CVState = mockInitialState || {
@@ -64,14 +69,25 @@ const initialState: CVState = mockInitialState || {
     name: '',
     id: '',
   },
+  sections: SECTIONS
 };
 
 export const cvReducer = createReducer(
   initialState,
 
+  on(selectSection, (state, { section }) => ({
+    ...state,
+    sections: getUpdatedSections(state.sections, section),
+  })),
+
   on(savePersonalDetails, (state, { personalDetails }) => ({
     ...state,
     personalDetails,
+  })),
+
+  on(saveContactDetails, (state, { contactDetails }) => ({
+    ...state,
+    contactDetails,
   })),
 
   on(addSkill, (state, { skill }) => ({
@@ -144,3 +160,12 @@ export const cvReducer = createReducer(
     interest: state.interest.filter((_) => _ !== interest),
   }))
 );
+
+function getUpdatedSections(currentSections: ISection[], selectedSection: ISection): ISection[] {
+  return currentSections.map(section => {
+    return {
+      ...section,
+      active: section.title === selectedSection.title
+    }
+  })
+}

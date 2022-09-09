@@ -3,13 +3,13 @@
         <div class="col-12 p-0">
             <mat-drawer-container class="wrapper" autosize>
                 <mat-drawer #drawer class="sidenav" mode="side" opened="true">
-                    <ng-container *ngFor="let section of sections">
-                        <button
-                            mat-raised-button color="primary" class="btn-block"
-                            [routerLink]="section.routerLink"
-                            routerLinkActive="router-link-active">
+                    <ng-container *ngFor="let section of sections$ | async">
+                        <a
+                            class="menu-item"
+                            [class.active]="section.active"
+                            (click)="goToSection(section)">
                             {{section.title}}
-                        </button>
+                        </a>
                     </ng-container>
                 </mat-drawer>
 

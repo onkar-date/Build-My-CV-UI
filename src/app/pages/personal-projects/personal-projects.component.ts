@@ -6,8 +6,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
 import { AppState } from 'src/app/state/app.state';
-import { addProject, removeEducation, removeProject } from 'src/app/state/CV-State/cv.actions';
-import { selectProjects } from 'src/app/state/CV-State/cv.selectors';
+import {
+  addProject,
+  removeEducation,
+  removeProject,
+  selectSection,
+} from 'src/app/state/CV-State/cv.actions';
+import {
+  selectProjects,
+  selectSections,
+} from 'src/app/state/CV-State/cv.selectors';
+import { takeUntil, Subject } from 'rxjs';
+import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
   selector: 'app-personal-projects',
@@ -16,12 +26,21 @@ import { selectProjects } from 'src/app/state/CV-State/cv.selectors';
 })
 export class PersonalProjectsComponent implements OnInit {
   projects$ = this.store.select(selectProjects);
+  sections: ISection[] = [];
+  destroy$ = new Subject();
   constructor(
     private modalService: NgbModal,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    store
+      .select(selectSections)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sections: ISection[]) => {
+        this.sections = sections;
+      });
+  }
 
   ngOnInit(): void {}
 
@@ -42,15 +61,27 @@ export class PersonalProjectsComponent implements OnInit {
   }
 
   goToNextSection(): void {
-    this.router.navigate(['../certificates'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 
   goToPreviousSection(): void {
-    this.router.navigate(['../education'], {
-      relativeTo: this.activatedRoute,
-    });
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
+        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
+      }
+    }
   }
 
   openProject(project: IProject): void {

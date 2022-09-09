@@ -1,3 +1,4 @@
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { InterestComponent } from './interest/interest.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { SummaryComponent } from './summary/summary.component';
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'personal-details',
         component: PersonalDetailsComponent,
+      },
+      {
+        path: 'contact-details',
+        component: ContactDetailsComponent,
       },
       {
         path: 'skills',

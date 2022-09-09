@@ -48,7 +48,7 @@
       </div>
 
       <!-- Personal Projects -->
-      <div class="section">
+      <div class="section" *ngIf="cvData.projects.length">
         <div class="section-header">
           <h2 class="section-title">Personal Projects</h2>
           <hr class="section-divider mt-0" />
@@ -151,7 +151,7 @@
       </div>
 
       <!-- Certificates -->
-      <div class="section mt-3">
+      <div class="section mt-3" *ngIf="cvData.certificates.length">
         <div class="section-header">
           <h4 class="m-0 font-weight-bold">Certificates</h4>
           <hr class="section-divider my-1" />
@@ -164,7 +164,7 @@
       </div>
 
       <!-- Hobbies & Interests -->
-      <div class="section mt-3">
+      <div class="section mt-3" *ngIf="cvData.interest.length">
         <div class="section-header">
           <h4 class="m-0 font-weight-bold">Hobbies</h4>
           <hr class="section-divider my-1" />
