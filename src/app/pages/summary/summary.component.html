@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid content-wrapper">
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
             <h2>Summary</h2>
@@ -39,14 +39,12 @@
             </ng-container>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-12 d-flex justify-content-start">
-            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
-                <mat-icon>arrow_back</mat-icon>
-                Templates
-            </button>
-        </div>
-    </div>
-
+<div class="action-footer d-flex justify-content-between">
+    <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+        <mat-icon>arrow_back</mat-icon>
+        Templates
+    </button>
+    <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
 </div>

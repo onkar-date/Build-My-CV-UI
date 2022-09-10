@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid content-wrapper">
     <div class="row">
         <div class="col-12">
             <h2>Certificates</h2>
@@ -61,18 +61,17 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 mt-3 d-flex justify-content-between">
-            <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
-                <mat-icon>arrow_back</mat-icon>
-                Projects
-            </button>
-            <button mat-raised-button color="primary" (click)="goToNextSection()">
-                Interests
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </div>
-    </div>
+</div>
+
+<div class="action-footer d-flex justify-content-between">
+    <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+        <mat-icon>arrow_back</mat-icon>
+        Projects
+    </button>
+    <button mat-raised-button color="primary" (click)="goToNextSection()">
+        Interests
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
 </div>
 
 <ng-template #noData>
