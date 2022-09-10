@@ -28,4 +28,13 @@ export class HomeComponent implements OnInit {
       relativeTo: this.activatedRoute,
     });
   }
+
+  toggleMenu(): void {
+    const toggle = document.querySelector('.toggle');
+    toggle?.classList.toggle('active');
+    const sidebar = document.querySelector('.sidebar');
+    sidebar?.classList.toggle('active');
+    const mainContent = document.querySelector('.main-content');
+    mainContent?.classList.toggle('active');
+  }
 }

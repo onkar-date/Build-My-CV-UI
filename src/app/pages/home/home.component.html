@@ -1,23 +1,27 @@
-<div class="container-fluid h-100">
-    <div class="row h-100">
-        <div class="col-12 p-0">
-            <mat-drawer-container class="wrapper" autosize>
-                <mat-drawer #drawer class="sidenav" mode="side" opened="true">
-                    <ng-container *ngFor="let section of sections$ | async">
-                        <a
-                            class="menu-item"
-                            [class.active]="section.active"
-                            (click)="goToSection(section)">
-                            {{section.title}}
-                        </a>
-                    </ng-container>
-                </mat-drawer>
+<div class="wrapper">
+    <div class="sidebar">
+        <div class="d-flex header border-bottom">
+            <span class="laptop-header">Build My CV</span>
+            <span class="mobile-header">BM-CV</span>
+        </div>
+        <ul class="nav mt-4">
+            <li *ngFor="let section of sections$ | async" class="nav-item" role="button" (click)="goToSection(section)">
+                <a class="nav-link" [class.active]="section.active">
+                    <!-- <i class="{{item.icon}}" aria-hidden="true"></i> -->
+                    <span>{{section.title}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-                <div class="content">
-                    <router-outlet></router-outlet>
-                </div>
-
-            </mat-drawer-container>
+    <div class="main-content">
+        <div class="topnav header p-3 bg-white shadow d-flex">
+            <div class="toggle" role="button" (click)="toggleMenu()">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
