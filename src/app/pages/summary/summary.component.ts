@@ -13,6 +13,7 @@ import { AppState } from 'src/app/state/app.state';
 import { selectTemplate } from 'src/app/state/CV-State/cv.selectors';
 import { selectSection } from 'src/app/state/CV-State/cv.actions';
 import { ISection } from 'src/app/shared/interface/section.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-summary',
@@ -28,7 +29,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private resumeService: ResumeService
+    private resumeService: ResumeService,
+    private spinner: NgxSpinnerService
   ) {
     store
       .select(selectSections)
@@ -70,6 +72,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   async downloadResume() {
+    this.spinner.show();
     const resume = await this.resumeService.downloadResume(
       this.selectedTemplate,
       this.cvData
@@ -78,5 +81,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
     downloadLink.href = window.URL.createObjectURL(resume);
     downloadLink.download = `${this.cvData.personalDetails.firstName}_${this.cvData.personalDetails.lastName}`;
     downloadLink.click();
+    this.spinner.hide();
   }
 }
