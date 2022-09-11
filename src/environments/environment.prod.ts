@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'add-base-url',
+  baseUrl: 'https://build-my-cv-server.onrender.com',
   apiUrls: {
     downloadResume: 'pdf'
   }
