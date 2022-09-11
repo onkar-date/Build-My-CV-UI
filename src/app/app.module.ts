@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppErrorHandlerService } from 'src/app-error-handler.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -18,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    NgxSpinnerModule,
     PagesModule,
     SharedComponentsModule,
     ToastrModule.forRoot({
@@ -27,7 +29,7 @@ import { StoreModule } from '@ngrx/store';
       closeButton: true,
       easing: 'ease-in',
       maxOpened: 1,
-      autoDismiss: true
+      autoDismiss: true,
     }),
     BrowserAnimationsModule,
     StoreModule.forRoot({
