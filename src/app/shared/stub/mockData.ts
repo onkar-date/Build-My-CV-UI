@@ -10,92 +10,69 @@ import { IExperience } from './../interface/experience.interface';
 import { IEducation } from '../interface/education.interface';
 
 export const mockPersonalDetails: IPersonalDetails = {
-  firstName: 'Onkar',
-  lastName: 'Date',
-  areaOfExpertise: 'Front End Developer',
+  firstName: 'Jon',
+  lastName: 'Snow',
+  areaOfExpertise: 'Knowing Nothing',
   aboutMe:
-    'UI developer with 3 years of experience in web development.Skilled in designing, developing, and testing web-based applications, incorporating range of techniques like HTML, CSS, JavaScript.',
+    'Bastard son of lord Eddard Stark and former Lord Commander of Nights Watch who was recently resurrected from the dead and now is looking for revenge',
 };
 
 export const mockSKills: ISkill[] = [
   {
-    name: 'Angular',
+    name: 'Tremendous horseback rider',
     rating: 5,
   },
   {
-    name: 'Node.js',
+    name: 'Natural born leader with loyal followers',
     rating: 5,
   },
   {
-    name: 'JavaSCript',
+    name: 'Knower of nothing.',
     rating: 4,
   },
   {
-    name: 'Bootstrap',
+    name: 'Knee bender',
     rating: 4,
-  },
-  {
-    name: 'Python',
-    rating: 3,
-  },
-  {
-    name: 'MongoDB',
-    rating: 3,
   },
 ];
 
 export const mockEducation: IEducation[] = [
   {
-    degree: 'Bachelor of Engineering (Computer Engineering)',
-    batch: '2015 - 2019',
-    university: 'Savitribai Phule Pune University',
+    degree: 'Nobles Education',
+    batch: '290 AC - 300 AC (Winterfell)',
+    university: 'Master Lewin',
   },
   {
-    degree: '12th',
-    batch: '2013 - 2015',
-    university: 'Sir Parashurambhau College',
-  },
-  {
-    degree: '10th',
-    batch: '2011 - 2013',
-    university: 'Sane Guruji Madhyamik Vidyalay',
+    degree: 'Dragon Rider',
+    batch: '305 AC - 306 AC',
+    university: 'Daenerys Targaryen',
   },
 ];
 
 export const mockExperience: IExperience[] = [
   {
-    companyName: 'Cognizant Technology Solutions',
-    designation: 'Associate Projects',
-    workedFrom: 'Dec, 2021',
-    workedTill: 'Present',
+    companyName: 'Winterfell',
+    designation: 'Bastard Child',
+    workedFrom: '290 AC',
+    workedTill: '300 AC',
     description: [
-      'Working on developing a angular application For Legato Health Technologies',
-      'Using library based approach for bringing modularity to application.',
-      'Using NgRx store for state management.',
+      'Developed advanced swodplay skills while dueling with brother Robb',
+      'Treated coldly by Catelyn who saw me as a reminder of Eddards unfaithfulness (still learned the value of true honor)',
+      'Discovered outcast direwolf pup and raised it as my own (Ghost)',
+      'Received young lord martial training from Master-at-Arms Rodrik Cassel',
     ],
   },
   {
-    companyName: 'Infosys Ltd.',
-    designation: 'Systems Engineer',
-    workedFrom: 'Jan, 2020',
-    workedTill: 'Dec, 2021',
+    companyName: 'The Wall',
+    designation: 'Nights Watch',
+    workedFrom: '305 AC',
+    workedTill: '310 AC',
     description: [
-      'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
-      'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
-      'Developed custom modules and components to achieve better user experience.',
-      'Designed and created routable modals and components to achieve better user experience',
-    ],
-  },
-  {
-    companyName: 'Infosys Ltd.',
-    designation: 'Systems Engineer Trainee',
-    workedFrom: 'Aug, 2019',
-    workedTill: 'Jan, 2020',
-    description: [
-      'Working on developing a CPQ (Configure Price Quote) application For Thyssenkrupp Elevators',
-      'Using Angular 11 Created and displayed dynamic reactive forms by consuming data from API.',
-      'Developed custom modules and components to achieve better user experience.',
-      'Designed and created routable modals and components to achieve better user experience',
+      "Committed my oath and allegiance to the Night's Watch",
+      'Started rough but soon became a friend and trusted leader to many (met BFF Samwell)',
+      'Honored by receiving Longclaw (Valyrian steel sword) from Jorah Mormont',
+      'Held The Wall and took over as leader during the wildling attack',
+      "Elected to Lord Commander of the Night's Watch after a surprise election",
     ],
   },
 ];
@@ -104,51 +81,35 @@ export const mockProjects: IProject[] = [
   {
     title: 'Portfolio',
     description: 'My Portfolio',
-    link: 'https://onkar-date.github.io/portfolio/home',
-  },
-  {
-    title: 'COVID-19 India',
-    description: 'Corona Tracker website made with Angular and bootstrap',
-    link: 'https://onkar-date.github.io/covid_India/dashboard/home',
-  },
-  {
-    title: 'Wanderlust',
-    description: 'MEAN stack project for planning trips',
-    link: 'https://onkar-date.github.io/wanderlust-UI/home',
-  },
-  {
-    title: 'My Laptop Replica',
-    description:
-      'Replica of my laptop created with Angular and bootstrap and little bit of JS',
-    link: 'https://onkar-date.github.io/My-laptop/laptop',
+    link: 'https://www.hbo.com/game-of-thrones',
   },
 ];
 
 export const mockCertificates: ICertificate[] = [
   {
-    title: 'Infosys Certified Angular Professional',
-    yearOfCompletion: '2021',
+    title: 'Westeros Certified Professional Dothraki',
+    yearOfCompletion: '305',
   },
   {
-    title: 'Infosys Certified Front End Web Developer',
-    yearOfCompletion: '2020',
+    title: 'Westeros Certified Drago Rider',
+    yearOfCompletion: '310',
   },
   {
-    title: 'Infosys Certified React Professional',
-    yearOfCompletion: '2020',
+    title: 'Westeros Certified City Waych Commander',
+    yearOfCompletion: '315',
   },
 ];
 
 export const mockTemplate: ITemplate = {
-  id: 'T105',
-  name: 'Template 5',
+  id: 'T101',
+  name: 'Template 1',
 };
 
 export const mockContactDetails: ICOntactDetails = {
-  mobile: '9922064217',
-  email: 'onkar101197@gmail.com',
-  linkedIn: 'adadadadada./adadad',
-  address: 'Hadapsar, Pune 411028',
+  mobile: '1234567890',
+  email: 'jon.snow@nightsWatch.com',
+  linkedIn: 'https://www.linkedin.com/in/jon-snow-a12345/',
+  address: 'Nights Watch, North 12345',
 };
 
 export const mockInitialState: CVState = {
@@ -169,7 +130,7 @@ export const mockInitialState: CVState = {
   education: [...mockEducation],
   projects: [...mockProjects],
   certificates: [...mockCertificates],
-  interest: ['Playing Games', 'Surfing Internet', 'Playing Guitar'],
+  interest: ['Riding Dragon', 'Bending Knee', 'Knowing Nothing'],
   template: {
     name: mockTemplate.name,
     id: mockTemplate.id,

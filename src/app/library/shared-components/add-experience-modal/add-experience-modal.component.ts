@@ -21,11 +21,11 @@ export class AddExperienceModalComponent implements OnInit {
 
   initForm(): void {
     this.experienceForm = this.fb.group({
-      companyName: ['Infosys', Validators.required],
-      designation: ['Systems Engineer', Validators.required],
+      companyName: ['', Validators.required],
+      designation: ['', Validators.required],
       workedFrom: ['', Validators.required],
       workedTill: ['', Validators.required],
-      description: [['adadd'], [Validators.required]],
+      description: [[''], [Validators.required]],
     });
   }
 

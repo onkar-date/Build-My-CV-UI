@@ -51,7 +51,7 @@ export interface CVState {
   sectionValidity: ISectionValidity;
 }
 
-const initialState: CVState = {
+const initialState: CVState = mockInitialState || {
   personalDetails: {
     firstName: '',
     lastName: '',

@@ -18,8 +18,8 @@ export class AddProjectModalComponent implements OnInit {
 
   initForm(): void {
     this.projectForm = this.fb.group({
-      title: ['Infosys', Validators.required],
-      description: ['Systems Engineer', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
       link: [''],
     });
   }
