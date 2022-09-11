@@ -8,7 +8,8 @@
     <div class="row mb-3">
         <div class="col-md-6 mb-3 d-flex justify-content-center template-container" *ngFor="let template of templates">
             <img src='{{ "assets/images/" + template.id + ".png" }}'
-                alt="" class="template-img shadow-lg"
+                alt="" class="template-img"
+                [class.primary-glow]="template.id === selectedTemplate?.id"
                 (click)="selectTemplate(template)"
             >
             <div class="selected-marker" *ngIf="template.id === selectedTemplate?.id">
