@@ -72,15 +72,20 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   async downloadResume() {
-    this.spinner.show();
-    const resume = await this.resumeService.downloadResume(
-      this.selectedTemplate,
-      this.cvData
-    );
-    const downloadLink = document.createElement('a');
-    downloadLink.href = window.URL.createObjectURL(resume);
-    downloadLink.download = `${this.cvData.personalDetails.firstName}_${this.cvData.personalDetails.lastName}`;
-    downloadLink.click();
-    this.spinner.hide();
+    try {
+      this.spinner.show();
+      const resume = await this.resumeService.downloadResume(
+        this.selectedTemplate,
+        this.cvData
+      );
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(resume);
+      downloadLink.download = `${this.cvData.personalDetails.firstName}_${this.cvData.personalDetails.lastName}`;
+      downloadLink.click();
+      this.spinner.hide();
+    } catch (err) {
+      this.spinner.hide();
+      throw err;
+    }
   }
 }
