@@ -10,7 +10,7 @@ import { AddProjectModalComponent } from './add-project-modal/add-project-modal.
   declarations: [
     ConfirmationPromptComponent,
     AddExperienceModalComponent,
-    AddProjectModalComponent,
+    AddProjectModalComponent
   ],
   imports: [
     CommonModule,

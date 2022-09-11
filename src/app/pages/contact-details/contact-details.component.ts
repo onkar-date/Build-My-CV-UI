@@ -6,11 +6,16 @@ import {
 } from './../../state/CV-State/cv.selectors';
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { saveContactDetails, selectSection } from 'src/app/state/CV-State/cv.actions';
+import {
+  saveContactDetails,
+  selectSection,
+  upadateSectionValidity,
+} from 'src/app/state/CV-State/cv.actions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -25,7 +30,8 @@ export class ContactDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private tostr: ToasterService
   ) {
     store
       .select(selectSections)
@@ -47,7 +53,7 @@ export class ContactDetailsComponent implements OnInit {
       mobile: [contactDetails.mobile, Validators.required],
       email: [contactDetails.email, Validators.required],
       address: [contactDetails.address, Validators.required],
-      linkedIn: [contactDetails.linkedIn, Validators.required],
+      linkedIn: [contactDetails.linkedIn],
     });
   }
 
@@ -55,6 +61,9 @@ export class ContactDetailsComponent implements OnInit {
     if (this.contactDetailsForm.valid) {
       this.store.dispatch(
         saveContactDetails({ contactDetails: this.contactDetailsForm.value })
+      );
+      this.store.dispatch(
+        upadateSectionValidity({ sectionKey: 'contactDetails', validity: true })
       );
       for (let i = 0; i < this.sections.length; i++) {
         if (this.sections[i].active) {
@@ -65,6 +74,8 @@ export class ContactDetailsComponent implements OnInit {
           break;
         }
       }
+    } else {
+      this.tostr.error('Please fill all the data');
     }
   }
 

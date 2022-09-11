@@ -13,6 +13,7 @@ import {
   addSkill,
   removeSkill,
   selectSection,
+  upadateSectionValidity,
 } from 'src/app/state/CV-State/cv.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISection } from 'src/app/shared/interface/section.interface';
@@ -75,12 +76,23 @@ export class SkillsComponent implements OnInit, OnDestroy {
   saveSkill(): void {
     if (this.newSkillForm.valid) {
       this.store.dispatch(addSkill({ skill: this.newSkillForm.value }));
+      this.updateSkillsSectionValidity();
       this.addSkill();
     }
   }
 
   removeSkill(name: string): void {
     this.store.dispatch(removeSkill({ name }));
+    this.updateSkillsSectionValidity();
+  }
+
+  updateSkillsSectionValidity(): void {
+    this.store.dispatch(
+      upadateSectionValidity({
+        sectionKey: 'skills',
+        validity: this.skills.length > 0,
+      })
+    );
   }
 
   goToNextSection(): void {

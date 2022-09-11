@@ -3,6 +3,7 @@ import {
   addEducation,
   removeEducation,
   selectSection,
+  upadateSectionValidity,
 } from './../../state/CV-State/cv.actions';
 import { IEducation } from 'src/app/shared/interface/education.interface';
 import {
@@ -40,6 +41,7 @@ export class EducationComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((education: IEducation[]) => {
         this.education = education;
+        this.updateEducationSectionValidity()
       });
     store
       .select(selectSections)
@@ -78,8 +80,18 @@ export class EducationComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         addEducation({ education: this.newEducationForm.value })
       );
+
       this.addEducation();
     }
+  }
+
+  updateEducationSectionValidity(): void {
+    this.store.dispatch(
+      upadateSectionValidity({
+        sectionKey: 'education',
+        validity: this.education.length > 0,
+      })
+    );
   }
 
   goToNextSection(): void {

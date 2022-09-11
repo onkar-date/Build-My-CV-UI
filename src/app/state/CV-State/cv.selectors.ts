@@ -9,6 +9,11 @@ export const selectSections = createSelector(
   (state: CVState) => state.sections
 );
 
+export const selectSectionValidity = createSelector(
+  selectCVState,
+  (state: CVState) => state.sectionValidity
+);
+
 export const selectPersonalDetails = createSelector(
   selectCVState,
   (state: CVState) => state.personalDetails

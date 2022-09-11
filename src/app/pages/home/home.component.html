@@ -4,11 +4,15 @@
             <span class="laptop-header">Build My CV</span>
             <span class="mobile-header">BM-CV</span>
         </div>
-        <ul class="nav mt-4">
+        <ul class="nav mt-4" *ngIf="sectionValidity$ | async as sectionValidity">
             <li *ngFor="let section of sections$ | async" class="nav-item" role="button" (click)="goToSection(section)">
-                <a class="nav-link" [class.active]="section.active">
-                    <!-- <i class="{{item.icon}}" aria-hidden="true"></i> -->
+                <a class="nav-link d-flex justify-content-between" [class.active]="section.active">
                     <span>{{section.title}}</span>
+                    <!-- <mat-icon class="text-success">check_circle</mat-icon> -->
+                    <ng-container *ngIf="!section.isOptional">
+                        <img *ngIf="sectionValidity[section.id]" src="assets/images/check.png" alt="complete_mark" class="check-img">
+                        <img *ngIf="!sectionValidity[section.id]" src="assets/images/warn.png" alt="complete_mark" class="check-img">
+                    </ng-container>
                 </a>
             </li>
         </ul>

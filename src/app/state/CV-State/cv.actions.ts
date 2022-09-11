@@ -14,6 +14,20 @@ export const selectSection = createAction(
   props<{ section: ISection }>()
 );
 
+export const upadateSectionValidity = createAction(
+  '[Sections] Update Section Validity',
+  props<{
+    sectionKey:
+      | 'personalDetails'
+      | 'contactDetails'
+      | 'skills'
+      | 'experience'
+      | 'education'
+      | 'template';
+    validity: boolean;
+  }>()
+);
+
 export const savePersonalDetails = createAction(
   '[Personsl Details] Save Personal Details',
   props<{ personalDetails: IPersonalDetails }>()

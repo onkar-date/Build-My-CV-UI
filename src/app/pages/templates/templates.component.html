@@ -6,8 +6,14 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-md-6 mb-3 d-flex justify-content-center" *ngFor="let template of templates">
-            <img src='{{ "assets/images/" + template.id + ".png" }}' alt="" class="template-img shadow-lg" (click)="selectTemplate(template)">
+        <div class="col-md-6 mb-3 d-flex justify-content-center template-container" *ngFor="let template of templates">
+            <img src='{{ "assets/images/" + template.id + ".png" }}'
+                alt="" class="template-img shadow-lg"
+                (click)="selectTemplate(template)"
+            >
+            <div class="selected-marker" *ngIf="template.id === selectedTemplate?.id">
+                <mat-icon>check_circle_outline</mat-icon>
+            </div>
         </div>
     </div>
 </div>
@@ -17,7 +23,7 @@
         <mat-icon>arrow_back</mat-icon>
         Interests
     </button>
-    <button mat-raised-button color="primary" (click)="goToNextSection()">
+    <button mat-raised-button color="primary" (click)="showSummary()" [disabled]="!selectedTemplate">
         Summary
         <mat-icon>arrow_forward</mat-icon>
     </button>

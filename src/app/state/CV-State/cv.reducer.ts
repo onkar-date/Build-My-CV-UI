@@ -1,5 +1,8 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
-import { ISection } from './../../shared/interface/section.interface';
+import {
+  ISection,
+  ISectionValidity,
+} from './../../shared/interface/section.interface';
 import { mockInitialState } from './../../shared/stub/mockData';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
@@ -24,6 +27,7 @@ import {
   removeInterest,
   saveContactDetails,
   selectSection,
+  upadateSectionValidity,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -44,9 +48,10 @@ export interface CVState {
   interest: string[];
   template: ITemplate;
   sections: ISection[];
+  sectionValidity: ISectionValidity;
 }
 
-const initialState: CVState = mockInitialState || {
+const initialState: CVState = {
   personalDetails: {
     firstName: '',
     lastName: '',
@@ -69,7 +74,15 @@ const initialState: CVState = mockInitialState || {
     name: '',
     id: '',
   },
-  sections: SECTIONS
+  sections: SECTIONS,
+  sectionValidity: {
+    personalDetails: false,
+    contactDetails: false,
+    skills: false,
+    experience: false,
+    education: false,
+    template: false,
+  },
 };
 
 export const cvReducer = createReducer(
@@ -78,6 +91,14 @@ export const cvReducer = createReducer(
   on(selectSection, (state, { section }) => ({
     ...state,
     sections: getUpdatedSections(state.sections, section),
+  })),
+
+  on(upadateSectionValidity, (state, { sectionKey, validity }) => ({
+    ...state,
+    sectionValidity: {
+      ...state.sectionValidity,
+      [sectionKey]: validity,
+    },
   })),
 
   on(savePersonalDetails, (state, { personalDetails }) => ({
@@ -161,11 +182,14 @@ export const cvReducer = createReducer(
   }))
 );
 
-function getUpdatedSections(currentSections: ISection[], selectedSection: ISection): ISection[] {
-  return currentSections.map(section => {
+function getUpdatedSections(
+  currentSections: ISection[],
+  selectedSection: ISection
+): ISection[] {
+  return currentSections.map((section) => {
     return {
       ...section,
-      active: section.title === selectedSection.title
-    }
-  })
+      active: section.title === selectedSection.title,
+    };
+  });
 }

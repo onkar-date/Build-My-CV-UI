@@ -1,5 +1,10 @@
+import { ToasterService } from './../../shared/services/toaster.service';
 import { ISection } from './../../shared/interface/section.interface';
-import { savePersonalDetails, selectSection } from './../../state/CV-State/cv.actions';
+import {
+  savePersonalDetails,
+  selectSection,
+  upadateSectionValidity,
+} from './../../state/CV-State/cv.actions';
 import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
 import {
   selectPersonalDetails,
@@ -25,7 +30,8 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private tostr: ToasterService
   ) {
     store
       .select(selectSections)
@@ -62,15 +68,23 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         savePersonalDetails({ personalDetails: this.personalDetailsForm.value })
       );
+      this.store.dispatch(
+        upadateSectionValidity({
+          sectionKey: 'personalDetails',
+          validity: true,
+        })
+      );
       for (let i = 0; i < this.sections.length; i++) {
         if (this.sections[i].active) {
           this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-          this.router.navigate([`../${this.sections[i+1].routerLink}`], {
+          this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
             relativeTo: this.activatedRoute,
           });
           break;
         }
       }
+    } else {
+      this.tostr.error('Please fill all the data');
     }
   }
 }

@@ -1,53 +1,83 @@
 import { ISection } from './../interface/section.interface';
 export const SECTIONS: ISection[] = [
   {
+    id: 'personalDetails',
     title: 'Personal Details',
     routerLink: 'personal-details',
-    active: true
+    active: true,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'contactDetails',
     title: 'Contact Details',
     routerLink: 'contact-details',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'skills',
     title: 'Skills',
     routerLink: 'skills',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'experience',
     title: 'Experience',
     routerLink: 'experience',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'education',
     title: 'Education',
     routerLink: 'education',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'personalProjects',
     title: 'Personal Projects',
     routerLink: 'personal-projects',
-    active: false
+    active: false,
+    isValid: true,
+    isOptional: true,
   },
   {
+    id: 'certificates',
     title: 'Certificates',
     routerLink: 'certificates',
-    active: false
+    active: false,
+    isValid: true,
+    isOptional: true,
   },
   {
+    id: 'interests',
     title: 'Interests',
     routerLink: 'interests',
-    active: false
+    active: false,
+    isValid: true,
+    isOptional: true,
   },
   {
+    id: 'template',
     title: 'Templates',
     routerLink: 'templates',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: false,
   },
   {
+    id: 'summary',
     title: 'Summary',
     routerLink: 'summary',
-    active: false
+    active: false,
+    isValid: false,
+    isOptional: true,
   },
 ];

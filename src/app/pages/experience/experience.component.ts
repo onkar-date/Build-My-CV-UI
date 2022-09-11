@@ -1,6 +1,13 @@
 import { Subject, takeUntil } from 'rxjs';
-import { removeExperience, selectSection } from './../../state/CV-State/cv.actions';
-import { selectExperiences, selectSections } from './../../state/CV-State/cv.selectors';
+import {
+  removeExperience,
+  selectSection,
+  upadateSectionValidity,
+} from './../../state/CV-State/cv.actions';
+import {
+  selectExperiences,
+  selectSections,
+} from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
 import { IExperience } from './../../shared/interface/experience.interface';
@@ -33,6 +40,7 @@ export class ExperienceComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((experiences: IExperience[]) => {
         this.experiences = experiences;
+        this.updateExperienceSectionValidity();
       });
     store
       .select(selectSections)
@@ -65,6 +73,15 @@ export class ExperienceComponent implements OnInit, OnDestroy {
     this.store.dispatch(removeExperience({ experience }));
   }
 
+  updateExperienceSectionValidity(): void {
+    this.store.dispatch(
+      upadateSectionValidity({
+        sectionKey: 'experience',
+        validity: this.experiences.length > 0,
+      })
+    );
+  }
+
   goToNextSection(): void {
     if (this.experiences.length) {
       for (let i = 0; i < this.sections.length; i++) {
@@ -77,7 +94,7 @@ export class ExperienceComponent implements OnInit, OnDestroy {
         }
       }
     } else {
-      this.toastr.error('Please provide atleast 1 experience')
+      this.toastr.error('Please provide atleast 1 experience');
     }
   }
 
