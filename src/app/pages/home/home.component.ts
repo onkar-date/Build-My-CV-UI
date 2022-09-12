@@ -12,7 +12,7 @@ import {
   selectSections,
   selectSectionValidity,
 } from 'src/app/state/CV-State/cv.selectors';
-import { selectSection } from 'src/app/state/CV-State/cv.actions';
+import { fillMockData, selectSection } from 'src/app/state/CV-State/cv.actions';
 
 @Component({
   selector: 'app-home',
@@ -75,5 +75,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     sidebar?.classList.toggle('active');
     const mainContent = document.querySelector('.main-content');
     mainContent?.classList.toggle('active');
+  }
+
+  fillMockData(): void {
+    this.store.dispatch(fillMockData());
   }
 }
