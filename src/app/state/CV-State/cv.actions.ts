@@ -107,3 +107,5 @@ export const removeInterest = createAction(
   '[Interests] Remove Interest',
   props<{ interest: string }>()
 );
+
+export const fillMockData = createAction('[Mock] Fill Mock Data');

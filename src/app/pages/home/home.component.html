@@ -18,10 +18,11 @@
     </div>
 
     <div class="main-content">
-        <div class="topnav header p-3 bg-white shadow d-flex">
+        <div class="topnav header p-3 bg-white shadow d-flex justify-content-between">
             <div class="toggle" role="button" (click)="toggleMenu()">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </div>
+            <span (click)="fillMockData()" class="text-white" role="button">Mock Data</span>
         </div>
         <div>
             <router-outlet></router-outlet>
