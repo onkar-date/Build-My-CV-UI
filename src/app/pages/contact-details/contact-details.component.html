@@ -1,54 +1,48 @@
-<div class="container-fluid content-wrapper">
-    <div class="row">
-        <div class="col-12">
-            <h2>Contact Details</h2>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 offset-md-2">
-            <form [formGroup]="contactDetailsForm">
-                <!-- Mobile No. -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Mobile No.</mat-label>
-                        <input matInput formControlName="mobile">
-                    </mat-form-field>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Email</mat-label>
-                        <input matInput formControlName="email" type="email">
-                    </mat-form-field>
-                </div>
-
-                <!-- LinkedIn -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>LinkedIn</mat-label>
-                        <input matInput formControlName="linkedIn">
-                    </mat-form-field>
-                </div>
-
-                <!-- Address -->
-                <div class="form-group">
-                    <mat-form-field class="example-full-width" appearance="fill" class="w-100">
-                        <mat-label>Address</mat-label>
-                        <textarea matInput formControlName="address" rows="5"></textarea>
-                    </mat-form-field>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                    
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="col-12 mt-3" id="sectionHeader">
+    <h2>Contact Details</h2>
 </div>
 
-<div class="action-footer d-flex justify-content-between">
+<div class="col-12">
+    <form [formGroup]="contactDetailsForm">
+        <!-- Mobile No. -->
+        <div class="form-group">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Mobile No.</mat-label>
+                <input matInput formControlName="mobile">
+            </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email">
+            </mat-form-field>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="form-group">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>LinkedIn</mat-label>
+                <input matInput formControlName="linkedIn">
+            </mat-form-field>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill" class="w-100">
+                <mat-label>Address</mat-label>
+                <textarea matInput formControlName="address" rows="5"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+        </div>
+    </form>
+</div>
+
+<div class="col-12 action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
         <mat-icon>arrow_back</mat-icon>
         Personal Details

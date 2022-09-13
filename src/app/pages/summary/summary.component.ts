@@ -25,6 +25,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   selectedTemplate!: ITemplate;
   cvData!: CVState;
   sections: ISection[] = [];
+  isSummary = false;
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -38,6 +39,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
       .subscribe((sections: ISection[]) => {
         this.sections = sections;
       });
+    if (router.url.split('/').pop() === 'summary') {
+      this.isSummary = true;
+    }
   }
 
   ngOnDestroy(): void {
@@ -45,6 +49,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
     this.store
       .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))
@@ -60,15 +66,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   goToPreviousSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
-        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
-    }
+    this.router.navigate([`../home/interests`], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
   async downloadResume() {

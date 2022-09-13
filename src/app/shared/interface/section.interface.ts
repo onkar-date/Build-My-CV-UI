@@ -3,8 +3,6 @@ export interface ISection {
   title: string;
   routerLink: string;
   active: boolean;
-  isValid: boolean;
-  isOptional: boolean;
 }
 
 export interface ISectionValidity {

@@ -1,13 +1,13 @@
 <div class="container-fluid content-wrapper">
     <div class="row">
-        <div class="col-12 d-flex justify-content-between">
+        <div class="col-12 d-flex justify-content-between" id="sectionHeader">
             <h2>Summary</h2>
             <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
         </div>
     </div>
 
     <div class="row mt-3" *ngIf="selectedTemplate.id">
-        <div class="col-12">
+        <div class="col-12" [class.summary]="isSummary">
             <ng-container [ngSwitch]="selectedTemplate.id">
 
                 <!-- Template T101 -->
@@ -44,7 +44,7 @@
 <div class="action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
         <mat-icon>arrow_back</mat-icon>
-        Templates
+        Interests
     </button>
     <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
 </div>

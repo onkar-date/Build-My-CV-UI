@@ -27,7 +27,6 @@ import {
   removeInterest,
   saveContactDetails,
   selectSection,
-  upadateSectionValidity,
   fillMockData,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
@@ -49,10 +48,9 @@ export interface CVState {
   interest: string[];
   template: ITemplate;
   sections: ISection[];
-  sectionValidity: ISectionValidity;
 }
 
-const initialState: CVState = {
+const initialState: CVState = (true && mockInitialState) || {
   personalDetails: {
     firstName: '',
     lastName: '',
@@ -76,14 +74,6 @@ const initialState: CVState = {
     id: '',
   },
   sections: SECTIONS,
-  sectionValidity: {
-    personalDetails: false,
-    contactDetails: false,
-    skills: false,
-    experience: false,
-    education: false,
-    template: false,
-  },
 };
 
 export const cvReducer = createReducer(
@@ -92,14 +82,6 @@ export const cvReducer = createReducer(
   on(selectSection, (state, { section }) => ({
     ...state,
     sections: getUpdatedSections(state.sections, section),
-  })),
-
-  on(upadateSectionValidity, (state, { sectionKey, validity }) => ({
-    ...state,
-    sectionValidity: {
-      ...state.sectionValidity,
-      [sectionKey]: validity,
-    },
   })),
 
   on(savePersonalDetails, (state, { personalDetails }) => ({

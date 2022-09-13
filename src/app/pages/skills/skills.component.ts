@@ -1,4 +1,3 @@
-import { ToasterService } from './../../shared/services/toaster.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ISkill } from './../../shared/interface/skills.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +12,6 @@ import {
   addSkill,
   removeSkill,
   selectSection,
-  upadateSectionValidity,
 } from 'src/app/state/CV-State/cv.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISection } from 'src/app/shared/interface/section.interface';
@@ -34,8 +32,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private toastr: ToasterService
+    private router: Router
   ) {
     store
       .select(selectSections)
@@ -56,6 +53,8 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
     this.routeToCurrentSection();
   }
 
@@ -76,38 +75,23 @@ export class SkillsComponent implements OnInit, OnDestroy {
   saveSkill(): void {
     if (this.newSkillForm.valid) {
       this.store.dispatch(addSkill({ skill: this.newSkillForm.value }));
-      this.updateSkillsSectionValidity();
       this.addSkill();
     }
   }
 
   removeSkill(name: string): void {
     this.store.dispatch(removeSkill({ name }));
-    this.updateSkillsSectionValidity();
-  }
-
-  updateSkillsSectionValidity(): void {
-    this.store.dispatch(
-      upadateSectionValidity({
-        sectionKey: 'skills',
-        validity: this.skills.length > 0,
-      })
-    );
   }
 
   goToNextSection(): void {
-    if (this.skills.length) {
-      for (let i = 0; i < this.sections.length; i++) {
-        if (this.sections[i].active) {
-          this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-          this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-            relativeTo: this.activatedRoute,
-          });
-          break;
-        }
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
       }
-    } else {
-      this.toastr.error('Please enter atleast 1 skill !!');
     }
   }
 

@@ -38,7 +38,10 @@ export class InterestComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+  }
 
   addInterest() {
     this.newInterest = '';
@@ -60,16 +63,10 @@ export class InterestComponent implements OnInit {
     }
   }
 
-  goToNextSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
-    }
+  showSummary(): void {
+    this.router.navigate([`../../summary`], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
   goToPreviousSection(): void {

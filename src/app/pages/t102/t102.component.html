@@ -16,26 +16,26 @@
       <div class="section-content">
         <!-- Address -->
         <div>Address</div>
-        <p class="info">
+        <p class="info text-break">
           {{cvData.contactDetails.address}}
         </p>
 
         <!-- Phone -->
         <div>Phone</div>
-        <p class="info">
+        <p class="info text-break">
           {{cvData.contactDetails.mobile}}
         </p>
 
         <!-- Email -->
         <div>Email</div>
-        <p class="info">
+        <p class="info text-break">
           {{cvData.contactDetails.email}}
         </p>
 
         <!-- LinkedIn -->
         <ng-container *ngIf="cvData.contactDetails.linkedIn">
           <div>LinkedIn</div>
-          <p class="info">
+          <p class="info text-break">
             {{cvData.contactDetails.linkedIn}}
           </p>
         </ng-container>
@@ -49,7 +49,7 @@
       </div>
       <div class="section-content">
         <ng-container *ngFor="let skill of cvData.skills">
-          <p class="info">
+          <p class="info text-break">
             {{skill.name}}
           </p>
         </ng-container>

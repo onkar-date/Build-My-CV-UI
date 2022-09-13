@@ -136,12 +136,4 @@ export const mockInitialState: CVState = {
     id: mockTemplate.id,
   },
   sections: SECTIONS,
-  sectionValidity: {
-    personalDetails: true,
-    contactDetails: true,
-    skills: true,
-    experience: true,
-    education: true,
-    template: true,
-  },
 };

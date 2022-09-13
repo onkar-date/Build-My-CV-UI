@@ -42,7 +42,10 @@ export class PersonalProjectsComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+  }
 
   addProject() {
     const modal = this.modalService.open(AddProjectModalComponent, {

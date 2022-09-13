@@ -1,67 +1,23 @@
-<div class="container-fluid content-wrapper">
-    <div class="row">
-        <div class="col-12">
-            <h2>Certificates</h2>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <button (click)="addCertificate()" color="primary" mat-raised-button>Add Certificate</button>
-        </div>
-    </div>
-
-    <div class="row mt-3" *ngIf="(certificates$ | async)?.length || showNewCertificateRow; else noData">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Certificate Name</th>
-                        <th>Year of Completion</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let certificate of certificates$ | async">
-                        <td>{{certificate.title}}</td>
-                        <td>{{certificate.yearOfCompletion}}</td>
-                        <td class="d-flex justify-content-center">
-                            <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)">
-                                <mat-icon>delete_outline</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr *ngIf="showNewCertificateRow">
-                        <td>
-                            <form [formGroup]="certificateForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" formControlName="title">
-                                </div>
-                            </form>
-                        </td>
-                        <td>
-                            <form [formGroup]="certificateForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" formControlName="yearOfCompletion"
-                                        placeholder="eg. 2017 - 2021">
-                                </div>
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <button mat-icon-button color="primary" (click)="saveCertificate()">
-                                <mat-icon>check_circle</mat-icon>
-                            </button>
-                            <button mat-icon-button color="warn" (click)="cancelCertificate()">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="col-12 mt-3" id="sectionHeader">
+    <h2>Certificates</h2>
 </div>
+
+<div class="col-12 my-3">
+    <button (click)="addCertificate()" color="primary" mat-raised-button>Add Certificate</button>
+</div>
+
+<ng-container *ngIf="(certificates$ | async)?.length else noData">
+    <ul class="mb-3" *ngFor="let certificate of certificates$ | async">
+        <li>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="mb-1">{{certificate.title}}</span>
+                <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteCertificate(certificate)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </div>
+        </li>
+    </ul>
+</ng-container>
 
 <div class="action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
@@ -75,9 +31,7 @@
 </div>
 
 <ng-template #noData>
-    <div class="row mt-3">
-        <div class="col-12">
-            <span class="d-flex justify-content-center text-muted display-5">No Certificates Added</span>
-        </div>
+    <div class="col-12 my-3">
+        <span class="d-flex justify-content-center text-muted display-5">No Certificates Added</span>
     </div>
 </ng-template>
