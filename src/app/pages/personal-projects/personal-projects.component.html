@@ -1,42 +1,36 @@
-<div class="container-fluid content-wrapper">
-    <div class="row">
-        <div class="col-12">
-            <h2>Personal Projects</h2>
-        </div>
-    </div>
+<div class="col-12 mt-3" id="sectionHeader">
+    <h2>Personal Projects</h2>
+</div>
 
-    <div class="row">
-        <div class="col-12">
-            <button (click)="addProject()" color="primary" mat-raised-button>Add Project</button>
-        </div>
-    </div>
+<div class="col-12 my-3">
+    <button (click)="addProject()" color="primary" mat-raised-button>Add Project</button>
+</div>
 
-    <div class="row mt-3" *ngIf="(projects$ | async)?.length else noData">
-        <div class="col-md-6 mb-3" *ngFor="let project of projects$ | async">
-            <div class="card shadow">
+<ng-container *ngIf="(projects$ | async)?.length else noData">
+    <div class="col-12 mb-3" *ngFor="let project of projects$ | async">
+        <div class="card shadow">
 
-                <div class="card-body exp-card">
-                    <div class="d-flex justify-content-between">
-                        <h2 class="mb-1">{{project.title}}</h2>
-                        <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteProject(project)">
-                            <mat-icon>delete_outline</mat-icon>
-                        </button>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <a role="button" class="mb-0">
-                            <a (click)="openProject(project)">
-                                <u>{{project.link}}</u>
-                            </a>
+            <div class="card-body exp-card">
+                <div class="d-flex justify-content-between">
+                    <h2 class="mb-1">{{project.title}}</h2>
+                    <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteProject(project)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a role="button" class="mb-0">
+                        <a (click)="openProject(project)">
+                            <u>{{project.link}}</u>
                         </a>
-                    </div>
-                    <div class="mt-2">
-                        {{project.description}}
-                    </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    {{project.description}}
                 </div>
             </div>
         </div>
     </div>
-</div>
+</ng-container>
 
 <div class="action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
@@ -50,9 +44,7 @@
 </div>
 
 <ng-template #noData>
-    <div class="row mt-3">
-        <div class="col-12">
-            <span class="d-flex justify-content-center text-muted display-5">No Projects Added</span>
-        </div>
+    <div class="col-12">
+        <span class="d-flex justify-content-center text-muted display-5">No Projects Added</span>
     </div>
 </ng-template>

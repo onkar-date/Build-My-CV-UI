@@ -1,18 +1,18 @@
-import { ToasterService } from './../../shared/services/toaster.service';
 import { takeUntil, Subject } from 'rxjs';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute } from '@angular/router';
 import {
-  ISection,
   ISectionValidity,
 } from './../../shared/interface/section.interface';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
+  selectCVState,
   selectSections,
-  selectSectionValidity,
+  selectTemplate,
 } from 'src/app/state/CV-State/cv.selectors';
-import { fillMockData, selectSection } from 'src/app/state/CV-State/cv.actions';
+import { fillMockData } from 'src/app/state/CV-State/cv.actions';
+import { ITemplate } from 'src/app/shared/interface/template.interface';
+import { CVState } from 'src/app/state/CV-State/cv.reducer';
 
 @Component({
   selector: 'app-home',
@@ -21,19 +21,24 @@ import { fillMockData, selectSection } from 'src/app/state/CV-State/cv.actions';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   sections$ = this.store.select(selectSections);
-  sectionValidity$ = this.store.select(selectSectionValidity);
   sectionValidity!: ISectionValidity;
+  selectedTemplate!: ITemplate;
   destroy$ = new Subject();
+  cvData!: CVState;
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private store: Store<AppState>,
-    private tostr: ToasterService
-  ) {
-    store
-      .select(selectSectionValidity)
+    private store: Store<AppState>  ) {
+    this.store
+      .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((_) => (this.sectionValidity = _));
+      .subscribe((template: ITemplate) => {
+        this.selectedTemplate = template;
+      });
+    this.store
+      .select(selectCVState)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((cvData: CVState) => {
+        this.cvData = cvData;
+      });
   }
 
   ngOnDestroy(): void {
@@ -41,32 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
-
-  goToSection(selectedSection: ISection): void {
-    if (selectedSection.id === 'summary') {
-      if (this.areAllSectionsValid()) {
-        this.store.dispatch(selectSection({ section: selectedSection }));
-        this.router.navigate([`./${selectedSection.routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-      } else {
-        this.tostr.error(
-          'Please fill all the necessary data for mandatory sections'
-        );
-      }
-    } else {
-      this.store.dispatch(selectSection({ section: selectedSection }));
-      this.router.navigate([`./${selectedSection.routerLink}`], {
-        relativeTo: this.activatedRoute,
-      });
-    }
-  }
-
-  areAllSectionsValid(): boolean {
-    return Object.values(this.sectionValidity).every((_) => _ === true)
-      ? true
-      : false;
-  }
 
   toggleMenu(): void {
     const toggle = document.querySelector('.toggle');

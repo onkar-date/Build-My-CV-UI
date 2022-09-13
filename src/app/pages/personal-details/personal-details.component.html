@@ -1,50 +1,45 @@
-<div class="container-fluid content-wrapper">
-    <div class="row">
-        <div class="col-12">
-            <h2>Personal Details</h2>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 offset-md-2">
-            <form [formGroup]="personalDetailsForm">
-                <!-- first name -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>First name</mat-label>
-                        <input matInput formControlName="firstName">
-                    </mat-form-field>
-                </div>
-                <!-- last name -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Last name</mat-label>
-                        <input matInput formControlName="lastName">
-                    </mat-form-field>
-                </div>
-
-                <!-- Area of expertise -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Area of expertise</mat-label>
-                        <input matInput placeholder="Ex. Front End Developer" formControlName="areaOfExpertise">
-                    </mat-form-field>
-                </div>
-
-                <!-- About Me -->
-                <div class="form-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>About Me</mat-label>
-                        <textarea matInput placeholder="Tell us something about you" formControlName="aboutMe"
-                            rows="5"></textarea>
-                    </mat-form-field>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="mt-3 col-12" id="sectionHeader">
+    <h2>Personal Details</h2>
 </div>
 
-<div class="action-footer d-flex justify-content-end">
+<form [formGroup]="personalDetailsForm" class="col-12">
+    <!-- first name -->
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName">
+        </mat-form-field>
+    </div>
+    <!-- last name -->
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName">
+        </mat-form-field>
+    </div>
+
+    <!-- Area of expertise -->
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>Area of expertise</mat-label>
+            <input matInput placeholder="Ex. Front End Developer" formControlName="areaOfExpertise">
+        </mat-form-field>
+    </div>
+
+    <!-- About Me -->
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>About Me</mat-label>
+            <textarea matInput placeholder="Tell us something about you" formControlName="aboutMe" rows="5"></textarea>
+        </mat-form-field>
+    </div>
+</form>
+
+<div class="col-12 action-footer d-flex justify-content-between">
+    <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
+        <mat-icon>arrow_back</mat-icon>
+        Templates
+    </button>
     <button mat-raised-button color="primary" (click)="goToNextSection()">
         Contact Details
         <mat-icon>arrow_forward</mat-icon>

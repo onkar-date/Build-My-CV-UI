@@ -2,5 +2,8 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
-    <span>Build My CV</span>
+    <a [routerLink]="['/templates']" routerLinkActive="router-link-active" class="text-white">Build My CV</a>
+    <button mat-button (click)="showTemplates()" class="ml-4">
+        Templates
+    </button>
 </mat-toolbar>

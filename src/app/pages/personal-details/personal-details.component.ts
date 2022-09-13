@@ -1,9 +1,7 @@
-import { ToasterService } from './../../shared/services/toaster.service';
 import { ISection } from './../../shared/interface/section.interface';
 import {
   savePersonalDetails,
   selectSection,
-  upadateSectionValidity,
 } from './../../state/CV-State/cv.actions';
 import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
 import {
@@ -15,7 +13,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-personal-details',
@@ -30,8 +28,7 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>,
-    private tostr: ToasterService
+    private store: Store<AppState>
   ) {
     store
       .select(selectSections)
@@ -46,6 +43,8 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
     this.store
       .select(selectPersonalDetails)
       .pipe(takeUntil(this.destroy$))
@@ -61,30 +60,31 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
       areaOfExpertise: [personalDetails.areaOfExpertise, Validators.required],
       aboutMe: [personalDetails.aboutMe, Validators.required],
     });
+
+    this.personalDetailsForm.valueChanges
+      .pipe(debounceTime(250))
+      .subscribe((formValue) => {
+        this.store.dispatch(
+          savePersonalDetails({ personalDetails: formValue })
+        );
+      });
   }
 
   goToNextSection(): void {
-    if (this.personalDetailsForm.valid) {
-      this.store.dispatch(
-        savePersonalDetails({ personalDetails: this.personalDetailsForm.value })
-      );
-      this.store.dispatch(
-        upadateSectionValidity({
-          sectionKey: 'personalDetails',
-          validity: true,
-        })
-      );
-      for (let i = 0; i < this.sections.length; i++) {
-        if (this.sections[i].active) {
-          this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-          this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-            relativeTo: this.activatedRoute,
-          });
-          break;
-        }
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
       }
-    } else {
-      this.tostr.error('Please fill all the data');
     }
+  }
+
+  goToPreviousSection(): void {
+    this.router.navigate([`../../templates`], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

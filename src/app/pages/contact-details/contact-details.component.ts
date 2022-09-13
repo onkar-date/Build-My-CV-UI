@@ -5,17 +5,15 @@ import {
   selectSections,
 } from './../../state/CV-State/cv.selectors';
 import { Component, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, debounceTime } from 'rxjs';
 import {
   saveContactDetails,
   selectSection,
-  upadateSectionValidity,
 } from 'src/app/state/CV-State/cv.actions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -30,8 +28,7 @@ export class ContactDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>,
-    private tostr: ToasterService
+    private store: Store<AppState>
   ) {
     store
       .select(selectSections)
@@ -40,6 +37,8 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
     this.store
       .select(selectContactDetails)
       .pipe(takeUntil(this.destroy$))
@@ -55,27 +54,22 @@ export class ContactDetailsComponent implements OnInit {
       address: [contactDetails.address, Validators.required],
       linkedIn: [contactDetails.linkedIn],
     });
+    this.contactDetailsForm.valueChanges
+      .pipe(debounceTime(250))
+      .subscribe((contactDetails) => {
+        this.store.dispatch(saveContactDetails({ contactDetails }));
+      });
   }
 
   goToNextSection(): void {
-    if (this.contactDetailsForm.valid) {
-      this.store.dispatch(
-        saveContactDetails({ contactDetails: this.contactDetailsForm.value })
-      );
-      this.store.dispatch(
-        upadateSectionValidity({ sectionKey: 'contactDetails', validity: true })
-      );
-      for (let i = 0; i < this.sections.length; i++) {
-        if (this.sections[i].active) {
-          this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-          this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-            relativeTo: this.activatedRoute,
-          });
-          break;
-        }
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
       }
-    } else {
-      this.tostr.error('Please fill all the data');
     }
   }
 

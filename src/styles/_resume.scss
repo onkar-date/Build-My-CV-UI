@@ -1,7 +1,11 @@
 .resume-body {
-    height: 100%;
-    width: 24cm;
     margin: auto;
+}
+
+.summary{
+    .resume-body{
+        width: 24cm;;
+    }
 }
 
 .display-5 {

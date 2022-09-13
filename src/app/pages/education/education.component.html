@@ -1,80 +1,34 @@
-<div class="container-fluid content-wrapper">
-    <div class="row">
-        <div class="col-12">
-            <h2>Education</h2>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <button (click)="addEducation()" color="primary" mat-raised-button>Add Education</button>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-12">
-            <table class="table table-bordered" *ngIf="education.length || showNewEducationRow; else noData">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Batch</th>
-                        <th>University/College</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let education of education">
-                        <td>{{education.degree}}</td>
-                        <td>{{education.batch}}</td>
-                        <td>{{education.university}}</td>
-                        <td class="d-flex justify-content-center">
-                            <button mat-icon-button color="warn" (click)="deleteEducation(education)">
-                                <mat-icon>delete_outline</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr *ngIf="showNewEducationRow">
-                        <td>
-                            <form [formGroup]="newEducationForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" formControlName="degree"
-                                        placeholder="eg. Bachelor of Engineering">
-                                </div>
-                            </form>
-                        </td>
-                        <td>
-                            <form [formGroup]="newEducationForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" formControlName="batch"
-                                        placeholder="eg. 2017 - 2021">
-                                </div>
-                            </form>
-                        </td>
-                        <td>
-                            <form [formGroup]="newEducationForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" formControlName="university"
-                                        placeholder="eg. City College of Engineering">
-                                </div>
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <button mat-icon-button color="primary" (click)="saveEducation()">
-                                <mat-icon>check_circle</mat-icon>
-                            </button>
-                            <button mat-icon-button color="warn" (click)="cancelEducation()">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="col-12 mt-3" id="sectionHeader">
+    <h2>Education</h2>
 </div>
 
-<div class="action-footer d-flex justify-content-between">
+<div class="col-12 my-3">
+    <button (click)="addEducation()" color="primary" mat-raised-button>Add Education</button>
+</div>
+
+<ng-container *ngIf="(education$ | async)?.length else noData">
+    <div class="col-12 mb-3" *ngFor="let education of education$ | async">
+        <div class="card shadow">
+
+            <div class="card-body exp-card">
+                <div class="d-flex justify-content-between">
+                    <h2 class="mb-1">{{education.degree}}</h2>
+                    <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteEducation(education)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </div>
+                <div class="d-flex align-items-center">
+                    <p>{{education.batch}}</p>
+                </div>
+                <div class="mt-2">
+                    {{education.university}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="col-12 action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">
         <mat-icon>arrow_back</mat-icon>
         Experience

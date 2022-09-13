@@ -54,18 +54,18 @@ const routes: Routes = [
         component: InterestComponent,
       },
       {
-        path: 'templates',
-        component: TemplatesComponent,
-      },
-      {
-        path: 'summary',
-        component: SummaryComponent
-      },
-      {
         path: '**',
         redirectTo: 'personal-details',
       },
     ],
+  },
+  {
+    path: 'templates',
+    component: TemplatesComponent,
+  },
+  {
+    path: 'summary',
+    component: SummaryComponent,
   },
   {
     path: '**',

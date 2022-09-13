@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.router.navigate(['home/personal-details'])
+    this.router.navigate(['templates'])
   }
   title = 'Build My CV';
 }

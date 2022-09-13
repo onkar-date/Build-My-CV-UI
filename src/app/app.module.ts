@@ -1,3 +1,4 @@
+import { FooterComponent } from './library/shared-components/footer/footer.component';
 import { cvReducer } from './state/CV-State/cv.reducer';
 import { SharedComponentsModule } from './library/shared-components/shared-components.module';
 import { NavbarComponent } from './library/shared-components/navbar/navbar.component';
@@ -14,7 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

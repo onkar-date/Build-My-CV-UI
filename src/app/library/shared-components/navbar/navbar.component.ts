@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   username: string | undefined;
-  constructor(private toastr: ToastrService, private router: Router) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+  
+  showTemplates(): void {
+    this.router.navigate(['./templates']);
+  }
 }

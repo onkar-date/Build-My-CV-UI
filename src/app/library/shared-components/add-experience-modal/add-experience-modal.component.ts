@@ -12,7 +12,6 @@ import DateHelper from 'src/app/shared/helpers/date.helper';
 export class AddExperienceModalComponent implements OnInit {
   experienceForm!: FormGroup;
   experienceData = null;
-  val = [''];
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {

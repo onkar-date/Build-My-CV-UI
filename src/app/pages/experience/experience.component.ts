@@ -2,7 +2,6 @@ import { Subject, takeUntil } from 'rxjs';
 import {
   removeExperience,
   selectSection,
-  upadateSectionValidity,
 } from './../../state/CV-State/cv.actions';
 import {
   selectExperiences,
@@ -16,7 +15,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { addExperience } from 'src/app/state/CV-State/cv.actions';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToasterService } from 'src/app/shared/services/toaster.service';
 import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
@@ -32,15 +30,13 @@ export class ExperienceComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private toastr: ToasterService
+    private router: Router
   ) {
     this.store
       .select(selectExperiences)
       .pipe(takeUntil(this.destroy$))
       .subscribe((experiences: IExperience[]) => {
         this.experiences = experiences;
-        this.updateExperienceSectionValidity();
       });
     store
       .select(selectSections)
@@ -54,7 +50,10 @@ export class ExperienceComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+  }
 
   addExperience() {
     const modal = this.modalService.open(AddExperienceModalComponent, {
@@ -73,28 +72,15 @@ export class ExperienceComponent implements OnInit, OnDestroy {
     this.store.dispatch(removeExperience({ experience }));
   }
 
-  updateExperienceSectionValidity(): void {
-    this.store.dispatch(
-      upadateSectionValidity({
-        sectionKey: 'experience',
-        validity: this.experiences.length > 0,
-      })
-    );
-  }
-
   goToNextSection(): void {
-    if (this.experiences.length) {
-      for (let i = 0; i < this.sections.length; i++) {
-        if (this.sections[i].active) {
-          this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-          this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-            relativeTo: this.activatedRoute,
-          });
-          break;
-        }
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].active) {
+        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
+        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
       }
-    } else {
-      this.toastr.error('Please provide atleast 1 experience');
     }
   }
 
