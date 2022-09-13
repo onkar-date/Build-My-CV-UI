@@ -2,10 +2,26 @@
     height: 100%;
 }
 
+.data-section {
+    flex: 0 0 41.6666666667%;
+    max-width: 41.6666666667%;
+}
+
 .resume-preview {
     margin-bottom: 5rem;
 }
 
-.check-img{
+.check-img {
     height: 1.2rem;
+}
+
+/* Medium devices (landscape tablets, 768px and down) */
+@media only screen and (max-width: 992px) {
+    .resume-preview {
+        display: none;
+    }
+    .data-section {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
