@@ -1,4 +1,6 @@
-import { ToastrService } from 'ngx-toastr';
+import { SECTIONS } from './../../../shared/constants/section.constants';
+import { AppState } from './../../../state/app.state';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,10 +11,10 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   username: string | undefined;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store<AppState>) {}
 
-  ngOnInit(): void { }
-  
+  ngOnInit(): void {}
+
   showTemplates(): void {
     this.router.navigate(['./templates']);
   }

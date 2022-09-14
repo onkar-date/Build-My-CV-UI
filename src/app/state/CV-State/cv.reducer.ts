@@ -1,8 +1,5 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
-import {
-  ISection,
-  ISectionValidity,
-} from './../../shared/interface/section.interface';
+import { ISection } from './../../shared/interface/section.interface';
 import { mockInitialState } from './../../shared/stub/mockData';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
@@ -26,7 +23,6 @@ import {
   addInterest,
   removeInterest,
   saveContactDetails,
-  selectSection,
   fillMockData,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
@@ -78,11 +74,6 @@ const initialState: CVState = (true && mockInitialState) || {
 
 export const cvReducer = createReducer(
   initialState,
-
-  on(selectSection, (state, { section }) => ({
-    ...state,
-    sections: getUpdatedSections(state.sections, section),
-  })),
 
   on(savePersonalDetails, (state, { personalDetails }) => ({
     ...state,

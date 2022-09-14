@@ -1,13 +1,11 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
+import { ISection } from 'src/app/shared/interface/section.interface';
 import { takeUntil, Subject } from 'rxjs';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
-import {
-  ISectionValidity,
-} from './../../shared/interface/section.interface';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   selectCVState,
-  selectSections,
   selectTemplate,
 } from 'src/app/state/CV-State/cv.selectors';
 import { fillMockData } from 'src/app/state/CV-State/cv.actions';
@@ -20,8 +18,7 @@ import { CVState } from 'src/app/state/CV-State/cv.reducer';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  sections$ = this.store.select(selectSections);
-  sectionValidity!: ISectionValidity;
+  sections: ISection[] = SECTIONS;
   selectedTemplate!: ITemplate;
   destroy$ = new Subject();
   cvData!: CVState;

@@ -4,54 +4,63 @@ export const SECTIONS: ISection[] = [
     id: 'personalDetails',
     title: 'Personal Details',
     routerLink: 'personal-details',
-    active: true
+    nextSection: 'contact-details',
+    previousSection: '',
   },
   {
     id: 'contactDetails',
     title: 'Contact Details',
     routerLink: 'contact-details',
-    active: false
+    nextSection: 'skills',
+    previousSection: 'personal-details',
   },
   {
     id: 'skills',
     title: 'Skills',
     routerLink: 'skills',
-    active: false
+    nextSection: 'experience',
+    previousSection: 'contact-details',
   },
   {
     id: 'experience',
     title: 'Experience',
     routerLink: 'experience',
-    active: false
+    nextSection: 'education',
+    previousSection: 'skills',
   },
   {
     id: 'education',
     title: 'Education',
     routerLink: 'education',
-    active: false
+    nextSection: 'personal-projects',
+    previousSection: 'experience',
   },
   {
     id: 'personalProjects',
     title: 'Personal Projects',
     routerLink: 'personal-projects',
-    active: false
+    nextSection: 'certificates',
+    previousSection: 'education',
   },
   {
     id: 'certificates',
     title: 'Certificates',
     routerLink: 'certificates',
-    active: false
+    nextSection: 'interests',
+    previousSection: 'personal-projects',
   },
   {
     id: 'interests',
     title: 'Interests',
     routerLink: 'interests',
-    active: false
+    nextSection: 'summary',
+    previousSection: 'certificates',
   },
   {
     id: 'summary',
     title: 'Summary',
     routerLink: 'summary',
-    active: false
+    nextSection: '',
+    previousSection: 'interests',
   },
 ];

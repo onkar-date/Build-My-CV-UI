@@ -1,13 +1,8 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { ISection } from './../../shared/interface/section.interface';
-import {
-  savePersonalDetails,
-  selectSection,
-} from './../../state/CV-State/cv.actions';
+import { savePersonalDetails } from './../../state/CV-State/cv.actions';
 import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
-import {
-  selectPersonalDetails,
-  selectSections,
-} from './../../state/CV-State/cv.selectors';
+import { selectPersonalDetails } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,21 +17,14 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
 })
 export class PersonalDetailsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
-  sections: ISection[] = [];
+  sections: ISection[] = SECTIONS;
   personalDetailsForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>
-  ) {
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this.destroy$.complete();
@@ -70,14 +58,13 @@ export class PersonalDetailsComponent implements OnInit, OnDestroy {
   }
 
   goToNextSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.nextSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 

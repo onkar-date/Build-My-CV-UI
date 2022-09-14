@@ -1,20 +1,13 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { AddSkillModalComponent } from './../../library/shared-components/add-skill-modal/add-skill-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ISkill } from './../../shared/interface/skills.interface';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {
-  selectSections,
-  selectSkills,
-} from './../../state/CV-State/cv.selectors';
+import { selectSkills } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  addSkill,
-  removeSkill,
-  selectSection,
-} from 'src/app/state/CV-State/cv.actions';
+import { addSkill, removeSkill } from 'src/app/state/CV-State/cv.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISection } from 'src/app/shared/interface/section.interface';
 
@@ -24,7 +17,7 @@ import { ISection } from 'src/app/shared/interface/section.interface';
   styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent implements OnInit, OnDestroy {
-  sections: ISection[] = [];
+  sections: ISection[] = SECTIONS;
   skills$ = this.store.select(selectSkills);
   destroy$ = new Subject();
   constructor(
@@ -32,14 +25,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private modal: NgbModal
-  ) {
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this.destroy$.complete();
@@ -70,26 +56,24 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   goToNextSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.nextSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 
   goToPreviousSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
-        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.previousSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 }

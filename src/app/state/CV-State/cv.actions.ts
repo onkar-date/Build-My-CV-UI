@@ -9,11 +9,6 @@ import { IPersonalDetails } from '../../shared/interface/personalDetails.interfa
 import { createAction, props } from '@ngrx/store';
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
 
-export const selectSection = createAction(
-  '[Sections] Select section',
-  props<{ section: ISection }>()
-);
-
 export const savePersonalDetails = createAction(
   '[Personsl Details] Save Personal Details',
   props<{ personalDetails: IPersonalDetails }>()

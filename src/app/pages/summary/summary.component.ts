@@ -1,7 +1,5 @@
-import {
-  selectCVState,
-  selectSections,
-} from './../../state/CV-State/cv.selectors';
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
+import { selectCVState } from './../../state/CV-State/cv.selectors';
 import { CVState } from './../../state/CV-State/cv.reducer';
 import { ResumeService } from './../../shared/services/resume.service';
 import { ITemplate } from './../../shared/interface/template.interface';
@@ -11,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { selectTemplate } from 'src/app/state/CV-State/cv.selectors';
-import { selectSection } from 'src/app/state/CV-State/cv.actions';
 import { ISection } from 'src/app/shared/interface/section.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -24,7 +21,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   selectedTemplate!: ITemplate;
   cvData!: CVState;
-  sections: ISection[] = [];
+  sections: ISection[] = SECTIONS;
   isSummary = false;
   constructor(
     private store: Store<AppState>,
@@ -33,12 +30,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
     private resumeService: ResumeService,
     private spinner: NgxSpinnerService
   ) {
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
     if (router.url.split('/').pop() === 'summary') {
       this.isSummary = true;
     }
@@ -65,9 +56,14 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   goToPreviousSection(): void {
-    this.router.navigate([`../home/interests`], {
-      relativeTo: this.activatedRoute,
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
     });
+    if (currentSection) {
+      this.router.navigate([`../home/${currentSection.previousSection}`], {
+        relativeTo: this.activatedRoute,
+      });
+    }
   }
 
   async downloadResume() {
