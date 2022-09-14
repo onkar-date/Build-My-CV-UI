@@ -20,3 +20,11 @@
         color: green;
     }
 }
+
+/* Medium devices (landscape tablets, 768px and down) */
+@media only screen and (max-width: 576px) {
+    .template-container{
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}

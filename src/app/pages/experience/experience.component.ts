@@ -1,5 +1,5 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { removeExperience } from './../../state/CV-State/cv.actions';
 import { selectExperiences } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
