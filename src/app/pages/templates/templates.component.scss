@@ -1,8 +1,8 @@
 .template-container {
     position: relative;
     .template-img {
-        height: 32rem;
-        width: 25rem;
+        height: 15rem;
+        width: 100%;
         cursor: pointer;
         transition: all 0.8s ease;
         border: 1px solid black;
@@ -15,7 +15,7 @@
     .selected-marker {
         position: absolute;
         top: 50%;
-        left: 50%;
+        left: 44%;
         scale: 6;
         color: green;
     }

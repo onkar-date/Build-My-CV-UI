@@ -38,8 +38,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
-    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   addCertificate() {

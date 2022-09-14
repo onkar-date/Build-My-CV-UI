@@ -13,7 +13,7 @@ export class AddCertificateModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {
     this.certificateForm = this.fb.group({
       title: ['', Validators.required],
-      yearOfCompletion: ['', Validators.required]
+      yearOfCompletion: ['']
     });
   }
 
@@ -23,7 +23,7 @@ export class AddCertificateModalComponent implements OnInit {
     if (this.certificateForm.valid) {
       const result: ICertificate = {
         title: this.certificateForm.value.title,
-        yearOfCompletion: this.certificateForm.value.title
+        yearOfCompletion: this.certificateForm.value.yearOfCompletion
       }
       this.activeModal.close(result);
     }

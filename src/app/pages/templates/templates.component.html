@@ -6,7 +6,7 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-md-6 mb-3 d-flex justify-content-center template-container" *ngFor="let template of templates">
+        <div class="col-sm-6 col-md-3 col-lg-2 mb-3 template-container" *ngFor="let template of templates">
             <img src='{{ "assets/images/" + template.id + ".png" }}'
                 alt="" class="template-img"
                 [class.primary-glow]="template.id === selectedTemplate?.id"
