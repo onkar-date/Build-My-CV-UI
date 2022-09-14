@@ -7,16 +7,18 @@
 </div>
 
 <ng-container *ngIf="(certificates$ | async)?.length else noData">
-    <ul class="mb-3" *ngFor="let certificate of certificates$ | async">
-        <li>
-            <div class="d-flex justify-content-between align-items-center">
-                <span class="mb-1">{{certificate.title}}</span>
-                <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteCertificate(certificate)">
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
+    <div class="col-12 mb-2" *ngFor="let certificate of certificates$ | async">
+        <div class="card shadow">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="mb-1">{{certificate.title}}</span>
+                    <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </div>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </ng-container>
 
 <div class="action-footer d-flex justify-content-between">

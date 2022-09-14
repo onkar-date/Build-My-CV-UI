@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Interest?Hobby</h4>
+    <button type="button" class="btn btn-close" aria-label="Close" (click)="activeModal.close()">X</button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="interestForm">
+        <div class="form-row">
+            <!-- Name -->
+            <div class="form-group col-md-12">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Interest/Hobby</mat-label>
+                    <input matInput formControlName="name" ngbAutoFocus>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button mat-raised-button color="primary" (click)="addInterest()">Save</button>
+</div>

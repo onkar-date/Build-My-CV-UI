@@ -2,69 +2,27 @@
     <h2>Skills</h2>
 </div>
 
-<div class="col-12">
+<div class="col-12 my-3">
     <button mat-raised-button color="primary" (click)="addSkill()">
         Add Skill
         <mat-icon>add</mat-icon>
     </button>
 </div>
 
-<div class="col-12 mt-3">
-    <table class="table" *ngIf="skills.length || showNewSkillRow; else noData">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let skill of skills; let i = index">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{skill.name}}</td>
-                <td>
-                    <ngb-rating [(rate)]="skill.rating" [max]="5" [readonly]="true"></ngb-rating>
-                </td>
-                <td>
-                    <button mat-icon-button color="warn" (click)="removeSkill(skill.name)">
+<ng-container *ngIf="(skills$ | async)?.length; else noData">
+    <div class="col-12 mb-2" *ngFor="let skill of skills$ | async">
+        <div class="card shadow">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="mb-1">{{skill.name}}</span>
+                    <button mat-icon-button color="warn" (click)="deleteSkill(skill)">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
-                </td>
-            </tr>
-            <tr *ngIf="showNewSkillRow">
-                <td></td>
-                <td>
-                    <form [formGroup]="newSkillForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" formControlName="name"
-                                placeholder="Enter skill name">
-                        </div>
-                    </form>
-                </td>
-                <td class="d-flex align-items-center justify-content-between">
-                    <form [formGroup]="newSkillForm">
-                        <div class="form-group">
-                            <ngb-rating [(rate)]="initialRating" [max]="5" formControlName="rating">
-                            </ngb-rating>
-                        </div>
-                    </form>
-
-                </td>
-                <td>
-                    <div>
-                        <button mat-icon-button color="primary" (click)="saveSkill()">
-                            <mat-icon>check_circle</mat-icon>
-                        </button>
-                        <button mat-icon-button color="warn" (click)="cancelSkill()">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
 
 <div class="action-footer d-flex justify-content-between">
     <button mat-raised-button color="secondary" (click)="goToPreviousSection()">

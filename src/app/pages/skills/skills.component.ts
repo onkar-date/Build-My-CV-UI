@@ -1,3 +1,5 @@
+import { AddSkillModalComponent } from './../../library/shared-components/add-skill-modal/add-skill-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 import { ISkill } from './../../shared/interface/skills.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -22,29 +24,20 @@ import { ISection } from 'src/app/shared/interface/section.interface';
   styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent implements OnInit, OnDestroy {
-  initialRating = 0;
-  newSkillForm!: FormGroup;
-  showNewSkillRow = false;
-  skills: ISkill[] = [];
   sections: ISection[] = [];
+  skills$ = this.store.select(selectSkills);
   destroy$ = new Subject();
   constructor(
     private store: Store<AppState>,
-    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modal: NgbModal
   ) {
     store
       .select(selectSections)
       .pipe(takeUntil(this.destroy$))
       .subscribe((sections: ISection[]) => {
         this.sections = sections;
-      });
-    store
-      .select(selectSkills)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((skills: ISkill[]) => {
-        this.skills = skills;
       });
   }
 
@@ -53,34 +46,27 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
-    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.routeToCurrentSection();
   }
 
   routeToCurrentSection(): void {}
 
   addSkill(): void {
-    this.newSkillForm = this.fb.group({
-      name: ['', Validators.required],
-      rating: [0, [Validators.required, Validators.max(5)]],
+    const modalRef = this.modal.open(AddSkillModalComponent, {
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false,
     });
-    this.showNewSkillRow = true;
+    modalRef.result.then((skill: ISkill) => {
+      if (skill) {
+        this.store.dispatch(addSkill({ skill }));
+      }
+    });
   }
 
-  cancelSkill(): void {
-    this.showNewSkillRow = false;
-  }
-
-  saveSkill(): void {
-    if (this.newSkillForm.valid) {
-      this.store.dispatch(addSkill({ skill: this.newSkillForm.value }));
-      this.addSkill();
-    }
-  }
-
-  removeSkill(name: string): void {
-    this.store.dispatch(removeSkill({ name }));
+  deleteSkill(skill: ISkill): void {
+    this.store.dispatch(removeSkill({ name: skill.name }));
   }
 
   goToNextSection(): void {

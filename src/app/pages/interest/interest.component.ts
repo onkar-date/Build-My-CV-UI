@@ -1,3 +1,5 @@
+import { AddInterestModalComponent } from './../../library/shared-components/add-interest-modal/add-interest-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   selectInterests,
   selectSections,
@@ -21,14 +23,13 @@ import { ISection } from 'src/app/shared/interface/section.interface';
 })
 export class InterestComponent implements OnInit {
   interests$ = this.store.select(selectInterests);
-  showNewInterestRow = false;
-  newInterest: string = '';
   sections: ISection[] = [];
   destroy$ = new Subject();
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modal: NgbModal
   ) {
     store
       .select(selectSections)
@@ -39,28 +40,24 @@ export class InterestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
-    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   addInterest() {
-    this.newInterest = '';
-    this.showNewInterestRow = true;
+    const modalRef = this.modal.open(AddInterestModalComponent, {
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false,
+    });
+    modalRef.result.then((interest: string) => {
+      if (interest) {
+        this.store.dispatch(addInterest({ interest }));
+      }
+    });
   }
 
   deleteInterest(interest: string) {
     this.store.dispatch(removeInterest({ interest }));
-  }
-
-  cancelInterest(): void {
-    this.showNewInterestRow = false;
-  }
-
-  saveInterest(): void {
-    if (this.newInterest.length) {
-      this.store.dispatch(addInterest({ interest: this.newInterest }));
-      this.addInterest();
-    }
   }
 
   showSummary(): void {

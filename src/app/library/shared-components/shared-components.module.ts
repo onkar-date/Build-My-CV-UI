@@ -8,13 +8,19 @@ import { AddExperienceModalComponent } from './add-experience-modal/add-experien
 import { AddProjectModalComponent } from './add-project-modal/add-project-modal.component';
 import { AddEducationModalComponent } from './add-education-modal/add-education-modal.component';
 import { AddCertificateModalComponent } from './add-certificate-modal/add-certificate-modal.component';
+import { AddInterestModalComponent } from './add-interest-modal/add-interest-modal.component';
+import { AddSkillModalComponent } from './add-skill-modal/add-skill-modal.component';
+import { RatingComponent } from './rating/rating.component';
 @NgModule({
   declarations: [
     ConfirmationPromptComponent,
     AddExperienceModalComponent,
     AddProjectModalComponent,
     AddEducationModalComponent,
-    AddCertificateModalComponent
+    AddCertificateModalComponent,
+    AddInterestModalComponent,
+    AddSkillModalComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +34,7 @@ import { AddCertificateModalComponent } from './add-certificate-modal/add-certif
     ConfirmationPromptComponent,
     AddExperienceModalComponent,
     AddProjectModalComponent,
+    RatingComponent
   ],
 })
 export class SharedComponentsModule {}

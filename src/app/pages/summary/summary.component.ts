@@ -49,8 +49,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    var scrollDiv = document.getElementById('sectionHeader')?.offsetTop;
-    window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.store
       .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))

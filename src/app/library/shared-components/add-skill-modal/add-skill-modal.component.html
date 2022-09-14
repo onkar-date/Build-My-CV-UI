@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Skill</h4>
+    <button type="button" class="btn btn-close" aria-label="Close" (click)="activeModal.close()">X</button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="skillForm">
+        <div class="form-row">
+            <!-- Certificate name -->
+            <div class="form-group col-md-12">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Skill</mat-label>
+                    <input matInput formControlName="name" ngbAutoFocus>
+                </mat-form-field>
+            </div>
+
+            <!-- Completion Year -->
+            <div class="form-group col-md-12 d-flex justify-content-center">
+                <app-rating [currentRating]="0" [totalRating]="5" (ratingChanged)="updateRating($event)"></app-rating>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button mat-raised-button color="primary" (click)="addSkill()">Save</button>
+</div>
