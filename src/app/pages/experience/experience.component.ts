@@ -1,12 +1,7 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { Subject, takeUntil } from 'rxjs';
-import {
-  removeExperience,
-  selectSection,
-} from './../../state/CV-State/cv.actions';
-import {
-  selectExperiences,
-  selectSections,
-} from './../../state/CV-State/cv.selectors';
+import { removeExperience } from './../../state/CV-State/cv.actions';
+import { selectExperiences } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
 import { IExperience } from './../../shared/interface/experience.interface';
@@ -23,28 +18,15 @@ import { ISection } from 'src/app/shared/interface/section.interface';
   styleUrls: ['./experience.component.scss'],
 })
 export class ExperienceComponent implements OnInit, OnDestroy {
-  experiences: IExperience[] = [];
-  sections: ISection[] = [];
+  experiences$ = this.store.select(selectExperiences);
+  sections: ISection[] = SECTIONS;
   destroy$ = new Subject();
   constructor(
     private modalService: NgbModal,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {
-    this.store
-      .select(selectExperiences)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((experiences: IExperience[]) => {
-        this.experiences = experiences;
-      });
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this.destroy$.complete();
@@ -72,26 +54,24 @@ export class ExperienceComponent implements OnInit, OnDestroy {
   }
 
   goToNextSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.nextSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 
   goToPreviousSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
-        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.previousSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 }

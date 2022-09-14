@@ -7,7 +7,7 @@
 </div>
 
 <ng-container *ngIf="(projects$ | async)?.length else noData">
-    <div class="col-12 mb-3" *ngFor="let project of projects$ | async">
+    <div class="col-12 mb-3" [class.last-item]="last" *ngFor="let project of (projects$ | async); let last = last">
         <div class="card shadow">
 
             <div class="card-body exp-card">

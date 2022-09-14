@@ -10,7 +10,7 @@
 </div>
 
 <ng-container *ngIf="(skills$ | async)?.length; else noData">
-    <div class="col-12 mb-2" *ngFor="let skill of skills$ | async">
+    <div class="col-12 mb-2" [class.last-item]="last" *ngFor="let skill of (skills$ | async); let last = last">
         <div class="card shadow">
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center">

@@ -1,3 +1,4 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { ToasterService } from './../../shared/services/toaster.service';
 import { finalizeTemplate } from './../../state/CV-State/cv.actions';
 import { TEMPLATES } from './../../shared/constants/templates.constants';
@@ -6,15 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { ITemplate } from 'src/app/shared/interface/template.interface';
-import {
-  selectSections,
-  selectTemplate,
-} from 'src/app/state/CV-State/cv.selectors';
+import { selectTemplate } from 'src/app/state/CV-State/cv.selectors';
 import { takeUntil, Subject } from 'rxjs';
-import {
-  ISection,
-  ISectionValidity,
-} from 'src/app/shared/interface/section.interface';
+import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
   selector: 'app-templates',
@@ -24,21 +19,13 @@ import {
 export class TemplatesComponent implements OnInit {
   templates = TEMPLATES;
   destroy$ = new Subject();
-  sections: ISection[] = [];
+  sections: ISection[] = SECTIONS;
   selectedTemplate!: ITemplate;
-  sectionValidity!: ISectionValidity;
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private tostr: ToasterService
+    private router: Router
   ) {
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
     store
       .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))

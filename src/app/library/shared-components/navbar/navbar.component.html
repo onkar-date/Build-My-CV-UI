@@ -3,7 +3,7 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
         </button>
-        <a [routerLink]="['/templates']" routerLinkActive="router-link-active" class="text-white">Build My CV</a>
+        <span role="button" (click)="showTemplates()">Build My CV</span>
     </div>
     <button mat-button (click)="showTemplates()" class="ml-4">
         Templates

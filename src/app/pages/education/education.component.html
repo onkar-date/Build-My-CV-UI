@@ -7,7 +7,7 @@
 </div>
 
 <ng-container *ngIf="(education$ | async)?.length else noData">
-    <div class="col-12 mb-3" *ngFor="let education of education$ | async">
+    <div class="col-12 mb-3" [class.last-item]="last" *ngFor="let education of (education$ | async); let last = last">
         <div class="card shadow">
 
             <div class="card-body exp-card">

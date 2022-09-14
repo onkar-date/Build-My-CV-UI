@@ -6,8 +6,8 @@
     <button (click)="addExperience()" color="primary" mat-raised-button>Add Experience</button>
 </div>
 
-<ng-container *ngIf="experiences.length; else noData">
-    <div class="col-12 mb-3" *ngFor="let experience of experiences">
+<ng-container *ngIf="(experiences$ | async)?.length; else noData">
+    <div class="col-12 mb-3" [class.last-item]="last" *ngFor="let experience of (experiences$ | async); let last = last ">
         <div class="card shadow">
 
             <div class="card-body exp-card">

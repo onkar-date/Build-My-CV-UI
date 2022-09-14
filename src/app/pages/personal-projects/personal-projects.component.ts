@@ -1,22 +1,14 @@
+import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { IProject } from './../../shared/interface/project.interface';
 import { AddProjectModalComponent } from './../../library/shared-components/add-project-modal/add-project-modal.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { IEducation } from 'src/app/shared/interface/education.interface';
 import { AppState } from 'src/app/state/app.state';
-import {
-  addProject,
-  removeEducation,
-  removeProject,
-  selectSection,
-} from 'src/app/state/CV-State/cv.actions';
-import {
-  selectProjects,
-  selectSections,
-} from 'src/app/state/CV-State/cv.selectors';
-import { takeUntil, Subject } from 'rxjs';
+import { addProject, removeProject } from 'src/app/state/CV-State/cv.actions';
+import { selectProjects } from 'src/app/state/CV-State/cv.selectors';
+import { Subject } from 'rxjs';
 import { ISection } from 'src/app/shared/interface/section.interface';
 
 @Component({
@@ -26,21 +18,14 @@ import { ISection } from 'src/app/shared/interface/section.interface';
 })
 export class PersonalProjectsComponent implements OnInit {
   projects$ = this.store.select(selectProjects);
-  sections: ISection[] = [];
+  sections: ISection[] = SECTIONS;
   destroy$ = new Subject();
   constructor(
     private modalService: NgbModal,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {
-    store
-      .select(selectSections)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sections: ISection[]) => {
-        this.sections = sections;
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -63,26 +48,24 @@ export class PersonalProjectsComponent implements OnInit {
   }
 
   goToNextSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i + 1] }));
-        this.router.navigate([`../${this.sections[i + 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.nextSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 
   goToPreviousSection(): void {
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.sections[i].active) {
-        this.store.dispatch(selectSection({ section: this.sections[i - 1] }));
-        this.router.navigate([`../${this.sections[i - 1].routerLink}`], {
-          relativeTo: this.activatedRoute,
-        });
-        break;
-      }
+    const currentSection = this.sections.find((section) => {
+      return section.routerLink === this.router.url.split('/').pop();
+    });
+    if (currentSection) {
+      this.router.navigate([`../${currentSection.previousSection}`], {
+        relativeTo: this.activatedRoute,
+      });
     }
   }
 

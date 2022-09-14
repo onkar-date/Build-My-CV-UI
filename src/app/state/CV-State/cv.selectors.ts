@@ -4,11 +4,6 @@ import { createSelector } from '@ngrx/store';
 
 export const selectCVState = (state: AppState) => state.cvState;
 
-export const selectSections = createSelector(
-  selectCVState,
-  (state: CVState) => state.sections
-);
-
 export const selectPersonalDetails = createSelector(
   selectCVState,
   (state: CVState) => state.personalDetails
