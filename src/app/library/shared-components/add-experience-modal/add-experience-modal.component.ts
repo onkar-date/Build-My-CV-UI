@@ -12,6 +12,7 @@ import DateHelper from 'src/app/shared/helpers/date.helper';
 export class AddExperienceModalComponent implements OnInit {
   experienceForm!: FormGroup;
   experienceData = null;
+  currentlyWorking = false;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -52,8 +53,12 @@ export class AddExperienceModalComponent implements OnInit {
     if (this.experienceForm.valid) {
       const formValue: IExperience = this.experienceForm.value;
       formValue.description = this.formatDescription(this.experienceForm.value);
-      formValue.workedFrom = DateHelper.formatToMonthAndYear(formValue.workedFrom);
-      formValue.workedTill = DateHelper.formatToMonthAndYear(formValue.workedTill);
+      formValue.workedFrom = DateHelper.formatToMonthAndYear(
+        formValue.workedFrom
+      );
+      formValue.workedTill = DateHelper.formatToMonthAndYear(
+        formValue.workedTill
+      ) || 'Present';
       this.activeModal.close(formValue);
     }
   }
@@ -63,5 +68,14 @@ export class AddExperienceModalComponent implements OnInit {
       .replace(/\u2022 /g, '')
       .split('\n')
       .filter(Boolean);
+  }
+
+  currentlWorkingChanged(): void {
+    if (this.currentlyWorking) {
+      this.experienceForm.controls['workedTill'].setValue('');
+      this.experienceForm.controls['workedTill'].disable();
+    } else {
+      this.experienceForm.controls['workedTill'].enable();
+    }
   }
 }

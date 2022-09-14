@@ -22,8 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   selectedTemplate!: ITemplate;
   destroy$ = new Subject();
   cvData!: CVState;
-  constructor(
-    private store: Store<AppState>  ) {
+  constructor(private store: Store<AppState>) {
     this.store
       .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))
