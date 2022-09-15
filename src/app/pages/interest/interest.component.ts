@@ -1,3 +1,4 @@
+import { editInterest } from './../../state/CV-State/cv.actions';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { AddInterestModalComponent } from './../../library/shared-components/add-interest-modal/add-interest-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -30,15 +31,23 @@ export class InterestComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  addInterest() {
+  addEditInterest(index: number, interest?: string, ) {
     const modalRef = this.modal.open(AddInterestModalComponent, {
       size: 'md',
       backdrop: 'static',
       keyboard: false,
     });
-    modalRef.result.then((interest: string) => {
-      if (interest) {
-        this.store.dispatch(addInterest({ interest }));
+    if (interest) {
+      modalRef.componentInstance.isEdit = true;
+      modalRef.componentInstance.interest = interest;
+    }
+    modalRef.result.then((updatedInterestData: string) => {
+      if (updatedInterestData) {
+        if (interest) {
+          this.store.dispatch(editInterest({ updatedInterest: updatedInterestData, index }));
+        } else {
+          this.store.dispatch(addInterest({ interest: updatedInterestData }));
+        }
       }
     });
   }

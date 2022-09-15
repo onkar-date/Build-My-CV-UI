@@ -13,10 +13,15 @@
             <div class="card-body exp-card">
                 <div class="d-flex justify-content-between">
                     <h2 class="mb-1">{{experience.designation}}</h2>
+                    <button mat-icon-button color="primary" class="edit-exp-btn"
+                        (click)="editExperience(experience)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
                     <button mat-icon-button color="warn" class="remove-exp-btn"
                         (click)="deleteExperience(experience)">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
+                    
                 </div>
                 <div class="d-flex align-items-center">
                     <h3 class="mb-0">{{experience.companyName}}</h3>

@@ -1,8 +1,8 @@
+import IdHelper from 'src/app/shared/helpers/id.helper';
 import { IExperience } from './../../../shared/interface/experience.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
-import DateHelper from 'src/app/shared/helpers/date.helper';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-experience-modal',
@@ -10,23 +10,38 @@ import DateHelper from 'src/app/shared/helpers/date.helper';
   styleUrls: ['./add-experience-modal.component.scss'],
 })
 export class AddExperienceModalComponent implements OnInit {
+  @Input() experienceData: IExperience = {
+    id: '',
+    companyName: '',
+    designation: '',
+    workedFrom: '',
+    workedTill: '',
+    description: [],
+  };
+  @Input() isEdit = false;
   experienceForm!: FormGroup;
-  experienceData = null;
   currentlyWorking = false;
+
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.initForm(this.experienceData);
   }
 
-  initForm(): void {
+  initForm(experienceData: IExperience): void {
     this.experienceForm = this.fb.group({
-      companyName: ['', Validators.required],
-      designation: ['', Validators.required],
-      workedFrom: ['', Validators.required],
-      workedTill: ['', Validators.required],
-      description: [[''], [Validators.required]],
+      id: [experienceData.id || IdHelper.getUniqueId()],
+      companyName: [experienceData.companyName, Validators.required],
+      designation: [experienceData.designation, Validators.required],
+      workedFrom: [experienceData.workedFrom, Validators.required],
+      workedTill: [experienceData.workedTill, Validators.required],
+      description: [[...experienceData.description], [Validators.required]],
     });
+    const isCurrentlyWorking = this.experienceForm.controls['workedTill'].value === 'Present';
+    if (isCurrentlyWorking) {
+      this.currentlyWorking = true;
+      this.experienceForm.controls['workedTill'].disable();
+    }
   }
 
   addBulletPoint(event: any) {
@@ -51,14 +66,8 @@ export class AddExperienceModalComponent implements OnInit {
 
   addExperience(): void {
     if (this.experienceForm.valid) {
-      const formValue: IExperience = this.experienceForm.value;
+      const formValue: IExperience = this.experienceForm.getRawValue();
       formValue.description = this.formatDescription(this.experienceForm.value);
-      formValue.workedFrom = DateHelper.formatToMonthAndYear(
-        formValue.workedFrom
-      );
-      formValue.workedTill = DateHelper.formatToMonthAndYear(
-        formValue.workedTill
-      ) || 'Present';
       this.activeModal.close(formValue);
     }
   }
@@ -72,9 +81,10 @@ export class AddExperienceModalComponent implements OnInit {
 
   currentlWorkingChanged(): void {
     if (this.currentlyWorking) {
-      this.experienceForm.controls['workedTill'].setValue('');
+      this.experienceForm.controls['workedTill'].setValue('Present');
       this.experienceForm.controls['workedTill'].disable();
     } else {
+      this.experienceForm.controls['workedTill'].setValue('');
       this.experienceForm.controls['workedTill'].enable();
     }
   }

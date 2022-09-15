@@ -19,18 +19,22 @@ export const mockPersonalDetails: IPersonalDetails = {
 
 export const mockSKills: ISkill[] = [
   {
+    id: 'bbf3f64c-abff-4124-a897-eba8f6aafbe0',
     name: 'Tremendous horseback rider',
     rating: 5,
   },
   {
+    id: '19e88891-c3d8-4f13-aaa6-26770b7548f1',
     name: 'Natural born leader with loyal followers',
     rating: 5,
   },
   {
+    id: '1f3fe223-dd77-4f68-8fd0-68687463818d',
     name: 'Knower of nothing.',
     rating: 4,
   },
   {
+    id: '98e5becd-83db-4430-ad7e-1ff7941742f8',
     name: 'Knee bender',
     rating: 4,
   },
@@ -38,11 +42,13 @@ export const mockSKills: ISkill[] = [
 
 export const mockEducation: IEducation[] = [
   {
+    id: 'agaagag',
     degree: 'Nobles Education',
     batch: '290 AC - 300 AC (Winterfell)',
     university: 'Master Lewin',
   },
   {
+    id: 'afsgahaha',
     degree: 'Dragon Rider',
     batch: '305 AC - 306 AC',
     university: 'Daenerys Targaryen',
@@ -51,6 +57,7 @@ export const mockEducation: IEducation[] = [
 
 export const mockExperience: IExperience[] = [
   {
+    id: 'oadkgaocals',
     companyName: 'Winterfell',
     designation: 'Bastard Child',
     workedFrom: '290 AC',
@@ -63,6 +70,7 @@ export const mockExperience: IExperience[] = [
     ],
   },
   {
+    id: 'dfkaofka',
     companyName: 'The Wall',
     designation: 'Nights Watch',
     workedFrom: '305 AC',
@@ -79,6 +87,7 @@ export const mockExperience: IExperience[] = [
 
 export const mockProjects: IProject[] = [
   {
+    id: 'akgpaga;gk',
     title: 'Portfolio',
     description: 'My Portfolio',
     link: 'https://www.hbo.com/game-of-thrones',
@@ -87,14 +96,17 @@ export const mockProjects: IProject[] = [
 
 export const mockCertificates: ICertificate[] = [
   {
+    id: 'afagahah',
     title: 'Westeros Certified Professional Dothraki',
     yearOfCompletion: '305',
   },
   {
+    id: 'afagahaadgagh',
     title: 'Westeros Certified Drago Rider',
     yearOfCompletion: '310',
   },
   {
+    id: 'adgagahgahah',
     title: 'Westeros Certified City Waych Commander',
     yearOfCompletion: '315',
   },

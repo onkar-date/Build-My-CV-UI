@@ -3,6 +3,7 @@ import { AddEducationModalComponent } from './../../library/shared-components/ad
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   addEducation,
+  editEducation,
   removeEducation,
 } from './../../state/CV-State/cv.actions';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -38,15 +39,23 @@ export class EducationComponent implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  addEducation() {
+  addEditEducation(educationToEdit?: IEducation) {
     const modalRef = this.modal.open(AddEducationModalComponent, {
       size: 'md',
       backdrop: 'static',
       keyboard: false,
     });
+    if (educationToEdit) {
+      modalRef.componentInstance.isEdit = true;
+      modalRef.componentInstance.education = educationToEdit;
+    }
     modalRef.result.then((education: IEducation) => {
       if (education) {
-        this.store.dispatch(addEducation({ education }));
+        if (educationToEdit) {
+          this.store.dispatch(editEducation({ education }));
+        } else {
+          this.store.dispatch(addEducation({ education }));
+        }
       }
     });
   }

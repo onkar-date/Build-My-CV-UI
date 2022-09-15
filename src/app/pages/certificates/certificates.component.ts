@@ -1,3 +1,4 @@
+import { editCertificate } from './../../state/CV-State/cv.actions';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { AddCertificateModalComponent } from './../../library/shared-components/add-certificate-modal/add-certificate-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -34,15 +35,27 @@ export class CertificatesComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  addCertificate() {
+  addEditCertificate(certificate?: ICertificate) {
     const modalRef = this.modal.open(AddCertificateModalComponent, {
       size: 'md',
       backdrop: 'static',
       keyboard: false,
     });
-    modalRef.result.then((certificate: ICertificate) => {
-      if (certificate) {
-        this.store.dispatch(addCertificate({ certificate }));
+    if (certificate) {
+      modalRef.componentInstance.isEdit = true;
+      modalRef.componentInstance.certificate = certificate;
+    }
+    modalRef.result.then((updatedCertificate: ICertificate) => {
+      if (updatedCertificate) {
+        if (certificate) {
+          this.store.dispatch(
+            editCertificate({ certificate: updatedCertificate })
+          );
+        } else {
+          this.store.dispatch(
+            addCertificate({ certificate: updatedCertificate })
+          );
+        }
       }
     });
   }

@@ -1,6 +1,6 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { Subject } from 'rxjs';
-import { removeExperience } from './../../state/CV-State/cv.actions';
+import { editExperience, removeExperience } from './../../state/CV-State/cv.actions';
 import { selectExperiences } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
@@ -45,6 +45,21 @@ export class ExperienceComponent implements OnInit, OnDestroy {
     modal.result.then((experience: IExperience) => {
       if (experience) {
         this.store.dispatch(addExperience({ experience }));
+      }
+    });
+  }
+
+  editExperience(experience: IExperience) {
+    const modal = this.modalService.open(AddExperienceModalComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      keyboard: false,
+    });
+    modal.componentInstance.isEdit = true;
+    modal.componentInstance.experienceData = experience;
+    modal.result.then((experience: IExperience) => {
+      if (experience) {
+        this.store.dispatch(editExperience({ experience }));
       }
     });
   }

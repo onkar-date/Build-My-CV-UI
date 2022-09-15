@@ -1,3 +1,4 @@
+import { editProject } from './../../state/CV-State/cv.actions';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { IProject } from './../../shared/interface/project.interface';
 import { AddProjectModalComponent } from './../../library/shared-components/add-project-modal/add-project-modal.component';
@@ -31,14 +32,22 @@ export class PersonalProjectsComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  addProject() {
+  addEditProject(projectToUpdate?: IProject) {
     const modal = this.modalService.open(AddProjectModalComponent, {
       backdrop: 'static',
       keyboard: false,
     });
-    modal.result.then((project: IProject) => {
-      if (project) {
-        this.store.dispatch(addProject({ project }));
+    if (projectToUpdate) {
+      modal.componentInstance.isEdit = true;
+      modal.componentInstance.project = projectToUpdate;
+    }
+    modal.result.then((updatedProjectData: IProject) => {
+      if (updatedProjectData) {
+        if (projectToUpdate) {
+          this.store.dispatch(editProject({ project: updatedProjectData }));
+        } else {
+          this.store.dispatch(addProject({ project: updatedProjectData }));
+        }
       }
     });
   }

@@ -7,7 +7,7 @@ import { selectSkills } from './../../state/CV-State/cv.selectors';
 import { AppState } from './../../state/app.state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { addSkill, removeSkill } from 'src/app/state/CV-State/cv.actions';
+import { addSkill, editSkill, removeSkill } from 'src/app/state/CV-State/cv.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISection } from 'src/app/shared/interface/section.interface';
 
@@ -47,6 +47,22 @@ export class SkillsComponent implements OnInit, OnDestroy {
     modalRef.result.then((skill: ISkill) => {
       if (skill) {
         this.store.dispatch(addSkill({ skill }));
+      }
+    });
+  }
+
+  editSkill(skill: ISkill): void {
+    const modalRef = this.modal.open(AddSkillModalComponent, {
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false,
+    });
+    modalRef.componentInstance.skill = skill;
+    modalRef.componentInstance.currentRating = skill.rating;
+    modalRef.componentInstance.isEdit = true;
+    modalRef.result.then((skill: ISkill) => {
+      if (skill) {
+        this.store.dispatch(editSkill({ skill }));
       }
     });
   }

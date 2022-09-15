@@ -12,6 +12,7 @@ import {
   addSkill,
   removeSkill,
   addExperience,
+  editExperience,
   removeExperience,
   addEducation,
   removeEducation,
@@ -24,6 +25,12 @@ import {
   removeInterest,
   saveContactDetails,
   fillMockData,
+  initiState,
+  editSkill,
+  editEducation,
+  editProject,
+  editCertificate,
+  editInterest,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -46,7 +53,7 @@ export interface CVState {
   sections: ISection[];
 }
 
-const initialState: CVState = (true && mockInitialState) || {
+const initialState: CVState = (false && mockInitialState) || {
   personalDetails: {
     firstName: '',
     lastName: '',
@@ -75,6 +82,11 @@ const initialState: CVState = (true && mockInitialState) || {
 export const cvReducer = createReducer(
   initialState,
 
+  on(initiState, (state, { cvState }) => ({
+    ...state,
+    ...cvState,
+  })),
+
   on(savePersonalDetails, (state, { personalDetails }) => ({
     ...state,
     personalDetails,
@@ -88,6 +100,11 @@ export const cvReducer = createReducer(
   on(addSkill, (state, { skill }) => ({
     ...state,
     skills: [...state.skills, skill],
+  })),
+
+  on(editSkill, (state, { skill }) => ({
+    ...state,
+    skills: getUpdatedSkills(state.skills, skill),
   })),
 
   on(removeSkill, (state, { name }) => ({
@@ -105,6 +122,11 @@ export const cvReducer = createReducer(
     experience: [...state.experience, experience],
   })),
 
+  on(editExperience, (state, { experience }) => ({
+    ...state,
+    experience: getUpdatedExperienceList(state.experience, experience),
+  })),
+
   on(removeExperience, (state, { experience }) => ({
     ...state,
     experience: state.experience.filter((_) => _ !== experience),
@@ -113,6 +135,11 @@ export const cvReducer = createReducer(
   on(addEducation, (state, { education }) => ({
     ...state,
     education: [...state.education, education],
+  })),
+
+  on(editEducation, (state, { education }) => ({
+    ...state,
+    education: getUpdatedEducationList(state.education, education),
   })),
 
   on(removeEducation, (state, { education }) => ({
@@ -125,6 +152,11 @@ export const cvReducer = createReducer(
     projects: [...state.projects, project],
   })),
 
+  on(editProject, (state, { project }) => ({
+    ...state,
+    projects: getUpdatedProjectList(state.projects, project),
+  })),
+
   on(removeProject, (state, { project }) => ({
     ...state,
     projects: state.projects.filter((_) => _ !== project),
@@ -135,14 +167,14 @@ export const cvReducer = createReducer(
     certificates: [...state.certificates, certificate],
   })),
 
+  on(editCertificate, (state, { certificate }) => ({
+    ...state,
+    certificates: getUpdatedCertificates(state.certificates, certificate),
+  })),
+
   on(removeCertificate, (state, { certificate }) => ({
     ...state,
     certificates: state.certificates.filter((_) => _ !== certificate),
-  })),
-
-  on(finalizeTemplate, (state, { template }) => ({
-    ...state,
-    template,
   })),
 
   on(addInterest, (state, { interest }) => ({
@@ -150,9 +182,19 @@ export const cvReducer = createReducer(
     interest: [...state.interest, interest],
   })),
 
+  on(editInterest, (state, { updatedInterest, index }) => ({
+    ...state,
+    interest: getUpdatedInterests(state.interest, updatedInterest, index),
+  })),
+
   on(removeInterest, (state, { interest }) => ({
     ...state,
     interest: state.interest.filter((_) => _ !== interest),
+  })),
+
+  on(finalizeTemplate, (state, { template }) => ({
+    ...state,
+    template,
   })),
 
   on(fillMockData, (state) => ({
@@ -161,14 +203,78 @@ export const cvReducer = createReducer(
   }))
 );
 
-function getUpdatedSections(
-  currentSections: ISection[],
-  selectedSection: ISection
-): ISection[] {
-  return currentSections.map((section) => {
-    return {
-      ...section,
-      active: section.title === selectedSection.title,
-    };
+function getUpdatedExperienceList(
+  experiences: IExperience[],
+  updatedExperience: IExperience
+): IExperience[] {
+  return experiences.map((experience) => {
+    if (experience.id === updatedExperience.id) {
+      return updatedExperience;
+    } else {
+      return experience;
+    }
+  });
+}
+
+function getUpdatedSkills(skills: ISkill[], updatedSkill: ISkill): ISkill[] {
+  return skills.map((skill) => {
+    if (skill.id === updatedSkill.id) {
+      return updatedSkill;
+    } else {
+      return skill;
+    }
+  });
+}
+
+function getUpdatedEducationList(
+  educations: IEducation[],
+  updatedEducation: IEducation
+): IEducation[] {
+  return educations.map((education) => {
+    if (education.id === updatedEducation.id) {
+      return updatedEducation;
+    } else {
+      return education;
+    }
+  });
+}
+
+function getUpdatedProjectList(
+  projects: IProject[],
+  updatedProject: IProject
+): IProject[] {
+  return projects.map((project) => {
+    if (project.id === updatedProject.id) {
+      return updatedProject;
+    } else {
+      return project;
+    }
+  });
+}
+
+function getUpdatedCertificates(
+  certificates: ICertificate[],
+  updatedCertificate: ICertificate
+): ICertificate[] {
+  return certificates.map((certificate) => {
+    if (certificate.id === updatedCertificate.id) {
+      return updatedCertificate;
+    } else {
+      return certificate;
+    }
+  });
+}
+
+function getUpdatedInterests(
+  interests: string[],
+  updatedInterest: string,
+  index: number
+): string[] {
+  return interests.map((interest, idx) => {
+    if (idx === index) {
+      return updatedInterest;
+    } else {
+      return interest;
+    }
   });
 }
