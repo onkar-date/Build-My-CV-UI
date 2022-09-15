@@ -1,6 +1,10 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Experience</h4>
-    <button type="button" class="btn btn-close" aria-label="Close" (click)="activeModal.close()">X</button>
+    <h2 class="modal-title">
+        {{isEdit ? 'Edit Experience' : 'Add Experience'}}
+    </h2>
+    <button mat-icon-button (click)="activeModal.close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 <div class="modal-body">
     <form [formGroup]="experienceForm">
@@ -24,9 +28,7 @@
             <div class="form-group col-md-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Worked From</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="workedFrom">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
+                    <input matInput formControlName="workedFrom">
                 </mat-form-field>
             </div>
 
@@ -34,16 +36,11 @@
             <div class="form-group col-md-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Worked Till</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="workedTill">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
+                    <input matInput formControlName="workedTill">
                 </mat-form-field>
                 <div class="d-flex justify-content-end">
-                    <mat-checkbox
-                        [ngModelOptions]="{standalone: true}"
-                        (change)="currentlWorkingChanged()"
-                        [(ngModel)]="currentlyWorking"
-                        color="primary">
+                    <mat-checkbox [ngModelOptions]="{standalone: true}" (change)="currentlWorkingChanged()"
+                        [(ngModel)]="currentlyWorking" color="primary">
                         Currently Working
                     </mat-checkbox>
                 </div>

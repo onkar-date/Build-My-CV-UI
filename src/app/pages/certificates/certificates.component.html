@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-12 my-3">
-    <button (click)="addCertificate()" color="primary" mat-raised-button>Add Certificate</button>
+    <button (click)="addEditCertificate()" color="primary" mat-raised-button>Add Certificate</button>
 </div>
 
 <ng-container *ngIf="(certificates$ | async)?.length else noData">
@@ -12,9 +12,14 @@
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="mb-1">{{certificate.title}}</span>
-                    <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)">
-                        <mat-icon>delete_outline</mat-icon>
-                    </button>
+                    <div>
+                        <button mat-icon-button color="primary" (click)="addEditCertificate(certificate)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

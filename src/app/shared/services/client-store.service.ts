@@ -6,10 +6,10 @@ import * as localforage from 'localforage';
 })
 export class ClientStoreService {
 
-  public store: any;
+  private clientStore: any;
 
   constructor() {
-    this.store = localforage.config(clientStoreConfig);
+    this.clientStore = localforage.config(clientStoreConfig);
   }
 
   setItem = (key: string, value: any, serialise = (data: any) => data) => {

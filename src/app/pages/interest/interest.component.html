@@ -3,18 +3,23 @@
 </div>
 
 <div class="col-12 my-3" id="sectionHeader">
-    <button (click)="addInterest()" color="primary" mat-raised-button>Add Hobby/Interest</button>
+    <button (click)="addEditInterest(0)" color="primary" mat-raised-button>Add Hobby/Interest</button>
 </div>
 
 <ng-container *ngIf="(interests$ | async)?.length; else noData">
-    <div class="col-12 mb-2" [class.last-item]="last" *ngFor="let interest of (interests$ | async); let last = last">
+    <div class="col-12 mb-2" [class.last-item]="last" *ngFor="let interest of (interests$ | async); let last = last; let i = index">
         <div class="card shadow">
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="mb-1">{{interest}}</span>
-                    <button mat-icon-button color="warn" (click)="deleteInterest(interest)">
-                        <mat-icon>delete_outline</mat-icon>
-                    </button>
+                    <div>
+                        <button mat-icon-button color="primary" (click)="addEditInterest(i, interest)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteInterest(interest)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

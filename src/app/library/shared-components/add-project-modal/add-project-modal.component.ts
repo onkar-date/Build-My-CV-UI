@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { IProject } from './../../../shared/interface/project.interface';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import IdHelper from 'src/app/shared/helpers/id.helper';
 
 @Component({
   selector: 'app-add-project-modal',
@@ -9,7 +11,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddProjectModalComponent implements OnInit {
   projectForm!: FormGroup;
-  projectData = null;
+  @Input() project: IProject = {
+    id: '',
+    title: '',
+    description: '',
+    link: '',
+  };
+  @Input() isEdit = false;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -18,9 +26,10 @@ export class AddProjectModalComponent implements OnInit {
 
   initForm(): void {
     this.projectForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      link: [''],
+      id: [this.project.id || IdHelper.getUniqueId(), Validators.required],
+      title: [this.project.title, Validators.required],
+      description: [this.project.description, Validators.required],
+      link: [this.project.link],
     });
   }
 

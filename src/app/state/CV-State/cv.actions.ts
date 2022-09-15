@@ -1,4 +1,4 @@
-import { ISection } from './../../shared/interface/section.interface';
+import { CVState } from './cv.reducer';
 import { ICOntactDetails } from './../../shared/interface/contactDetails.interface';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
@@ -8,6 +8,11 @@ import { ISkill } from './../../shared/interface/skills.interface';
 import { IPersonalDetails } from '../../shared/interface/personalDetails.interface';
 import { createAction, props } from '@ngrx/store';
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
+
+export const initiState = createAction(
+  '[Init State] Initialize App CV State',
+  props<{ cvState: CVState }>()
+);
 
 export const savePersonalDetails = createAction(
   '[Personsl Details] Save Personal Details',
@@ -21,6 +26,11 @@ export const saveContactDetails = createAction(
 
 export const addSkill = createAction(
   '[Skills] Add Skill',
+  props<{ skill: ISkill }>()
+);
+
+export const editSkill = createAction(
+  '[Skills] Edit Skill',
   props<{ skill: ISkill }>()
 );
 
@@ -39,6 +49,11 @@ export const addExperience = createAction(
   props<{ experience: IExperience }>()
 );
 
+export const editExperience = createAction(
+  '[Experience] Edit Experience',
+  props<{ experience: IExperience }>()
+);
+
 export const removeExperience = createAction(
   '[Experience] Remove Experience',
   props<{ experience: IExperience }>()
@@ -46,6 +61,11 @@ export const removeExperience = createAction(
 
 export const addEducation = createAction(
   '[Education] Add Education',
+  props<{ education: IEducation }>()
+);
+
+export const editEducation = createAction(
+  '[Education] Edit Education',
   props<{ education: IEducation }>()
 );
 
@@ -59,6 +79,11 @@ export const addProject = createAction(
   props<{ project: IProject }>()
 );
 
+export const editProject = createAction(
+  '[Project] Edit Project',
+  props<{ project: IProject }>()
+);
+
 export const removeProject = createAction(
   '[Project] Remove Project',
   props<{ project: IProject }>()
@@ -69,14 +94,14 @@ export const addCertificate = createAction(
   props<{ certificate: ICertificate }>()
 );
 
-export const removeCertificate = createAction(
-  '[Certificate] Remove Certificate',
+export const editCertificate = createAction(
+  '[Certificate] Edit  Certificate',
   props<{ certificate: ICertificate }>()
 );
 
-export const finalizeTemplate = createAction(
-  '[Templates] Select Template',
-  props<{ template: ITemplate }>()
+export const removeCertificate = createAction(
+  '[Certificate] Remove Certificate',
+  props<{ certificate: ICertificate }>()
 );
 
 export const addInterest = createAction(
@@ -84,9 +109,19 @@ export const addInterest = createAction(
   props<{ interest: string }>()
 );
 
+export const editInterest = createAction(
+  '[Interests] Edit Interest',
+  props<{ updatedInterest: string, index: number }>()
+);
+
 export const removeInterest = createAction(
   '[Interests] Remove Interest',
   props<{ interest: string }>()
+);
+
+export const finalizeTemplate = createAction(
+  '[Templates] Select Template',
+  props<{ template: ITemplate }>()
 );
 
 export const fillMockData = createAction('[Mock] Fill Mock Data');

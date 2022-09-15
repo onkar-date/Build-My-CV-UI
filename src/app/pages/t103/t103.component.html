@@ -75,6 +75,28 @@
             </div>
         </section>
 
+        <!-- Personal Projects -->
+        <section *ngIf="cvData.projects.length">
+            <div class="section-title">
+                <h1 class="mb-0">
+                    <strong>Personal Projects</strong>
+                </h1>
+            </div>
+            <div class="section-info">
+                <ul>
+                    <li class="mt-2" *ngFor="let project of cvData.projects">
+                        <span>{{project.title}}</span>
+                        <br>
+                        <a [href]="project.link">
+                            <u>{{project.link}}</u>
+                        </a>
+                        <br>
+                        <span>{{project.description}}</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
         <!-- Education -->
         <section>
             <div class="section-title">
@@ -100,28 +122,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
-
-        <!-- Personal Projects -->
-        <section *ngIf="cvData.projects.length">
-            <div class="section-title">
-                <h1 class="mb-0">
-                    <strong>Personal Projects</strong>
-                </h1>
-            </div>
-            <div class="section-info">
-                <ul>
-                    <li class="mt-2" *ngFor="let project of cvData.projects">
-                        <span>{{project.title}}</span>
-                        <br>
-                        <a [href]="project.link">
-                            <u>{{project.link}}</u>
-                        </a>
-                        <br>
-                        <span>{{project.description}}</span>
-                    </li>
-                </ul>
             </div>
         </section>
 

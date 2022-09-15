@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-12 my-3">
-    <button (click)="addEducation()" color="primary" mat-raised-button>Add Education</button>
+    <button (click)="addEditEducation()" color="primary" mat-raised-button>Add Education</button>
 </div>
 
 <ng-container *ngIf="(education$ | async)?.length else noData">
@@ -13,9 +13,14 @@
             <div class="card-body exp-card">
                 <div class="d-flex justify-content-between">
                     <h2 class="mb-1">{{education.degree}}</h2>
-                    <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteEducation(education)">
-                        <mat-icon>delete_outline</mat-icon>
-                    </button>
+                    <div>
+                        <button mat-icon-button color="primary" class="remove-exp-btn" (click)="addEditEducation(education)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" class="remove-exp-btn" (click)="deleteEducation(education)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
                 </div>
                 <div class="d-flex align-items-center">
                     <p>{{education.batch}}</p>

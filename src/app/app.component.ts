@@ -1,5 +1,11 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { CVState } from './state/CV-State/cv.reducer';
+import { ClientStoreService } from './shared/services/client-store.service';
+import { selectCVState } from './state/CV-State/cv.selectors';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from './state/app.state';
+import { initiState } from './state/CV-State/cv.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +13,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  stateData!: CVState;
+  appLoaded = false;
+  constructor(
+    private router: Router,
+    private store: Store<AppState>,
+    private clientStore: ClientStoreService
+  ) {}
 
   ngOnInit(): void {
-    this.router.navigate(['templates'])
+    this.router.navigate(['templates']);
+    this.clientStore.getItem('cvState').then((stateData: CVState) => {
+      if (stateData) {
+        this.store.dispatch(initiState({ cvState: stateData }));
+      }
+      this.appLoaded = true;
+    });
+    this.store.select(selectCVState).subscribe((cvState) => {
+      this.clientStore.setItem('cvState', cvState);
+    });
   }
   title = 'Build My CV';
 }

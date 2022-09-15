@@ -1,6 +1,10 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Skill</h4>
-    <button type="button" class="btn btn-close" aria-label="Close" (click)="activeModal.close()">X</button>
+    <h2 class="modal-title">
+        {{isEdit ? 'Edit Skill' : 'Add Skill'}}
+    </h2>
+    <button mat-icon-button (click)="activeModal.close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 <div class="modal-body">
     <form [formGroup]="skillForm">
@@ -15,7 +19,7 @@
 
             <!-- Completion Year -->
             <div class="form-group col-md-12 d-flex justify-content-center">
-                <app-rating [currentRating]="0" [totalRating]="5" (ratingChanged)="updateRating($event)"></app-rating>
+                <app-rating [currentRating]="currentRating" [totalRating]="5" (ratingChanged)="updateRating($event)"></app-rating>
             </div>
         </div>
     </form>

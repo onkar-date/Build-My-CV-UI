@@ -1,6 +1,8 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Interest?Hobby</h4>
-    <button type="button" class="btn btn-close" aria-label="Close" (click)="activeModal.close()">X</button>
+    <h2 class="modal-title">Add Interest/Hobby</h2>
+    <button mat-icon-button (click)="activeModal.close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 <div class="modal-body">
     <form [formGroup]="interestForm">
