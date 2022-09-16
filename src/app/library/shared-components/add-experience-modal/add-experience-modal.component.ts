@@ -26,6 +26,8 @@ export class AddExperienceModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm(this.experienceData);
+    console.log(this.experienceData);
+    
   }
 
   initForm(experienceData: IExperience): void {
@@ -35,8 +37,10 @@ export class AddExperienceModalComponent implements OnInit {
       designation: [experienceData.designation, Validators.required],
       workedFrom: [experienceData.workedFrom, Validators.required],
       workedTill: [experienceData.workedTill, Validators.required],
-      description: [[...experienceData.description], [Validators.required]],
+      description: [this.formatExperienceData(experienceData.description), [Validators.required]],
     });
+    console.log(this.formatExperienceData(experienceData.description));
+    
     const isCurrentlyWorking = this.experienceForm.controls['workedTill'].value === 'Present';
     if (isCurrentlyWorking) {
       this.currentlyWorking = true;
@@ -87,5 +91,15 @@ export class AddExperienceModalComponent implements OnInit {
       this.experienceForm.controls['workedTill'].setValue('');
       this.experienceForm.controls['workedTill'].enable();
     }
+  }
+
+  formatExperienceData(description: string[] = []): string {
+    const bullet = '\u2022';
+    const bulletWithSpace = `${bullet} `;
+    let formatted = '';
+    description.forEach(exp => {
+      formatted += `${bulletWithSpace}${exp}\n`;
+    })
+    return formatted;
   }
 }
