@@ -42,7 +42,10 @@ export class AppComponent implements OnInit {
   }
 
   async confirmUnsavedChanges(): Promise<boolean> {
-    const modalRef = this.modal.open(ConfirmationPromptComponent);
+    const modalRef = this.modal.open(ConfirmationPromptComponent, {
+      keyboard: false,
+      backdrop: 'static'
+    });
     modalRef.componentInstance.title = 'Continue Editing ?';
     modalRef.componentInstance.bodyMessage = 'Do you want to continue where you left ?';
     return await modalRef.result;
