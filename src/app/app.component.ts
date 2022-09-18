@@ -26,13 +26,17 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.router.navigate(['templates']);
+    // this.router.navigate(['templates']);
     this.clientStore.getItem('cvState').then(async (stateData: CVState) => {
       if (stateData) {
         if (await this.confirmUnsavedChanges()) {
           this.store.dispatch(initiState({ cvState: stateData }));
-          this.router.navigate(['home/personal-details']);
+        } else {
+          this.clientStore.removeItem('cvState');
+          this.router.navigate(['templates']);
         }
+      } else {
+        this.router.navigate(['templates']);
       }
       this.appLoaded = true;
     });
@@ -44,11 +48,11 @@ export class AppComponent implements OnInit {
   async confirmUnsavedChanges(): Promise<boolean> {
     const modalRef = this.modal.open(ConfirmationPromptComponent, {
       keyboard: false,
-      backdrop: 'static'
+      backdrop: 'static',
     });
     modalRef.componentInstance.title = 'Continue Editing ?';
-    modalRef.componentInstance.bodyMessage = 'Do you want to continue where you left ?';
+    modalRef.componentInstance.bodyMessage =
+      'Do you want to continue where you left ?';
     return await modalRef.result;
-    
   }
 }
