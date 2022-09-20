@@ -21,6 +21,7 @@ import { T104Component } from './t104/t104.component';
 import { InterestComponent } from './interest/interest.component';
 import { T105Component } from './t105/t105.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
+import { T106Component } from './t106/t106.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -39,6 +40,7 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
     InterestComponent,
     T105Component,
     ContactDetailsComponent,
+    T106Component,
   ],
   imports: [
     CommonModule,

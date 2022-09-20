@@ -19,4 +19,8 @@ export const TEMPLATES = [
     name: 'Template 5',
     id: 'T105'
   },
+  {
+    name: 'Template 6',
+    id: 'T106'
+  },
 ]
