@@ -1,0 +1,27 @@
+.resume-body{
+    padding: 3rem;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.vert-divider {
+    width: 2px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background: gray;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    border-bottom: 3px solid lightgray;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+

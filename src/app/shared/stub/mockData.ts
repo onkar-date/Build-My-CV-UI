@@ -45,13 +45,13 @@ export const mockEducation: IEducation[] = [
     id: 'agaagag',
     degree: 'Nobles Education',
     batch: '290 AC - 300 AC (Winterfell)',
-    university: 'Master Lewin',
+    university: 'Master Lewin University',
   },
   {
     id: 'afsgahaha',
     degree: 'Dragon Rider',
     batch: '305 AC - 306 AC',
-    university: 'Daenerys Targaryen',
+    university: 'Daenerys Targaryen University',
   },
 ];
 

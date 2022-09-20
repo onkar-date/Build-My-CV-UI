@@ -1,0 +1,85 @@
+<div class="resume-body shadow-lg" *ngIf="cvData">
+
+  <!-- Header -->
+  <section class="header">
+    <h1 class="mb-1">
+      <span>{{cvData.personalDetails.firstName}} {{cvData.personalDetails.lastName}}</span>
+    </h1>
+    <span class="mb-2">{{cvData.contactDetails.address}}</span>
+    <div class="d-flex">
+      <span>{{cvData.contactDetails.mobile}}</span>
+      <div class="vert-divider"></div>
+      <span>{{cvData.contactDetails.email}}</span>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section>
+    <h3 class="section-title">EDUCATION</h3>
+    <ng-container *ngFor="let education of cvData.education">
+      <div class="mb-2">
+        <h4 class="mb-0">
+          {{education.university}}
+        </h4>
+        <div>
+          {{education.degree}}
+          <span class="ml-3">({{education.batch}})</span>
+        </div>
+      </div>
+    </ng-container>
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <h3 class="section-title">WORK AND LEADERSHIP EXPERIENCE</h3>
+
+    <ng-container *ngFor="let experience of cvData.experience">
+      <h3 class="mb-0">{{experience.companyName}}</h3>
+      <div>
+        <span>{{experience.designation}}</span>
+        <span>{{experience.workedFrom}} {{experience.workedTill}}</span>
+      </div>
+      <ul class="mt-2">
+        <li *ngFor="let description of experience.description">
+          {{description}}
+        </li>
+      </ul>
+    </ng-container>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3 class="section-title">
+      SKILLS
+    </h3>
+    <ul>
+      <li *ngFor="let skill of cvData.skills">
+        {{skill.name}}
+      </li>
+    </ul>
+  </section>
+
+  <!-- Certifications -->
+  <section>
+    <h3 class="section-title">
+      CERTIFICATIONS
+    </h3>
+    <ul>
+      <li *ngFor="let certificate of cvData.certificates">
+        {{certificate.title}}
+      </li>
+    </ul>
+  </section>
+
+  <!-- Interests -->
+  <section>
+    <h3 class="section-title">
+      INTERESTS
+    </h3>
+    <ul>
+      <li *ngFor="let interest of cvData.interest">
+        {{interest}}
+      </li>
+    </ul>
+  </section>
+</div>

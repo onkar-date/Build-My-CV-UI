@@ -26,8 +26,6 @@ export class AddExperienceModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm(this.experienceData);
-    console.log(this.experienceData);
-    
   }
 
   initForm(experienceData: IExperience): void {
@@ -39,8 +37,6 @@ export class AddExperienceModalComponent implements OnInit {
       workedTill: [experienceData.workedTill, Validators.required],
       description: [this.formatExperienceData(experienceData.description), [Validators.required]],
     });
-    console.log(this.formatExperienceData(experienceData.description));
-    
     const isCurrentlyWorking = this.experienceForm.controls['workedTill'].value === 'Present';
     if (isCurrentlyWorking) {
       this.currentlyWorking = true;
