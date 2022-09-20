@@ -11,6 +11,7 @@ import { AddCertificateModalComponent } from './add-certificate-modal/add-certif
 import { AddInterestModalComponent } from './add-interest-modal/add-interest-modal.component';
 import { AddSkillModalComponent } from './add-skill-modal/add-skill-modal.component';
 import { RatingComponent } from './rating/rating.component';
+import { ChangeTemplateModalComponent } from './change-template-modal/change-template-modal.component';
 @NgModule({
   declarations: [
     ConfirmationPromptComponent,
@@ -20,7 +21,8 @@ import { RatingComponent } from './rating/rating.component';
     AddCertificateModalComponent,
     AddInterestModalComponent,
     AddSkillModalComponent,
-    RatingComponent
+    RatingComponent,
+    ChangeTemplateModalComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { RatingComponent } from './rating/rating.component';
     ConfirmationPromptComponent,
     AddExperienceModalComponent,
     AddProjectModalComponent,
-    RatingComponent
+    RatingComponent,
+    ChangeTemplateModalComponent
   ],
 })
 export class SharedComponentsModule {}

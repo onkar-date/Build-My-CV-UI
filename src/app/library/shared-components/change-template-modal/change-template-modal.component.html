@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h2 class="modal-title">
+        Select Template
+    </h2>
+    <button mat-icon-button (click)="activeModal.close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div class="modal-body" *ngIf="selectedTemplate">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 mb-3 template-container" *ngFor="let template of templates">
+                <img src='{{ "assets/images/" + template.id + ".png" }}'
+                    alt="" class="template-img"
+                    [class.primary-glow]="template.id === selectedTemplate.id"
+                    (click)="setTemplate(template)"
+                >
+                <div class="selected-marker" *ngIf="template.id === selectedTemplate?.id">
+                    <mat-icon>check_circle_outline</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button mat-raised-button color="primary" (click)="selectTemplate()">Select</button>
+</div>

@@ -1,11 +1,17 @@
-<mat-toolbar color="primary" class="d-flex justify-content-between">
-    <div class="d-flex align-items-center">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span role="button" (click)="showTemplates()">Build My CV</span>
-    </div>
-    <button mat-button (click)="showTemplates()" class="ml-4">
-        Templates
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" role="button" (click)="showTemplates()">Build My CV</a>
+    <button mat-icon-button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav" aria-controls="navbarNav"
+        aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
     </button>
-</mat-toolbar>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" role="button" (click)="showTemplates()">Templates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" role="button" (click)="goToSummary()">Summary</a>
+            </li>
+        </ul>
+    </div>
+</nav>

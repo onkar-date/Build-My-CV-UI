@@ -18,4 +18,10 @@ export class NavbarComponent implements OnInit {
   showTemplates(): void {
     this.router.navigate(['./templates']);
   }
+
+  goToSummary(): void {
+    this.router.navigate(['./summary']);
+  }
+
+  toggleMenu(): void {}
 }

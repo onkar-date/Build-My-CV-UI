@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { ISection } from 'src/app/shared/interface/section.interface';
 import { takeUntil, Subject } from 'rxjs';
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   selectedTemplate!: ITemplate;
   destroy$ = new Subject();
   cvData!: CVState;
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.store
       .select(selectTemplate)
       .pipe(takeUntil(this.destroy$))
@@ -54,5 +55,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   fillMockData(): void {
     this.store.dispatch(fillMockData());
+  }
+
+  showTemplates(): void {
+    this.router.navigate(['templates'])
   }
 }
