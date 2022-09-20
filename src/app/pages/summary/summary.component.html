@@ -1,12 +1,16 @@
 <div class="container-fluid content-wrapper">
     <div class="row">
-        <div class="col-12 d-flex justify-content-between" id="sectionHeader">
-            <h2>Summary</h2>
-            <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
+        <div class="col-md-8 col-sm-12" id="sectionHeader">
+            <h2 class="mb-0">Summary</h2>
+        </div>
+        <div class="mt-sm-3 col-md-4 col-sm-12 d-flex justify-content-md-end justify-content-sm-between">
+            <button color="primar" mat-raised-button (click)="changeTemplate()">Change Template</button>
+            <button color="primary" class="ml-3" mat-raised-button (click)="downloadResume()"
+                [disabled]="!selectedTemplate.id">Download</button>
         </div>
     </div>
 
-    <div class="row mt-3" *ngIf="selectedTemplate.id">
+    <div class="row mt-3" *ngIf="selectedTemplate.id; else noTemplate">
         <div class="col-12" [class.summary]="isSummary">
             <ng-container [ngSwitch]="selectedTemplate.id">
 
@@ -51,5 +55,14 @@
         <mat-icon>arrow_back</mat-icon>
         Interests
     </button>
-    <button color="primary" mat-raised-button (click)="downloadResume()">Download</button>
+    <button color="primary" mat-raised-button (click)="downloadResume()"
+        [disabled]="!selectedTemplate.id">Download</button>
 </div>
+
+<ng-template #noTemplate>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="display-5 text-muted">Please Select A template!!</div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,30 @@
+.template-container {
+    position: relative;
+    .template-img {
+        height: 15rem;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.8s ease;
+        border: 1px solid black;
+    }
+
+    .template-img:hover {
+        scale: 1.05;
+    }
+
+    .selected-marker {
+        position: absolute;
+        top: 50%;
+        left: 44%;
+        scale: 6;
+        color: green;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and down) */
+@media only screen and (max-width: 576px) {
+    .template-container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}

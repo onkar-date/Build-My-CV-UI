@@ -4,7 +4,7 @@
             <router-outlet></router-outlet>
         </div>
         <div class="col-md-7 resume-preview">
-            <div class="row mt-3" *ngIf="selectedTemplate.id">
+            <div class="row mt-3" *ngIf="selectedTemplate.id; else noTemplate">
                 <div class="col-12">
                     <ng-container [ngSwitch]="selectedTemplate.id">
 
@@ -45,3 +45,14 @@
         </div>
     </div>
 </div>
+
+<ng-template #noTemplate>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h1 class="display-4 d-flex justify-content-center text-muted">
+                No Template Selected!
+            </h1>
+            <button mat-raised-button color="primary" (click)="showTemplates()">Select Template</button>
+        </div>
+    </div>
+</ng-template>

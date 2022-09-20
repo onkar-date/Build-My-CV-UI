@@ -4,7 +4,7 @@
 }
 
 .summary{
-    overflow-x: scroll;
+    // overflow-x: scroll;
     .resume-body{
         width: 24cm;;
     }
@@ -13,4 +13,11 @@
 .display-5 {
     font-size: 2.5rem;
     line-height: 1.7;
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+    .summary{
+        overflow-x: scroll;
+    }
 }

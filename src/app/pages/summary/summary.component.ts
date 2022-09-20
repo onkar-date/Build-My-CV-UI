@@ -1,3 +1,4 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { selectCVState } from './../../state/CV-State/cv.selectors';
 import { CVState } from './../../state/CV-State/cv.reducer';
@@ -11,6 +12,8 @@ import { AppState } from 'src/app/state/app.state';
 import { selectTemplate } from 'src/app/state/CV-State/cv.selectors';
 import { ISection } from 'src/app/shared/interface/section.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ChangeTemplateModalComponent } from 'src/app/library/shared-components/change-template-modal/change-template-modal.component';
+import { finalizeTemplate } from 'src/app/state/CV-State/cv.actions';
 
 @Component({
   selector: 'app-summary',
@@ -28,7 +31,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private resumeService: ResumeService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modal: NgbModal
   ) {
     if (router.url.split('/').pop() === 'summary') {
       this.isSummary = true;
@@ -82,5 +86,19 @@ export class SummaryComponent implements OnInit, OnDestroy {
       this.spinner.hide();
       throw err;
     }
+  }
+
+  changeTemplate(): void {
+    const modalRef = this.modal.open(ChangeTemplateModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static',
+      scrollable: true
+    });
+    modalRef.result.then((template: ITemplate) => {
+      if (template) {
+        this.store.dispatch(finalizeTemplate({ template }));
+      }
+    })
   }
 }
