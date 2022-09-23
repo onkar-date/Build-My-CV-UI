@@ -31,6 +31,7 @@ import {
   editProject,
   editCertificate,
   editInterest,
+  clearCVData,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -85,6 +86,10 @@ export const cvReducer = createReducer(
   on(initiState, (state, { cvState }) => ({
     ...state,
     ...cvState,
+  })),
+
+  on(clearCVData, (state) => ({
+    ...initialState
   })),
 
   on(savePersonalDetails, (state, { personalDetails }) => ({

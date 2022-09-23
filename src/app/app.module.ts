@@ -1,3 +1,4 @@
+import { UserEffect } from './state/user-state/user.effects';
 import { FooterComponent } from './library/shared-components/footer/footer.component';
 import { cvReducer } from './state/CV-State/cv.reducer';
 import { SharedComponentsModule } from './library/shared-components/shared-components.module';
@@ -13,6 +14,8 @@ import { AppErrorHandlerService } from 'src/app-error-handler.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { userReducer } from './state/user-state/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
@@ -35,7 +38,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     StoreModule.forRoot({
       cvState: cvReducer,
+      userState: userReducer,
     }),
+    EffectsModule.forRoot([UserEffect]),
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandlerService }],
   bootstrap: [AppComponent],

@@ -39,7 +39,7 @@ export class TemplatesComponent implements OnInit {
   selectTemplate(template: ITemplate) {
     this.selectedTemplate = template;
     this.store.dispatch(finalizeTemplate({ template: this.selectedTemplate }));
-    this.router.navigate([`./home/personal-details`], {
+    this.router.navigate([`../home/personal-details`], {
       relativeTo: this.activatedRoute,
     });
   }

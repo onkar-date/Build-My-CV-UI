@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { InterestComponent } from './interest/interest.component';
 import { TemplatesComponent } from './templates/templates.component';
@@ -64,12 +65,16 @@ const routes: Routes = [
     component: TemplatesComponent,
   },
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: 'summary',
     component: SummaryComponent,
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'templates',
   },
 ];
 
