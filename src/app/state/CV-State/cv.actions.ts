@@ -14,6 +14,10 @@ export const initiState = createAction(
   props<{ cvState: CVState }>()
 );
 
+export const clearCVData = createAction(
+  '[Clear State] Clear CV State'
+);
+
 export const savePersonalDetails = createAction(
   '[Personsl Details] Save Personal Details',
   props<{ personalDetails: IPersonalDetails }>()

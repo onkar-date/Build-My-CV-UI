@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" role="button" (click)="showTemplates()">Build My CV</a>
-    <button mat-icon-button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav" aria-controls="navbarNav"
-        aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
+    <button mat-icon-button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -12,6 +12,31 @@
             <li class="nav-item">
                 <a class="nav-link active" role="button" (click)="goToSummary()">Summary</a>
             </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <!-- User Data -->
+            <li class="nav-item dropdown " *ngIf="(userLoggedIn$ | async) else showLogin">
+                <a class="nav-link active d-flex align-items-center" role="button" data-toggle="dropdown"
+                    aria-expanded="false">
+                    <mat-icon class="mr-2">account_circle</mat-icon>
+                    {{(userData$ | async)?.firstName}}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" role="button">Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="logout()" role="button">Logout</a>
+                </div>
+            </li>
+
+            <ng-template #showLogin>
+                <!-- Login -->
+                <li class="nav-item">
+                    <a class="nav-link active" role="button" (click)="goToLogin()">
+                        Login
+                    </a>
+                </li>
+            </ng-template>
         </ul>
     </div>
 </nav>
