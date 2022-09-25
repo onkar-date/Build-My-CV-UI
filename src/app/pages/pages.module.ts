@@ -23,6 +23,7 @@ import { T105Component } from './t105/t105.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { T106Component } from './t106/t106.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -43,6 +44,7 @@ import { LoginComponent } from './login/login.component';
     ContactDetailsComponent,
     T106Component,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

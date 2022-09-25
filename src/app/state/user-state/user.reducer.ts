@@ -5,7 +5,7 @@ import {
   loginUserSuccess,
   logoutUser,
   registerUser,
-  registerUserSuccess,
+  registerUserSuccess
 } from './user.actions';
 export interface UserState {
   userData: {
