@@ -9,6 +9,7 @@ export class RatingComponent implements OnInit {
 
   @Input() totalRating = 5;
   @Input() currentRating = 0;
+  @Input() editable = true;
   @Output() ratingChanged = new EventEmitter<number>();
   constructor() { }
 
