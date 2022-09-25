@@ -1,1 +1,212 @@
-<p>profile works!</p>
+<div class="container mb-5">
+    <div class="row mt-4">
+        <div class="col-12 profile-content" *ngIf="userData">
+
+            <!-- Personal Details -->
+            <section>
+                <h2>Personal Details</h2>
+
+                <table class="table table-bordered mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="w-25">First Name</td>
+                            <td>{{userData.personalDetails.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Last Name</td>
+                            <td>{{userData.personalDetails.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Primary Role</td>
+                            <td>{{userData.personalDetails.areaOfExpertise}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">About Me</td>
+                            <td>{{userData.personalDetails.aboutMe}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Contact Details -->
+            <section>
+                <h2>Contact Details</h2>
+
+                <table class="table table-bordered mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="w-25">Mobile</td>
+                            <td>{{userData.contactDetails.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Email</td>
+                            <td>{{userData.contactDetails.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Address</td>
+                            <td>{{userData.contactDetails.address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">LinkedIn</td>
+                            <td>{{userData.contactDetails.linkedIn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Experience -->
+            <section>
+                <h2>Experience</h2>
+
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel *ngFor="let experience of userData.experience">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{experience.companyName}}
+                            </mat-panel-title>
+                            <mat-panel-description class="justify-content-between">
+                                {{experience.designation}}
+                                <button mat-icon-button aria-label="Example icon button with a menu icon">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div>
+                            ({{experience.workedFrom}} {{experience.workedTill}})
+                        </div>
+
+                        <ul class="mt-3">
+                            <li *ngFor="let description of experience.description">
+                                {{description}}
+                            </li>
+                        </ul>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </section>
+
+            <!-- Education -->
+            <section class="mt-3">
+                <h2>Education</h2>
+
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel *ngFor="let education of userData.education">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{education.degree}}
+                            </mat-panel-title>
+                            <mat-panel-description class="justify-content-end">
+                                <button mat-icon-button aria-label="Example icon button with a menu icon">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div>
+                            {{education.university}} ({{education.batch}})
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </section>
+
+            <!-- Skills -->
+            <section>
+                <h2>Skills</h2>
+
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let skill of userData.skills">
+                            <td class="w-25">
+                                {{skill.name}}
+                            </td>
+                            <td>
+                                <app-rating [totalRating]="5" [currentRating]="skill.rating" [editable]="false">
+                                </app-rating>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Projects -->
+            <section class="mt-3">
+                <h2>Projects</h2>
+
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel *ngFor="let project of userData.projects">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{project.title}}
+                            </mat-panel-title>
+                            <mat-panel-description class="justify-content-end">
+                                <button mat-icon-button aria-label="Example icon button with a menu icon">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <ul>
+                            <li>
+                                <a (click)="openProject(project)" class="link cursor-pointer">
+                                    {{project.link}}
+                                </a>
+                            </li>
+                            <li>
+                                {{project.description}}
+                            </li>
+                        </ul>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </section>
+
+            <!-- Certificates -->
+            <section>
+                <h2>Certificates</h2>
+
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Year Of Completion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let certificate of userData.certificates">
+                            <td class="w-50">
+                                {{certificate.title}}
+                            </td>
+                            <td>
+                                {{certificate.yearOfCompletion || '-'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Interests -->
+            <section>
+                <h2>Interests</h2>
+
+                <table class="table table-bordered mb-0">
+                    <tbody>
+                        <tr *ngFor="let interest of userData.interest">
+                            <td>
+                                {{interest}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </div>
+</div>
