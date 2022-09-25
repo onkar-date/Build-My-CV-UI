@@ -35,6 +35,7 @@ export class UserEffect {
       switchMap((action) =>
         from(this.loginService.login(action.loginData)).pipe(
           map((userData) => {
+            this.clientStore.setItem('user', userData);
             this.toast.success('Logged in Succesfully!');
             this.router.navigate(['templates']);
             return loginUserSuccess({ userData });
@@ -54,6 +55,7 @@ export class UserEffect {
         ofType(logoutUser),
         map(() => {
           this.clientStore.removeItem('cvState');
+          this.clientStore.removeItem('user');
           this.store.dispatch(clearCVData());
           this.toast.success('Logged out Succesfully!!');
           this.router.navigate(['login']);
@@ -69,6 +71,7 @@ export class UserEffect {
       switchMap((action) =>
         from(this.loginService.register(action.userData)).pipe(
           map((userData) => {
+            this.clientStore.setItem('user', userData);
             this.toast.success('User registered succesfully!');
             this.router.navigate(['templates']);
             return registerUserSuccess({ userData });

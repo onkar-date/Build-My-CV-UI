@@ -1,3 +1,5 @@
+import { loginUserSuccess } from './state/user-state/user.actions';
+import { IUser } from './shared/interface/user.interface';
 import { ConfirmationPromptComponent } from './library/shared-components/confirmation-prompt/confirmation-prompt.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CVState } from './state/CV-State/cv.reducer';
@@ -17,6 +19,7 @@ import { initiState } from './state/CV-State/cv.actions';
 export class AppComponent implements OnInit {
   stateData!: CVState;
   appLoaded = false;
+  userDataLoaded = false;
   title = 'Build My CV';
   constructor(
     private router: Router,
@@ -26,7 +29,14 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.router.navigate(['templates']);
+    this.checkCachedCVData();
+    this.checkCachedUserData();
+    this.store.select(selectCVState).subscribe((cvState) => {
+      this.clientStore.setItem('cvState', cvState);
+    });
+  }
+
+  checkCachedCVData(): void {
     this.clientStore.getItem('cvState').then(async (stateData: CVState) => {
       if (stateData) {
         if (await this.confirmUnsavedChanges()) {
@@ -40,8 +50,14 @@ export class AppComponent implements OnInit {
       }
       this.appLoaded = true;
     });
-    this.store.select(selectCVState).subscribe((cvState) => {
-      this.clientStore.setItem('cvState', cvState);
+  }
+
+  checkCachedUserData(): void {
+    this.clientStore.getItem('user').then((user: IUser) => {
+      if (user) {
+        this.store.dispatch(loginUserSuccess({ userData: user }))
+      } 
+      this.userDataLoaded = true;
     });
   }
 
