@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   checkCachedUserData(): void {
     this.clientStore.getItem('user').then((user: IUser) => {
       if (user) {
-        this.store.dispatch(loginUserSuccess({ userData: user }))
+        this.store.dispatch(loginUserSuccess({ userData: user }));
       } 
       this.userDataLoaded = true;
     });

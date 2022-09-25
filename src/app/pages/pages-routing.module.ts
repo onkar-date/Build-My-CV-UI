@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { PersonalProjectsComponent } from './personal-projects/personal-projects.component';
 import { SkillsComponent } from './skills/skills.component';
+import { CanActivateGuard } from '../shared/guards/can-activate.guard';
 
 const routes: Routes = [
   {
@@ -76,6 +77,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [CanActivateGuard]
   },
   {
     path: '**',
