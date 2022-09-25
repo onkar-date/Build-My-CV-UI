@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { ToasterService } from './../../shared/services/toaster.service';
@@ -26,25 +27,31 @@ export class UserEffect {
     private toast: ToasterService,
     private router: Router,
     private clientStore: ClientStoreService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private spinner: NgxSpinnerService
   ) {}
 
   loginUser$ = createEffect(() =>
     this.action$.pipe(
       ofType(loginUser),
       switchMap((action) =>
-        from(this.loginService.login(action.loginData)).pipe(
+      {
+        this.spinner.show();
+        return from(this.loginService.login(action.loginData)).pipe(
           map((userData) => {
             this.clientStore.setItem('user', userData);
             this.toast.success('Logged in Succesfully!');
             this.router.navigate(['templates']);
+            this.spinner.hide();
             return loginUserSuccess({ userData });
           }),
           catchError((err) => {
+            this.spinner.hide();
             this.toast.error(err.error?.message || 'Something went wrong');
             return of(loginUserFailed());
           })
         )
+        }
       )
     )
   );
