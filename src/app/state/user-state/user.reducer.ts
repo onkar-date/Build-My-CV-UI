@@ -1,12 +1,16 @@
+import { IProfile } from './../../shared/interface/profile.interface';
 import { createReducer, on } from '@ngrx/store';
 import {
+  updateUserProfile,
   loginUser,
   loginUserFailed,
   loginUserSuccess,
   logoutUser,
   registerUser,
-  registerUserSuccess
+  registerUserSuccess,
+  updateUserProfileSuccess,
 } from './user.actions';
+import { INITIAL_PROFILE_DATA } from 'src/app/shared/constants/profile.constants';
 export interface UserState {
   userData: {
     userId: string;
@@ -15,6 +19,7 @@ export interface UserState {
     lastName: string;
     accessToken: string;
     refreshToken: string;
+    profileData: IProfile;
   };
   loggedIn: boolean;
 }
@@ -27,6 +32,7 @@ const initialState: UserState = {
     lastName: '',
     accessToken: '',
     refreshToken: '',
+    profileData: getInitialProfileData(),
   },
   loggedIn: false,
 };
@@ -66,5 +72,19 @@ export const userReducer = createReducer(
     ...state,
     userData,
     loggedIn: true,
+  })),
+
+  on(updateUserProfile, (state) => ({
+    ...state,
+    profileData: getInitialProfileData(),
+  })),
+
+  on(updateUserProfileSuccess, (state, { updatedProfileData }) => ({
+    ...state,
+    profileData: updatedProfileData,
   }))
 );
+
+function getInitialProfileData(): IProfile {
+  return JSON.parse(JSON.stringify(INITIAL_PROFILE_DATA));
+}

@@ -1,3 +1,4 @@
+import { IProfile } from './../../shared/interface/profile.interface';
 import { IRegisterUser, IUser } from './../../shared/interface/user.interface';
 import { createAction, props } from '@ngrx/store';
 import { ILoginData } from 'src/app/shared/interface/user.interface';
@@ -12,9 +13,7 @@ export const loginUserSuccess = createAction(
   props<{ userData: IUser }>()
 );
 
-export const loginUserFailed = createAction(
-  '[Login] Login User Failed'
-);
+export const loginUserFailed = createAction('[Login] Login User Failed');
 
 export const logoutUser = createAction('[Logout] Logout User');
 
@@ -30,4 +29,14 @@ export const registerUserSuccess = createAction(
 
 export const registerUserFailed = createAction(
   '[Register] Register User Failed'
+);
+
+export const updateUserProfile = createAction(
+  '[Profile] Update User Profile Data',
+  props<{ userId: string, profileData: IProfile }>()
+);
+
+export const updateUserProfileSuccess = createAction(
+  '[Profile] Update User Profile Data Success',
+  props<{ updatedProfileData: IProfile }>()
 );

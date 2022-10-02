@@ -13,3 +13,8 @@ export const selectUserLoggedIn = createSelector(
   selectCVState,
   (state: UserState) => state.loggedIn
 );
+
+export const selectUserProfileData = createSelector(
+  selectCVState,
+  (state: UserState) => state.userData.profileData
+);

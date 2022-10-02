@@ -36,22 +36,13 @@ import {
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
-export interface CVState {
-  personalDetails: IPersonalDetails;
-  contactDetails: {
-    mobile: string;
-    email: string;
-    linkedIn: string;
-    address: string;
-  };
-  skills: ISkill[];
-  experience: IExperience[];
-  education: IEducation[];
-  projects: IProject[];
-  certificates: ICertificate[];
-  interest: string[];
-  template: ITemplate;
+import { IProfile } from 'src/app/shared/interface/profile.interface';
+export interface CVState extends IProfile {
   sections: ISection[];
+  template: {
+    name: string;
+    id: string;
+  };
 }
 
 const initialState: CVState = (false && mockInitialState) || {
@@ -89,7 +80,7 @@ export const cvReducer = createReducer(
   })),
 
   on(clearCVData, (state) => ({
-    ...initialState
+    ...initialState,
   })),
 
   on(savePersonalDetails, (state, { personalDetails }) => ({
