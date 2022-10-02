@@ -5,5 +5,6 @@ export const environment = {
     downloadResume: 'pdf',
     loginUser: 'user/login',
     registerUser: 'user/register',
+    profile: 'profile'
   }
 };

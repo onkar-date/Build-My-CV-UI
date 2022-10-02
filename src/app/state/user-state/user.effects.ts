@@ -1,3 +1,5 @@
+import { IProfile } from 'src/app/shared/interface/profile.interface';
+import { ProfileService } from './../../shared/services/profile.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -11,6 +13,8 @@ import {
   registerUser,
   registerUserFailed,
   registerUserSuccess,
+  updateUserProfile,
+  updateUserProfileSuccess,
 } from './user.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
@@ -24,6 +28,7 @@ export class UserEffect {
   constructor(
     private action$: Actions,
     private loginService: LoginService,
+    private profileService: ProfileService,
     private toast: ToasterService,
     private router: Router,
     private clientStore: ClientStoreService,
@@ -91,4 +96,22 @@ export class UserEffect {
       )
     )
   );
+
+  updateUserProfile$ = createEffect(() =>
+  this.action$.pipe(
+    ofType(updateUserProfile),
+    switchMap((action) =>
+      from(this.profileService.updateProfileData(action.userId, action.profileData)).pipe(
+        map((profileData: IProfile) => {
+          this.toast.success('Profile Updated succesfully!');
+          return updateUserProfileSuccess({ updatedProfileData: profileData });
+        }),
+        catchError((err) => {
+          this.toast.error(err.error?.message || 'Something went wrong');
+          return of();
+        })
+      )
+    )
+  )
+);
 }

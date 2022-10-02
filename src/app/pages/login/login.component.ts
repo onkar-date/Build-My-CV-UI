@@ -3,7 +3,6 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -25,7 +24,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private store: Store<AppState>
   ) {}
 
@@ -36,8 +34,8 @@ export class LoginComponent implements OnInit {
 
   initLoginForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['onkar101197@gmail.com', [Validators.required]],
+      password: ['1Tomisbest!', [Validators.required]],
     });
   }
 
