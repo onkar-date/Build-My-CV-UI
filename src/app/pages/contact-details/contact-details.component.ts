@@ -1,6 +1,6 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { ISection } from './../../shared/interface/section.interface';
-import { ICOntactDetails } from './../../shared/interface/contactDetails.interface';
+import { IContactDetails } from './../../shared/interface/contactDetails.interface';
 import { selectContactDetails } from './../../state/CV-State/cv.selectors';
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
@@ -31,12 +31,12 @@ export class ContactDetailsComponent implements OnInit {
     this.store
       .select(selectContactDetails)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((contactDetails: ICOntactDetails) => {
+      .subscribe((contactDetails: IContactDetails) => {
         this.initForm(contactDetails);
       });
   }
 
-  initForm(contactDetails: ICOntactDetails): void {
+  initForm(contactDetails: IContactDetails): void {
     this.contactDetailsForm = this.fb.group({
       mobile: [contactDetails.mobile, Validators.required],
       email: [contactDetails.email, Validators.required],

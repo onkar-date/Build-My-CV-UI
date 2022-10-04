@@ -1,3 +1,4 @@
+import { Interest } from './../../shared/interface/interest.interface';
 import { editInterest } from './../../state/CV-State/cv.actions';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { AddInterestModalComponent } from './../../library/shared-components/add-interest-modal/add-interest-modal.component';
@@ -31,7 +32,7 @@ export class InterestComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  addEditInterest(index: number, interest?: string, ) {
+  addEditInterest(interest?: Interest, ) {
     const modalRef = this.modal.open(AddInterestModalComponent, {
       size: 'md',
       backdrop: 'static',
@@ -41,10 +42,10 @@ export class InterestComponent implements OnInit {
       modalRef.componentInstance.isEdit = true;
       modalRef.componentInstance.interest = interest;
     }
-    modalRef.result.then((updatedInterestData: string) => {
+    modalRef.result.then((updatedInterestData: Interest) => {
       if (updatedInterestData) {
         if (interest) {
-          this.store.dispatch(editInterest({ updatedInterest: updatedInterestData, index }));
+          this.store.dispatch(editInterest({ updatedInterest: updatedInterestData }));
         } else {
           this.store.dispatch(addInterest({ interest: updatedInterestData }));
         }
@@ -52,7 +53,7 @@ export class InterestComponent implements OnInit {
     });
   }
 
-  deleteInterest(interest: string) {
+  deleteInterest(interest: Interest) {
     this.store.dispatch(removeInterest({ interest }));
   }
 

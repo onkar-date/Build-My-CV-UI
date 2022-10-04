@@ -164,12 +164,12 @@
       </div>
 
       <!-- Hobbies & Interests -->
-      <div class="section mt-3" *ngIf="cvData.interest.length">
+      <div class="section mt-3" *ngIf="cvData.interests.length">
         <div class="section-header">
           <h4 class="m-0 font-weight-bold">Hobbies</h4>
           <hr class="section-divider my-1" />
           <ul>
-            <li *ngFor="let item of cvData.interest">{{item}}</li>
+            <li *ngFor="let item of cvData.interests">{{item.title}}</li>
           </ul>
         </div>
       </div>

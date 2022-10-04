@@ -1,11 +1,10 @@
+import { Interest } from './../../shared/interface/interest.interface';
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { ISection } from './../../shared/interface/section.interface';
 import { mockInitialState } from './../../shared/stub/mockData';
-import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
 import { IExperience } from './../../shared/interface/experience.interface';
 import { ISkill } from './../../shared/interface/skills.interface';
-import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
 import {
   savePersonalDetails,
   saveSkillsDetails,
@@ -63,7 +62,7 @@ const initialState: CVState = (false && mockInitialState) || {
   education: [],
   projects: [],
   certificates: [],
-  interest: [],
+  interests: [],
   template: {
     name: '',
     id: '',
@@ -175,17 +174,17 @@ export const cvReducer = createReducer(
 
   on(addInterest, (state, { interest }) => ({
     ...state,
-    interest: [...state.interest, interest],
+    interests: [...state.interests, interest],
   })),
 
-  on(editInterest, (state, { updatedInterest, index }) => ({
+  on(editInterest, (state, { updatedInterest }) => ({
     ...state,
-    interest: getUpdatedInterests(state.interest, updatedInterest, index),
+    interest: getUpdatedInterests(state.interests, updatedInterest),
   })),
 
   on(removeInterest, (state, { interest }) => ({
     ...state,
-    interest: state.interest.filter((_) => _ !== interest),
+    interest: state.interests.filter((_) => _ !== interest),
   })),
 
   on(finalizeTemplate, (state, { template }) => ({
@@ -262,12 +261,11 @@ function getUpdatedCertificates(
 }
 
 function getUpdatedInterests(
-  interests: string[],
-  updatedInterest: string,
-  index: number
-): string[] {
+  interests: Interest[],
+  updatedInterest: Interest
+): Interest[] {
   return interests.map((interest, idx) => {
-    if (idx === index) {
+    if (interest.id === updatedInterest.id) {
       return updatedInterest;
     } else {
       return interest;

@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h2 class="modal-title">
+        Personal Details
+    </h2>
+    <button mat-icon-button (click)="activeModal.close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="contactDetailsForm">
+        <!-- Mobile No. -->
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Mobile No.</mat-label>
+                <input matInput formControlName="mobile">
+            </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email">
+            </mat-form-field>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>LinkedIn</mat-label>
+                <input matInput formControlName="linkedIn">
+            </mat-form-field>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="outline" class="w-100">
+                <mat-label>Address</mat-label>
+                <textarea matInput formControlName="address" rows="5"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button mat-raised-button color="primary" (click)="savecontactDetails()">Save</button>
+</div>

@@ -1,4 +1,4 @@
-export interface ICOntactDetails {
+export interface IContactDetails {
   mobile: string;
   email: string;
   linkedIn: string;

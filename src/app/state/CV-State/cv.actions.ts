@@ -1,5 +1,6 @@
+import { Interest } from './../../shared/interface/interest.interface';
 import { CVState } from './cv.reducer';
-import { ICOntactDetails } from './../../shared/interface/contactDetails.interface';
+import { IContactDetails } from './../../shared/interface/contactDetails.interface';
 import { ITemplate } from './../../shared/interface/template.interface';
 import { IProject } from './../../shared/interface/project.interface';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -25,7 +26,7 @@ export const savePersonalDetails = createAction(
 
 export const saveContactDetails = createAction(
   '[Contact Details] Save Contact Details',
-  props<{ contactDetails: ICOntactDetails }>()
+  props<{ contactDetails: IContactDetails }>()
 );
 
 export const addSkill = createAction(
@@ -110,17 +111,17 @@ export const removeCertificate = createAction(
 
 export const addInterest = createAction(
   '[Interests] Add Interest',
-  props<{ interest: string }>()
+  props<{ interest: Interest }>()
 );
 
 export const editInterest = createAction(
   '[Interests] Edit Interest',
-  props<{ updatedInterest: string, index: number }>()
+  props<{ updatedInterest: Interest }>()
 );
 
 export const removeInterest = createAction(
   '[Interests] Remove Interest',
-  props<{ interest: string }>()
+  props<{ interest: Interest }>()
 );
 
 export const finalizeTemplate = createAction(

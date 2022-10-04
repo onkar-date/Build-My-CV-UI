@@ -1,6 +1,6 @@
 import { SECTIONS } from 'src/app/shared/constants/section.constants';
 import { CVState } from './../../state/CV-State/cv.reducer';
-import { ICOntactDetails } from './../interface/contactDetails.interface';
+import { IContactDetails } from './../interface/contactDetails.interface';
 import { ITemplate } from './../interface/template.interface';
 import { ICertificate } from './../interface/certificate.interface';
 import { IProject } from './../interface/project.interface';
@@ -117,7 +117,7 @@ export const mockTemplate: ITemplate = {
   name: 'Template 1',
 };
 
-export const mockContactDetails: ICOntactDetails = {
+export const mockContactDetails: IContactDetails = {
   mobile: '1234567890',
   email: 'jon.snow@nightsWatch.com',
   linkedIn: 'https://www.linkedin.com/in/jon-snow-a12345/',
@@ -142,7 +142,20 @@ export const mockInitialState: CVState = {
   education: [...mockEducation],
   projects: [...mockProjects],
   certificates: [...mockCertificates],
-  interest: ['Riding Dragon', 'Bending Knee', 'Knowing Nothing'],
+  interests: [
+    {
+      id: 'test1',
+      title: 'Riding Dragon'
+    },
+    {
+      id: 'test2',
+      title: 'Bending Knee'
+    },
+    {
+      id: 'test3',
+      title: 'Knowing Nothing'
+    }
+  ],
   template: {
     name: mockTemplate.name,
     id: mockTemplate.id,

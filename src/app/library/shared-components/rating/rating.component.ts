@@ -1,23 +1,25 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-
+import * as uuid from 'uuid';
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss']
+  styleUrls: ['./rating.component.scss'],
 })
 export class RatingComponent implements OnInit {
-
   @Input() totalRating = 5;
   @Input() currentRating = 0;
   @Input() editable = true;
   @Output() ratingChanged = new EventEmitter<number>();
-  constructor() { }
+  id: string = uuid.v4().split('-')[0];
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onMouseOver(index: number): void {
-    const icons = document.getElementsByClassName('rating');
+    if (!this.editable) {
+      return;
+    }
+    const icons = document.getElementsByClassName(`rating-${this.id}`);
     for (let i = 0; i < icons.length; i++) {
       if (i <= index) {
         icons[i].classList.remove('fa-star-o');
@@ -30,7 +32,10 @@ export class RatingComponent implements OnInit {
   }
 
   onMouseLeave(): void {
-    const icons = document.getElementsByClassName('rating');
+    if (!this.editable) {
+      return;
+    }
+    const icons = document.getElementsByClassName(`rating-${this.id}`);
     for (let i = 0; i < icons.length; i++) {
       if (i <= this.currentRating) {
         icons[i].classList.remove('fa-star-o');
@@ -46,5 +51,4 @@ export class RatingComponent implements OnInit {
     this.currentRating = index;
     this.ratingChanged.emit(this.currentRating + 1);
   }
-
 }
