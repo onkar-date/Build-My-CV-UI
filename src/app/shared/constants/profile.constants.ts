@@ -17,5 +17,5 @@ export const INITIAL_PROFILE_DATA: IProfile = {
   education: [],
   projects: [],
   certificates: [],
-  interest: [],
+  interests: [],
 };

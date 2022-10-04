@@ -1,4 +1,4 @@
-<i class="fa fa-2x rating ml-2" [ngClass]="i <= currentRating-1 ? 'fa-star' : 'fa-star-o'"
+<i class="fa fa-2x rating-{{id}} rating ml-2" [ngClass]="i <= currentRating-1 ? 'fa-star' : 'fa-star-o'"
     (mouseover)="editable && onMouseOver(i)" (mouseleave)="editable && onMouseLeave()" aria-hidden="true"
     (click)="editable && setRating(i)" *ngFor="let star of [].constructor(totalRating); let i = index">
 </i>

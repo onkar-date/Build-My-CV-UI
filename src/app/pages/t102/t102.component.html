@@ -57,14 +57,14 @@
     </div>
 
     <!-- Interests -->
-    <div class="section" *ngIf="cvData.interest.length">
+    <div class="section" *ngIf="cvData.interests.length">
       <div class="section-header">
         <h3 class="section-title">Interests</h3>
       </div>
       <div class="section-content">
-        <ng-container *ngFor="let interest of cvData.interest">
+        <ng-container *ngFor="let interest of cvData.interests">
           <p class="info">
-            {{interest}}
+            {{interest.title}}
           </p>
         </ng-container>
       </div>

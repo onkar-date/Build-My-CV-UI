@@ -1,14 +1,32 @@
 import { IProfile } from './../../shared/interface/profile.interface';
 import { createReducer, on } from '@ngrx/store';
 import {
-  updateUserProfile,
   loginUser,
   loginUserFailed,
   loginUserSuccess,
   logoutUser,
   registerUser,
   registerUserSuccess,
-  updateUserProfileSuccess,
+  updatePersonalDetailsSuccess,
+  updateContactDetailsSuccess,
+  updateExperienceSuccess,
+  addExperienceSuccess,
+  deleteExperienceSuccess,
+  addEducationSuccess,
+  deleteEducationSuccess,
+  updateEducationSuccess,
+  addSkillSuccess,
+  deleteSkillSuccess,
+  updateSkillSuccess,
+  addProjectSuccess,
+  deleteProjectSuccess,
+  updateProjectSuccess,
+  updateCertificateSuccess,
+  addCertificateSuccess,
+  deleteCertificateSuccess,
+  addInterestSuccess,
+  deleteInterestSuccess,
+  updateInterestSuccess,
 } from './user.actions';
 import { INITIAL_PROFILE_DATA } from 'src/app/shared/constants/profile.constants';
 export interface UserState {
@@ -74,15 +92,211 @@ export const userReducer = createReducer(
     loggedIn: true,
   })),
 
-  on(updateUserProfile, (state) => ({
-    ...state,
-    profileData: getInitialProfileData(),
-  })),
+  on(updatePersonalDetailsSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
 
-  on(updateUserProfileSuccess, (state, { updatedProfileData }) => ({
-    ...state,
-    profileData: updatedProfileData,
-  }))
+  on(updateContactDetailsSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Experience
+  on(addExperienceSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateExperienceSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteExperienceSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Education
+  on(addEducationSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateEducationSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteEducationSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Skill
+  on(addSkillSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateSkillSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteSkillSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Project
+  on(addProjectSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateProjectSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteProjectSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Certificate
+  on(addCertificateSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateCertificateSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteCertificateSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  // Interests
+  on(addInterestSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(updateInterestSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  }),
+
+  on(deleteInterestSuccess, (state, { profileData }) => {
+    return {
+      ...state,
+      userData: {
+        ...state.userData,
+        profileData,
+      },
+    };
+  })
 );
 
 function getInitialProfileData(): IProfile {

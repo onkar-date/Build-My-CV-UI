@@ -6,3 +6,7 @@
         margin-bottom: 3rem;
     }
 }
+
+.dropdown-toggle::after {
+    display: none !important;
+}

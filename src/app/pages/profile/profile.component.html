@@ -4,10 +4,14 @@
 
             <!-- Personal Details -->
             <section>
-                <h2>Personal Details</h2>
+                <div class="d-flex justify-content-between">
+                    <h2>Personal Details</h2>
+                    <button mat-icon-button (click)="editPersonalDetails(profileData.personalDetails)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
 
-                <table class="table table-bordered mb-0"
-                    *ngIf="profileData.personalDetails as personalDetails">
+                <table class="table table-bordered mb-0" *ngIf="profileData.personalDetails as personalDetails">
                     <tbody>
                         <tr>
                             <td class="w-25">First Name</td>
@@ -31,10 +35,14 @@
 
             <!-- Contact Details -->
             <section>
-                <h2>Contact Details</h2>
+                <div class="d-flex justify-content-between">
+                    <h2>Contact Details</h2>
+                    <button mat-icon-button (click)="editContactDetails(profileData.contactDetails)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
 
-                <table class="table table-bordered mb-0"
-                    *ngIf="profileData.contactDetails as contactDetails">
+                <table class="table table-bordered mb-0" *ngIf="profileData.contactDetails as contactDetails">
                     <tbody>
                         <tr>
                             <td class="w-25">Mobile</td>
@@ -58,21 +66,57 @@
 
             <!-- Experience -->
             <section>
-                <h2>Experience</h2>
+                <div class="d-flex justify-content-between">
+                    <h2>Experience</h2>
+                    <button mat-icon-button color="primary" (click)="addEditExperience(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
 
-                <ng-container *ngIf="profileData.experience.length">
+                <ng-container *ngIf="profileData.experience.length; else noData">
                     <mat-accordion class="example-headers-align" multi>
-                        <mat-expansion-panel *ngFor="let exp of profileData.experience">
+                        <mat-expansion-panel *ngFor="let exp of profileData.experience; let i = index">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     {{exp.companyName}}
                                 </mat-panel-title>
-                                <mat-panel-description class="justify-content-between">
-                                    {{exp.designation}}
-                                    <button mat-icon-button aria-label="Example icon button with a menu icon">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
+
+                                <!-- For large Screen -->
+                                <mat-panel-description class="justify-content-between d-none d-md-flex">
+                                    <span>
+                                        {{exp.designation}}
+                                    </span>
+                                    <div>
+                                        <button mat-icon-button aria-label="delete experience" color="warn"
+                                            (click)="deleteExperience(exp, $event)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="edit experience"
+                                            (click)="addEditExperience(exp, $event, true)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
                                 </mat-panel-description>
+
+                                <!-- For Small Screens -->
+                                <mat-panel-description class="justify-content-between d-md-none">
+                                    <div></div>
+                                    <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                        <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                            (click)="$event.stopPropagation(); myDrop.open();">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button ngbDropdownItem (click)="deleteExperience(exp, $event)">
+                                                Delete
+                                            </button>
+                                            <button ngbDropdownItem (click)="addEditExperience(exp, $event, true)">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </mat-panel-description>
+
                             </mat-expansion-panel-header>
 
                             <div>
@@ -92,19 +136,52 @@
 
             <!-- Education -->
             <section class="mt-3">
-                <h2>Education</h2>
 
-                <ng-container *ngIf="profileData.education.length">
+                <div class="d-flex justify-content-between">
+                    <h2>Education</h2>
+                    <button mat-icon-button color="primary" (click)="addEditEducation(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <ng-container *ngIf="profileData.education.length; else noData">
                     <mat-accordion class="example-headers-align" multi>
-                        <mat-expansion-panel *ngFor="let edu of profileData.education">
+                        <mat-expansion-panel *ngFor="let edu of profileData.education; let i = index">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     {{edu.degree}}
                                 </mat-panel-title>
-                                <mat-panel-description class="justify-content-end">
-                                    <button mat-icon-button aria-label="Example icon button with a menu icon">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
+
+                                <!-- For Large Screen -->
+                                <mat-panel-description class="justify-content-end d-none d-md-flex">
+                                    <div>
+                                        <button mat-icon-button aria-label="delete education" color="warn"
+                                            (click)="deleteEducation(edu, $event)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="edit education"
+                                            (click)="addEditEducation(edu, $event, true)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-panel-description>
+
+                                <!-- For Small Screens -->
+                                <mat-panel-description class="justify-content-between d-md-none">
+                                    <div></div>
+                                    <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                        <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                            (click)="$event.stopPropagation(); myDrop.open();">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button ngbDropdownItem (click)="deleteEducation(edu, $event)">
+                                                Delete
+                                            </button>
+                                            <button ngbDropdownItem (click)="addEditEducation(edu, $event, true)">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
@@ -120,13 +197,18 @@
 
             <!-- Skills -->
             <section>
-                <h2>Skills</h2>
-
-                <table class="table table-bordered mb-0" *ngIf="profileData.skills.length">
+                <div class="d-flex justify-content-between">
+                    <h2>Skills</h2>
+                    <button mat-icon-button color="primary" (click)="addEditSkill(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <table class="table table-bordered mb-0" *ngIf="profileData.skills.length; else noData">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Rating</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,6 +220,16 @@
                                 <app-rating [totalRating]="5" [currentRating]="skill.rating" [editable]="false">
                                 </app-rating>
                             </td>
+                            <td class="d-flex justify-content-center">
+                                <button mat-icon-button aria-label="delete Skill" color="warn"
+                                    (click)="deleteSkill(skill, $event)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="edit Skill"
+                                    (click)="addEditSkill(skill, $event, true)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -145,18 +237,50 @@
 
             <!-- Projects -->
             <section class="mt-3">
-                <h2>Projects</h2>
-
-                <mat-accordion class="example-headers-align" multi *ngIf="profileData.projects.length">
-                    <mat-expansion-panel *ngFor="let project of profileData.projects">
+                <div class="d-flex justify-content-between">
+                    <h2>Projects</h2>
+                    <button mat-icon-button color="primary" (click)="addEditProject(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <mat-accordion class="example-headers-align" multi *ngIf="profileData.projects.length; else noData">
+                    <mat-expansion-panel *ngFor="let project of profileData.projects; let i = index">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 {{project.title}}
                             </mat-panel-title>
-                            <mat-panel-description class="justify-content-end">
-                                <button mat-icon-button aria-label="Example icon button with a menu icon">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
+
+                            <!-- For Large Screens -->
+                            <mat-panel-description class="justify-content-end d-none d-md-flex">
+                                <div>
+                                    <button mat-icon-button aria-label="delete Project" color="warn"
+                                        (click)="deleteProject(project, $event)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="edit Project"
+                                        (click)="addEditProject(project, $event, true)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-panel-description>
+
+                            <!-- For Small Screens -->
+                            <mat-panel-description class="justify-content-between d-md-none">
+                                <div></div>
+                                <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                    <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                        (click)="$event.stopPropagation(); myDrop.open();">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <button ngbDropdownItem (click)="deleteProject(project, $event)">
+                                            Delete
+                                        </button>
+                                        <button ngbDropdownItem (click)="addEditProject(project, $event, true)">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
@@ -177,13 +301,18 @@
 
             <!-- Certificates -->
             <section>
-                <h2>Certificates</h2>
-
-                <table class="table table-bordered mb-0" *ngIf="profileData.certificates.length">
+                <div class="d-flex justify-content-between">
+                    <h2>Certificates</h2>
+                    <button mat-icon-button color="primary" (click)="addEditCertificate(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <table class="table table-bordered mb-0" *ngIf="profileData.certificates.length; else noData">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Year Of Completion</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,6 +323,16 @@
                             <td>
                                 {{certificate.yearOfCompletion || '-'}}
                             </td>
+                            <td class="text-center">
+                                <button mat-icon-button aria-label="delete Certificate" color="warn"
+                                    (click)="deleteCertificate(certificate, $event)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="edit Certificate"
+                                    (click)="addEditCertificate(certificate, $event, true)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -201,19 +340,38 @@
 
             <!-- Interests -->
             <section>
-                <h2>Interests</h2>
-
-                <table class="table table-bordered mb-0"  *ngIf="profileData.interest.length">
-                    <tbody>
-                        <tr *ngFor="let interest of profileData.interest">
-                            <td>
-                                {{interest}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="d-flex justify-content-between">
+                    <h2>Interests</h2>
+                    <button mat-icon-button color="primary" (click)="addEditInterest(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <ng-container *ngIf="profileData.interests.length; else noData">
+                    <mat-card *ngFor="let interest of profileData.interests"
+                        class="mb-2 d-flex justify-content-between align-items-center">
+                        <span>
+                            {{interest.title}}
+                        </span>
+                        <div>
+                            <button mat-icon-button aria-label="delete interest" color="warn"
+                                (click)="deleteInterest(interest, $event)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button mat-icon-button aria-label="edit interest"
+                                (click)="addEditInterest(interest, $event, true)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </ng-container>
             </section>
 
         </div>
     </div>
 </div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Data Found !!
+    </h1>
+</ng-template>

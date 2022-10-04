@@ -134,14 +134,14 @@
     </section>
 
     <!-- Interest & Hobbies -->
-    <section *ngIf="cvData.interest.length">
+    <section *ngIf="cvData.interests.length">
       <div class="section-title">
         <h1>Interest And Hobbies</h1>
       </div>
       <div class="section-info">
         <ul>
-          <li *ngFor="let item of cvData.interest">
-            {{item}}
+          <li *ngFor="let item of cvData.interests">
+            {{item.title}}
           </li>
         </ul>
       </div>

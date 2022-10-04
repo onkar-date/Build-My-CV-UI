@@ -46,5 +46,5 @@ export const selectTemplate = createSelector(
 
 export const selectInterests = createSelector(
   selectCVState,
-  (state: CVState) => state.interest
+  (state: CVState) => state.interests
 );

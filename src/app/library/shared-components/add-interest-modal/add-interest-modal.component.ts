@@ -1,3 +1,4 @@
+import { Interest } from './../../../shared/interface/interest.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,21 +9,24 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-interest-modal.component.scss'],
 })
 export class AddInterestModalComponent implements OnInit {
-  @Input() interest: string = '';
+  @Input() interest: Interest = {
+    id: '',
+    title: '',
+  };
   @Input() isEdit = false;
   interestForm!: FormGroup;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.interestForm = this.fb.group({
-      name: [this.interest, Validators.required],
+      id: [this.interest.id],
+      title: [this.interest.title, Validators.required],
     });
   }
 
   addInterest(): void {
     if (this.interestForm.valid) {
-      const result: string = this.interestForm.value.name;
-      this.activeModal.close(result);
+      this.activeModal.close(this.interestForm.value);
     }
   }
 }
