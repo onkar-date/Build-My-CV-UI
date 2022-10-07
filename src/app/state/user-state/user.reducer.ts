@@ -27,6 +27,8 @@ import {
   addInterestSuccess,
   deleteInterestSuccess,
   updateInterestSuccess,
+  fetchProfileData,
+  fetchProfileDataSuccess,
 } from './user.actions';
 import { INITIAL_PROFILE_DATA } from 'src/app/shared/constants/profile.constants';
 export interface UserState {
@@ -90,6 +92,22 @@ export const userReducer = createReducer(
     ...state,
     userData,
     loggedIn: true,
+  })),
+
+  on(fetchProfileData, (state, { userId }) => ({
+    ...state,
+    userData: {
+      ...state.userData,
+      profileData: getInitialProfileData()
+    }
+  })),
+
+  on(fetchProfileDataSuccess, (state, { profileData }) => ({
+    ...state,
+    userData: {
+      ...state.userData,
+      profileData
+    }
   })),
 
   on(updatePersonalDetailsSuccess, (state, { profileData }) => {

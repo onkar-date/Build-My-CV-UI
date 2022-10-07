@@ -1,4 +1,4 @@
-import { loginUserSuccess } from './state/user-state/user.actions';
+import { fetchProfileData, loginUserSuccess } from './state/user-state/user.actions';
 import { IUser } from './shared/interface/user.interface';
 import { ConfirmationPromptComponent } from './library/shared-components/confirmation-prompt/confirmation-prompt.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
     this.clientStore.getItem('user').then((user: IUser) => {
       if (user) {
         this.store.dispatch(loginUserSuccess({ userData: user }));
+        this.store.dispatch(fetchProfileData({ userId: user.userId }));
       } 
       this.userDataLoaded = true;
     });

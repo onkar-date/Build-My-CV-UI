@@ -31,6 +31,7 @@ import {
   editCertificate,
   editInterest,
   clearCVData,
+  initCVStateFromProfileData,
 } from './cv.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IEducation } from 'src/app/shared/interface/education.interface';
@@ -77,6 +78,13 @@ export const cvReducer = createReducer(
     ...state,
     ...cvState,
   })),
+
+  on(initCVStateFromProfileData, (state, { profileData }) => {
+    return {
+      ...state,
+      ...profileData
+    }
+  }),
 
   on(clearCVData, (state) => ({
     ...initialState,
@@ -179,12 +187,12 @@ export const cvReducer = createReducer(
 
   on(editInterest, (state, { updatedInterest }) => ({
     ...state,
-    interest: getUpdatedInterests(state.interests, updatedInterest),
+    interests: getUpdatedInterests(state.interests, updatedInterest),
   })),
 
   on(removeInterest, (state, { interest }) => ({
     ...state,
-    interest: state.interests.filter((_) => _ !== interest),
+    interests: state.interests.filter((_) => _ !== interest),
   })),
 
   on(finalizeTemplate, (state, { template }) => ({

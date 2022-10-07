@@ -31,6 +31,8 @@ import {
   deleteProjectSuccess,
   deleteSkill,
   deleteSkillSuccess,
+  fetchProfileData,
+  fetchProfileDataSuccess,
   loginUser,
   loginUserFailed,
   loginUserSuccess,
@@ -60,7 +62,7 @@ import { Injectable } from '@angular/core';
 import { catchError, from, map, of, switchMap } from 'rxjs';
 import { ClientStoreService } from 'src/app/shared/services/client-store.service';
 import { AppState } from '../app.state';
-import { clearCVData } from '../CV-State/cv.actions';
+import { clearCVData, initCVStateFromProfileData } from '../CV-State/cv.actions';
 
 @Injectable()
 export class UserEffect {
@@ -81,7 +83,8 @@ export class UserEffect {
       switchMap((action) => {
         this.spinner.show();
         return from(this.loginService.login(action.loginData)).pipe(
-          map((userData) => {
+          map((userData: IUser) => {
+            this.store.dispatch(initCVStateFromProfileData({ profileData: userData.profileData }));
             this.clientStore.setItem('user', userData);
             this.toast.success('Logged in Succesfully!');
             this.router.navigate(['templates']);
@@ -119,7 +122,8 @@ export class UserEffect {
       ofType(registerUser),
       switchMap((action) =>
         from(this.loginService.register(action.userData)).pipe(
-          map((userData) => {
+          map((userData: IUser) => {
+            this.store.dispatch(initCVStateFromProfileData({ profileData: userData.profileData }));
             this.clientStore.setItem('user', userData);
             this.toast.success('User registered succesfully!');
             this.router.navigate(['templates']);
@@ -131,6 +135,20 @@ export class UserEffect {
           })
         )
       )
+    )
+  );
+
+  fetchProfileData$ = createEffect(() => 
+    this.action$.pipe(
+      ofType(fetchProfileData),
+      switchMap((action) =>
+        from(this.profileService.fetchProfileData(action.userId)).pipe(
+          map((profileData: IProfile) => {
+            this.store.dispatch(initCVStateFromProfileData({ profileData }));
+            return fetchProfileDataSuccess({ profileData })
+        })
+      )
+      )  
     )
   );
 

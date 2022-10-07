@@ -1,3 +1,4 @@
+import { IProfile } from './../../shared/interface/profile.interface';
 import { Interest } from './../../shared/interface/interest.interface';
 import { CVState } from './cv.reducer';
 import { IContactDetails } from './../../shared/interface/contactDetails.interface';
@@ -13,6 +14,11 @@ import { ICertificate } from 'src/app/shared/interface/certificate.interface';
 export const initiState = createAction(
   '[Init State] Initialize App CV State',
   props<{ cvState: CVState }>()
+);
+
+export const initCVStateFromProfileData = createAction(
+  '[Init State] Initialize App CV State',
+  props<{ profileData: IProfile }>()
 );
 
 export const clearCVData = createAction(
