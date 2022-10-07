@@ -39,6 +39,16 @@ export const registerUserFailed = createAction(
   '[Register] Register User Failed'
 );
 
+export const fetchProfileData = createAction(
+  '[Profile] Fetch Profile Data',
+  props<{ userId: string }>()
+);
+
+export const fetchProfileDataSuccess = createAction(
+  '[Profile] Fetch Profile Data Success',
+  props<{ profileData: IProfile }>()
+);
+
 export const updatePersonalDetails = createAction(
   '[Profile] Update Personal Details',
   props<{ userId: string, personalDetails: IPersonalDetails }>()

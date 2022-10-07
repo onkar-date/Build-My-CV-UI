@@ -20,6 +20,15 @@ import { Interest } from '../interface/interest.interface';
 export class ProfileService {
   constructor(private apiService: WrapperService) {}
 
+  async fetchProfileData(userID: string): Promise<IProfile> {
+    const url = UrlHelper.createUrl([
+      environment.baseUrl,
+      environment.apiUrls.profile,
+    ]);
+    const params = new HttpParams().set('userId', userID);
+    return await this.apiService.Api(API_METHOD.GET, url, params);
+  }
+
   async savePersonalDetails(
     userId: string,
     personalDetails: IPersonalDetails
@@ -190,7 +199,10 @@ export class ProfileService {
   }
 
   // Certificate
-  async addCertificate(userId: string, certificate: ICertificate): Promise<IProfile> {
+  async addCertificate(
+    userId: string,
+    certificate: ICertificate
+  ): Promise<IProfile> {
     const url = UrlHelper.createUrl([
       environment.baseUrl,
       environment.apiUrls.certificates,
@@ -199,7 +211,10 @@ export class ProfileService {
     return await this.apiService.Api(API_METHOD.POST, url, params, certificate);
   }
 
-  async updateCertificate(userId: string, certificate: ICertificate): Promise<IProfile> {
+  async updateCertificate(
+    userId: string,
+    certificate: ICertificate
+  ): Promise<IProfile> {
     const url = UrlHelper.createUrl([
       environment.baseUrl,
       environment.apiUrls.certificates,
@@ -208,7 +223,10 @@ export class ProfileService {
     return await this.apiService.Api(API_METHOD.PUT, url, params, certificate);
   }
 
-  async deleteCertificate(userId: string, certificateId: string): Promise<IProfile> {
+  async deleteCertificate(
+    userId: string,
+    certificateId: string
+  ): Promise<IProfile> {
     const url = UrlHelper.createUrl([
       environment.baseUrl,
       environment.apiUrls.certificates,
