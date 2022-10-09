@@ -1,0 +1,75 @@
+<div class="container-fluid mb-5">
+    <div class="row mt-4">
+        <div class="col-12" *ngIf="(profileData$ | async) as profileData">
+
+            <!-- Personal Details -->
+            <section>
+                <div class="d-flex justify-content-between">
+                    <h2>Personal Details</h2>
+                    <button mat-icon-button (click)="editPersonalDetails(profileData.personalDetails)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+
+                <table class="table table-bordered mb-0" *ngIf="profileData.personalDetails as personalDetails">
+                    <tbody>
+                        <tr>
+                            <td class="w-25">First Name</td>
+                            <td>{{personalDetails.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Last Name</td>
+                            <td>{{personalDetails.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Primary Role</td>
+                            <td>{{personalDetails.areaOfExpertise}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">About Me</td>
+                            <td>{{personalDetails.aboutMe}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Contact Details -->
+            <section class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <h2>Contact Details</h2>
+                    <button mat-icon-button (click)="editContactDetails(profileData.contactDetails)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+
+                <table class="table table-bordered mb-0" *ngIf="profileData.contactDetails as contactDetails">
+                    <tbody>
+                        <tr>
+                            <td class="w-25">Mobile</td>
+                            <td>{{contactDetails.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Email</td>
+                            <td>{{contactDetails.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Address</td>
+                            <td>{{contactDetails.address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">LinkedIn</td>
+                            <td>{{contactDetails.linkedIn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Data Found !!
+    </h1>
+</ng-template>

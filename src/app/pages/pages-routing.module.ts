@@ -1,4 +1,4 @@
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './../profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { InterestComponent } from './interest/interest.component';
@@ -73,16 +73,7 @@ const routes: Routes = [
   {
     path: 'summary',
     component: SummaryComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [CanActivateGuard]
-  },
-  {
-    path: '**',
-    redirectTo: 'templates',
-  },
+  }
 ];
 
 @NgModule({

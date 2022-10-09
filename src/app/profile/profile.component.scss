@@ -1,0 +1,42 @@
+mat-sidenav-container {
+    height: 100%;
+}
+
+mat-sidenav {
+    width: 15%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    mat-sidenav {
+        width: 75%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    mat-sidenav {
+        width: 35%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    mat-sidenav {
+        width: 25%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    mat-sidenav {
+        width: 20%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    mat-sidenav {
+        width: 20%;
+    }
+}

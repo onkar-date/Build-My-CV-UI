@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Interests -->
+            <section class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <h2>Interests</h2>
+                    <button mat-icon-button color="primary" (click)="addEditInterest(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <ng-container *ngIf="(interests$ | async)?.length; else noData">
+                    <mat-card *ngFor="let interest of (interests$ | async)"
+                        class="mb-2 d-flex justify-content-between align-items-center">
+                        <span>
+                            {{interest.title}}
+                        </span>
+                        <div>
+                            <button mat-icon-button aria-label="delete interest" color="warn"
+                                (click)="deleteInterest(interest, $event)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button mat-icon-button aria-label="edit interest"
+                                (click)="addEditInterest(interest, $event, true)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </ng-container>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Interest Data Found !!
+    </h1>
+</ng-template>
