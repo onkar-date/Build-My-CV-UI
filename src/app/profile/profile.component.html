@@ -1,0 +1,30 @@
+<mat-sidenav-container class="example-container" (backdropClick)="this.sidenav.close();">
+    <mat-sidenav #sidenav class="profile-sidenav" disableClose [opened]="(isHandset$ | async) === false"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'">
+
+        <div class="justify-content-end p-2 d-flex d-md-none d-sm-flex d-xs-flex">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <!-- Links -->
+        <div class="p-3 d-flex flex-column">
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('personal-details', sidenav)">Personal
+                Details</button>
+            <button mat-raised-button color="primary" class="mb-2"
+                (click)="goToScreen('experience', sidenav)">Experience</button>
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('skills', sidenav)">Skills</button>
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('education', sidenav)">Education</button>
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('projects', sidenav)">Projects</button>
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('certificates', sidenav)">Certificates</button>
+            <button mat-raised-button color="primary" class="mb-2" (click)="goToScreen('interests', sidenav)">Interests</button>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <button mat-icon-button (click)="sidenav.toggle()" class="d-md-none d-sm-flex">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

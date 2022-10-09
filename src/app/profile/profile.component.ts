@@ -1,22 +1,15 @@
-import { AddEducationModalComponent } from './../../library/shared-components/add-education-modal/add-education-modal.component';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IEducation } from 'src/app/shared/interface/education.interface';
-import { ConfirmationPromptComponent } from './../../library/shared-components/confirmation-prompt/confirmation-prompt.component';
-import { AddExperienceModalComponent } from './../../library/shared-components/add-experience-modal/add-experience-modal.component';
-import { IExperience } from './../../shared/interface/experience.interface';
-import { UpdateContactDetailsModalComponent } from './../../library/shared-components/update-contact-details-modal/update-contact-details-modal.component';
-import { IContactDetails } from './../../shared/interface/contactDetails.interface';
-import { selectUserData } from './../../state/user-state/user.selectors';
-import { IUser } from './../../shared/interface/user.interface';
-import { IPersonalDetails } from './../../shared/interface/personalDetails.interface';
-import { UpdatePersonalDetailsModalComponent } from './../../library/shared-components/update-personal-details-modal/update-personal-details-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IProfile } from 'src/app/shared/interface/profile.interface';
-import { Observable } from 'rxjs';
-import { IProject } from './../../shared/interface/project.interface';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppState } from 'src/app/state/app.state';
-import { selectUserProfileData } from 'src/app/state/user-state/user.selectors';
+import {
+  selectUserData,
+  selectUserProfileData,
+} from 'src/app/state/user-state/user.selectors';
 import {
   addCertificate,
   addEducation,
@@ -44,24 +37,64 @@ import { AddCertificateModalComponent } from 'src/app/library/shared-components/
 import { ICertificate } from 'src/app/shared/interface/certificate.interface';
 import { AddSkillModalComponent } from 'src/app/library/shared-components/add-skill-modal/add-skill-modal.component';
 import { ISkill } from 'src/app/shared/interface/skills.interface';
-import * as $ from 'jquery';
 import { AddInterestModalComponent } from 'src/app/library/shared-components/add-interest-modal/add-interest-modal.component';
 import { Interest } from 'src/app/shared/interface/interest.interface';
+import { AddEducationModalComponent } from '../library/shared-components/add-education-modal/add-education-modal.component';
+import { AddExperienceModalComponent } from '../library/shared-components/add-experience-modal/add-experience-modal.component';
+import { ConfirmationPromptComponent } from '../library/shared-components/confirmation-prompt/confirmation-prompt.component';
+import { UpdateContactDetailsModalComponent } from '../library/shared-components/update-contact-details-modal/update-contact-details-modal.component';
+import { UpdatePersonalDetailsModalComponent } from '../library/shared-components/update-personal-details-modal/update-personal-details-modal.component';
+import { IContactDetails } from '../shared/interface/contactDetails.interface';
+import { IExperience } from '../shared/interface/experience.interface';
+import { IPersonalDetails } from '../shared/interface/personalDetails.interface';
+import { IProject } from '../shared/interface/project.interface';
+import { IUser } from '../shared/interface/user.interface';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
   userData!: IUser;
+  showFiller = false;
   profileData$: Observable<IProfile> = this.store.select(selectUserProfileData);
-  constructor(private store: Store<AppState>, private modalService: NgbModal) {
+  constructor(
+    private store: Store<AppState>,
+    private modalService: NgbModal,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
+  ) {
     this.store.select(selectUserData).subscribe((userData) => {
       this.userData = userData;
     });
   }
 
   ngOnInit(): void {}
+
+  toggle(nav: MatSidenav) {
+    const isSmallScreen =
+      this.breakpointObserver.isMatched('(max-width: 599px)');
+    if (isSmallScreen) {
+      nav.toggle();
+    }
+  }
+
+  goToScreen(section: string, nav: MatSidenav): void {
+    this.router.navigate([`./${section}`], {
+      relativeTo: this.activatedRoute,
+    });
+    this.toggle(nav);
+  }
 
   openProject(project: IProject): void {
     window.open(project.link, '_blank');
@@ -392,10 +425,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  async deleteInterest(
-    interest: Interest,
-    event: Event
-  ): Promise<void> {
+  async deleteInterest(interest: Interest, event: Event): Promise<void> {
     event.stopPropagation();
     const modalRef = this.modalService.open(ConfirmationPromptComponent, {
       size: 'sm',

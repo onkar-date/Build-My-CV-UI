@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const MATERIAL_COMPONENTS = [
   MatToolbarModule,
@@ -28,6 +29,7 @@ const MATERIAL_COMPONENTS = [
   MatCheckboxModule,
   MatExpansionModule,
   MatCardModule,
+  LayoutModule
 ];
 
 @NgModule({

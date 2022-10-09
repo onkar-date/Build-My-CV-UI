@@ -1,3 +1,4 @@
+import { ProfileModule } from './profile/profile.module';
 import { UserEffect } from './state/user-state/user.effects';
 import { FooterComponent } from './library/shared-components/footer/footer.component';
 import { cvReducer } from './state/CV-State/cv.reducer';
@@ -25,6 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
     NgbModule,
     NgxSpinnerModule,
     PagesModule,
+    ProfileModule,
     SharedComponentsModule,
     ToastrModule.forRoot({
       timeOut: 2500,

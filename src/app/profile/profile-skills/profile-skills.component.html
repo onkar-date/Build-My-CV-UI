@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Skills -->
+            <section class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <h2>Skills</h2>
+                    <button mat-icon-button color="primary" (click)="addEditSkill(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <table class="table table-bordered mb-0" *ngIf="(skills$ | async )?.length; else noData">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rating</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let skill of (skills$ | async )">
+                            <td class="w-25">
+                                {{skill.name}}
+                            </td>
+                            <td>
+                                <app-rating [totalRating]="5" [currentRating]="skill.rating" [editable]="false">
+                                </app-rating>
+                            </td>
+                            <td class="d-flex justify-content-center">
+                                <button mat-icon-button aria-label="delete Skill" color="warn"
+                                    (click)="deleteSkill(skill, $event)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="edit Skill"
+                                    (click)="addEditSkill(skill, $event, true)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Experience Data Found !!
+    </h1>
+</ng-template>

@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Projects -->
+            <section class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <h2>Projects</h2>
+                    <button mat-icon-button color="primary" (click)="addEditProject(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <mat-accordion class="example-headers-align" multi *ngIf="(projects$ | async)?.length; else noData">
+                    <mat-expansion-panel *ngFor="let project of (projects$ | async); let i = index" class="mb-3">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{project.title}}
+                            </mat-panel-title>
+
+                            <!-- For Large Screens -->
+                            <mat-panel-description class="justify-content-end d-none d-md-flex">
+                                <div>
+                                    <button mat-icon-button aria-label="delete Project" color="warn"
+                                        (click)="deleteProject(project, $event)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="edit Project"
+                                        (click)="addEditProject(project, $event, true)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-panel-description>
+
+                            <!-- For Small Screens -->
+                            <mat-panel-description class="justify-content-between d-md-none">
+                                <div></div>
+                                <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                    <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                        (click)="$event.stopPropagation(); myDrop.open();">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <button ngbDropdownItem (click)="deleteProject(project, $event)">
+                                            Delete
+                                        </button>
+                                        <button ngbDropdownItem (click)="addEditProject(project, $event, true)">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <ul>
+                            <li>
+                                <a (click)="openProject(project)" class="link cursor-pointer">
+                                    {{project.link}}
+                                </a>
+                            </li>
+                            <li>
+                                {{project.description}}
+                            </li>
+                        </ul>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Project Data Found !!
+    </h1>
+</ng-template>

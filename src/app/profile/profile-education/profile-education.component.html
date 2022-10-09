@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Education -->
+            <section class="mt-3">
+
+                <div class="d-flex justify-content-between">
+                    <h2>Education</h2>
+                    <button mat-icon-button color="primary" (click)="addEditEducation(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <ng-container *ngIf="(educationDetails$ | async )?.length; else noData">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel *ngFor="let edu of (educationDetails$ | async ); let i = index" class="mb-3">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{edu.degree}}
+                                </mat-panel-title>
+
+                                <!-- For Large Screen -->
+                                <mat-panel-description class="justify-content-end d-none d-md-flex">
+                                    <div>
+                                        <button mat-icon-button aria-label="delete education" color="warn"
+                                            (click)="deleteEducation(edu, $event)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="edit education"
+                                            (click)="addEditEducation(edu, $event, true)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-panel-description>
+
+                                <!-- For Small Screens -->
+                                <mat-panel-description class="justify-content-between d-md-none">
+                                    <div></div>
+                                    <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                        <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                            (click)="$event.stopPropagation(); myDrop.open();">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button ngbDropdownItem (click)="deleteEducation(edu, $event)">
+                                                Delete
+                                            </button>
+                                            <button ngbDropdownItem (click)="addEditEducation(edu, $event, true)">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <div>
+                                {{edu.university}} ({{edu.batch}})
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </ng-container>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Education Data Found !!
+    </h1>
+</ng-template>

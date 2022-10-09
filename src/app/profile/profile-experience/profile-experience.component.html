@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Experience -->
+            <section class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <h2>Experience</h2>
+                    <button mat-icon-button color="primary" (click)="addEditExperience(null, $event, false)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+                <ng-container *ngIf="(experienceDetails$ | async)?.length; else noData">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel *ngFor="let exp of (experienceDetails$ | async); let i = index" class="mb-3">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{exp.companyName}}
+                                </mat-panel-title>
+
+                                <!-- For large Screen -->
+                                <mat-panel-description class="justify-content-between d-none d-md-flex">
+                                    <span>
+                                        {{exp.designation}}
+                                    </span>
+                                    <div>
+                                        <button mat-icon-button aria-label="delete experience" color="warn"
+                                            (click)="deleteExperience(exp, $event)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="edit experience"
+                                            (click)="addEditExperience(exp, $event, true)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-panel-description>
+
+                                <!-- For Small Screens -->
+                                <mat-panel-description class="justify-content-between d-md-none">
+                                    <div></div>
+                                    <div ngbDropdown container="body" #myDrop="ngbDropdown" class="d-inline-block">
+                                        <button mat-icon-button type="button" id="dropdownBasic-{{i}}" ngbDropdownToggle
+                                            (click)="$event.stopPropagation(); myDrop.open();">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button ngbDropdownItem (click)="deleteExperience(exp, $event)">
+                                                Delete
+                                            </button>
+                                            <button ngbDropdownItem (click)="addEditExperience(exp, $event, true)">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </mat-panel-description>
+
+                            </mat-expansion-panel-header>
+
+                            <div>
+                                ({{exp.workedFrom}} {{exp.workedTill}})
+                            </div>
+
+                            <ul class="mt-3">
+                                <li *ngFor="let description of exp.description">
+                                    {{description}}
+                                </li>
+                            </ul>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </ng-container>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData let-title="title">
+    <h1 class="text-center text-muted">
+        No Experience Data Found !!
+    </h1>
+</ng-template>
